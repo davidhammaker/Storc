@@ -8,10 +8,26 @@ let scars = ['Scar over left eye', 'Scar over right eye', 'Scar on nose', 'Scar 
 
 let uniqueAttributes = ['Flawless complexion', 'Freckled face', 'Much acne', 'Big ears', 'Small ears', 'Big nose', 'Small nose', 'Perfect nose', 'Wide mouth', 'Small mouth', 'Wide eyes', 'Narrow eyes', 'Bushy eyebrows', 'Narrow eyebrows', 'Slight unibrow', 'High cheekbones', 'Square jaw', 'Pointed chin', 'Flat chin', 'Perfect jawline', 'Perfect teeth', 'Crooked teeth', 'Missing one tooth', choice(scars)];
 
+let colors = ['maroon', 'red', 'orange', 'coral', 'yellow', 'lime green', 'green', 'aqua', 'light blue', 'blue', 'dark blue', 'purple', 'violet', 'black', 'gray', 'white', 'brown'];
+
+let favoriteClothesGeneric = [`${articleChoice(colors)} beanie`, `${articleChoice(colors)} baseball cap`, `${articleChoice(colors)} scarf`, `${articleChoice(colors)} hoodie`, `${articleChoice(colors)} jacket`, `a leather jacket`, `jeans and ${articleChoice(colors)} T-shirt`, `shorts and ${articleChoice(colors)} T-shirt`];
+
 function choice(list) {
     let selection = list[Number.parseInt((Math.random() * list.length))];
     return selection;
 };
+
+function articleChoice(list) {
+    let selection = list[Number.parseInt((Math.random() * list.length))];
+    let letter = selection[0];
+    if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u') {
+        selection = 'an ' + selection;
+    }
+    else {
+        selection = 'a ' + selection;
+    }
+    return selection;
+}
 
 function assignAttribute(attributeList, attributeElement) {
     let attribute = choice(attributeList);
@@ -63,6 +79,9 @@ function select() {
 
     let uniqueAttributeElement = document.getElementById('unique_attribute');
     assignAttribute(uniqueAttributes, uniqueAttributeElement);
+
+    let favoriteClothesElement = document.getElementById('favorite_clothes');
+    assignAttribute(favoriteClothesGeneric, favoriteClothesElement);
 };
 
 select();
