@@ -16,7 +16,7 @@ function select() {
     assignAttribute(heights, heightElement);
 
     let weightElement = document.getElementById('weight');
-    assignAttribute(weights, weightElement);
+    weightElement.textContent = Number.parseInt((Math.random() * 100) + 100) + ' lb';
 
     let hairColorElement = document.getElementById('hair_color');
     assignAttribute(hairColors, hairColorElement);
