@@ -48,7 +48,6 @@ nav a{
 }
 
 .main h3{
-    text-align: center;
     padding-top: 20px;
 }
 
@@ -234,6 +233,24 @@ td{
     clear: both;
     display: inline-block;
     float: right;
+}
+
+/* Buttons */
+.button{
+    color: #ffffff;
+    font-size: large;
+    background-color: #336699;
+    border: none;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.button:hover{
+    background-color: #4080bf;
+}
+
+.button:active{
+    background-color: #b3cce6;
+    color: #336699;
 }
 
 /* Smaller Centered Content */
