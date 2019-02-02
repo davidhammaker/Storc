@@ -1,4 +1,5 @@
 import os
+from random import choice
 import requests
 from flask import Flask, render_template
 
@@ -8,9 +9,9 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     api_key = os.environ.get('BTN_KEY')
-    gender = 'f'
+    gender = choice(['male', 'female'])
     random_name_url = f'https://www.behindthename.com/api/random.json' \
-        f'?usage=eng&number=1&randomsurname=yes&gender={gender}' \
+        f'?usage=eng&number=1&randomsurname=yes&gender={gender[0]}' \
         f'&key={api_key}'
 
     # In the future, the next 3 lines will be un-commented:
@@ -20,7 +21,8 @@ def home():
 
     # Temporary name:
     name = 'John Doe'
-    return render_template('base.html', name=name)
+    return render_template('base.html', name=name,
+                           gender=gender.title())
 
 
 if __name__ == '__main__':

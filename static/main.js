@@ -1,5 +1,3 @@
-genders = ['Male', 'Female'];
-
 heights = ['Very short', 'Short', 'Average', 'Tall', 'Very tall'];
 
 weights = ['Underweight', 'Average', 'Overweight'];
@@ -14,9 +12,6 @@ function assignAttribute(attributeList, attributeElement) {
 };
 
 function select() {
-    let genderElement = document.getElementById('gender');
-    assignAttribute(genders, genderElement);
-
     let heightElement = document.getElementById('height');
     assignAttribute(heights, heightElement);
 
