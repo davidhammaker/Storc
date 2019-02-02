@@ -64,28 +64,28 @@ function select() {
         return Number.parseInt((Math.random() * (maximum - minimum) + minimum));
     };
     if (heightRaw <= 62) {
-        weight = weightChoice(100, 150);
+        weight = weightChoice(90, 140);
     }
     else if (heightRaw <= 64) {
-        weight = weightChoice(100, 160);
+        weight = weightChoice(95, 150);
     }
     else if (heightRaw <= 66) {
-        weight = weightChoice(110, 170);
+        weight = weightChoice(100, 160);
     }
     else if (heightRaw <= 68) {
-        weight = weightChoice(115, 180);
+        weight = weightChoice(105, 170);
     }
     else if (heightRaw <= 70) {
-        weight = weightChoice(120, 190);
+        weight = weightChoice(110, 180);
     }
     else if (heightRaw <= 72) {
-        weight = weightChoice(125, 200);
+        weight = weightChoice(115, 190);
     }
     else if (heightRaw <= 74) {
-        weight = weightChoice(135, 210);
+        weight = weightChoice(125, 200);
     }
     else {
-        weight = weightChoice(140, 220);
+        weight = weightChoice(130, 210);
     }
     weightElement.textContent = weight + ' lb';
 
