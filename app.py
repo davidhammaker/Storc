@@ -8,18 +8,18 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    api_key = os.environ.get('BTN_KEY')
     gender = choice(['male', 'female'])
-    random_name_url = f'https://www.behindthename.com/api/random.json' \
-        f'?usage=eng&number=1&randomsurname=yes&gender={gender[0]}' \
-        f'&key={api_key}'
 
-    # In the future, the next 3 lines will be un-commented:
+    # The following lines have been commented out for development:
+    # api_key = os.environ.get('BTN_KEY')
+    # random_name_url = f'https://www.behindthename.com/api/random.json' \
+    #     f'?usage=eng&number=1&randomsurname=yes&gender={gender[0]}' \
+    #     f'&key={api_key}'
     # names_request = requests.get(random_name_url)
     # names_list = names_request.json()['names']
     # name = f'Name: {names_list[0]} {names_list[1]}'
 
-    # Temporary name:
+    # Temporary name for development:
     name = 'John Doe'
     return render_template('base.html', name=name,
                            gender=gender.title())
