@@ -6,11 +6,17 @@ let eyeColors = ['Brown', 'Blue', 'Green', 'Gray', 'Hazel'];
 
 let scars = ['Scar over left eye', 'Scar over right eye', 'Scar on nose', 'Scar on upper lip', 'Scar on lower lip', 'Scar on left cheek', 'Scar on right cheek', 'Scar on chin', 'Scar along jawline', 'Scar on forehead'];
 
-let uniqueAttributes = ['Flawless complexion', 'Freckled face', 'Much acne', 'Big ears', 'Small ears', 'Big nose', 'Small nose', 'Perfect nose', 'Wide mouth', 'Small mouth', 'Wide eyes', 'Narrow eyes', 'Bushy eyebrows', 'Narrow eyebrows', 'Slight unibrow', 'High cheekbones', 'Square jaw', 'Pointed chin', 'Flat chin', 'Perfect jawline', 'Perfect teeth', 'Crooked teeth', 'Missing one tooth', choice(scars)];
+let uniqueAttributes;
+function defineUniqueAttributes() {
+    uniqueAttributes = ['Flawless complexion', 'Freckled face', 'Much acne', 'Big ears', 'Small ears', 'Big nose', 'Small nose', 'Perfect nose', 'Wide mouth', 'Small mouth', 'Wide eyes', 'Narrow eyes', 'Bushy eyebrows', 'Narrow eyebrows', 'Slight unibrow', 'High cheekbones', 'Square jaw', 'Pointed chin', 'Flat chin', 'Perfect jawline', 'Perfect teeth', 'Crooked teeth', 'Missing one tooth', choice(scars)];
+};
 
 let colors = ['maroon', 'red', 'orange', 'coral', 'yellow', 'lime green', 'green', 'aqua', 'light blue', 'blue', 'dark blue', 'purple', 'violet', 'black', 'gray', 'white', 'brown'];
 
-let favoriteClothesGeneric = [`${articleChoice(colors)} beanie`, `${articleChoice(colors)} baseball cap`, `${articleChoice(colors)} scarf`, `${articleChoice(colors)} hoodie`, `${articleChoice(colors)} jacket`, `a leather jacket`, `jeans and ${articleChoice(colors)} T-shirt`, `shorts and ${articleChoice(colors)} T-shirt`];
+let favoriteClothesGeneric;
+function defineClothes() {
+    favoriteClothesGeneric = [`${articleChoice(colors)} beanie`, `${articleChoice(colors)} baseball cap`, `${articleChoice(colors)} scarf`, `${articleChoice(colors)} hoodie`, `${articleChoice(colors)} jacket`, `a leather jacket`, `jeans and ${articleChoice(colors)} T-shirt`, `shorts and ${articleChoice(colors)} T-shirt`];
+};
 
 function choice(list) {
     let selection = list[Number.parseInt((Math.random() * list.length))];
@@ -84,4 +90,10 @@ function select() {
     assignAttribute(favoriteClothesGeneric, favoriteClothesElement);
 };
 
-select();
+function scramble() {
+    defineClothes();
+    defineUniqueAttributes();
+    select();
+};
+
+scramble();
