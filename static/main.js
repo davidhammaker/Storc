@@ -45,8 +45,16 @@ function assignAttribute(attributeList, attributeElement) {
 };
 
 function select() {
+    let gender = document.getElementById('gender').textContent;
+
     let heightElement = document.getElementById('height');
-    let heightRaw = Number.parseInt((Math.random() * 17) + 60);
+    let heightRaw;
+    if (gender == 'Male') {
+        heightRaw = Number.parseInt((Math.random() * 13) + 64);
+    }
+    else {
+        heightRaw = Number.parseInt((Math.random() * 13) + 60);
+    }
     let height = `${Number.parseInt(heightRaw / 12)}'${heightRaw % 12}"`
     heightElement.textContent = height;
 
@@ -90,7 +98,6 @@ function select() {
     let uniqueAttributeElement = document.getElementById('unique_attribute');
     assignAttribute(uniqueAttributes, uniqueAttributeElement);
 
-    let gender = document.getElementById('gender').textContent;
     let favoriteClothes = favoriteClothesGeneric;
     if (gender == 'Male') {
         favoriteClothes = favoriteClothes.concat(favoriteClothesMale);
