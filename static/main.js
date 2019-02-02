@@ -22,7 +22,9 @@ function assignAttribute(attributeList, attributeElement) {
 
 function select() {
     let heightElement = document.getElementById('height');
-    assignAttribute(heights, heightElement);
+    let heightRaw = Number.parseInt((Math.random() * 17) + 60);
+    let height = `${Number.parseInt(heightRaw / 12)}'${heightRaw % 12}"`
+    heightElement.textContent = height;
 
     let weightElement = document.getElementById('weight');
     weightElement.textContent = Number.parseInt((Math.random() * 100) + 100) + ' lb';
