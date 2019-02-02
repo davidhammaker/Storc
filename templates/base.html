@@ -3,8 +3,18 @@
     <head>
         <meta charset="utf-8">
         <title>Story Character Generator</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
     </head>
     <body>
-        {{ name }}
+        <nav>
+            <div class="nav-l">
+                <a href="{{ url_for('home') }}">Story Character Generator</a>
+            </div>
+            <div class="nav-r">
+                <ul>
+                    <li><a href="#">New Character</a></li>
+                </ul>
+            </div>
+        </nav>
     </body>
 </html>
