@@ -47,6 +47,11 @@ nav a{
     margin: 50px auto 0 auto;
 }
 
+.main h3{
+    text-align: center;
+    padding-top: 20px;
+}
+
 /* Left Column */
 .col-l{
     float: left;
@@ -168,6 +173,7 @@ nav a{
 /* Primary Centered Content */
 .center{
     max-width: 100%;
+    min-height: 500px;
     background-color: #ffffff;
     padding: 25px;
 }
@@ -201,6 +207,33 @@ nav a{
 
 .center a:hover{
     color: #4080bf;
+}
+
+/* Tables */
+td{
+    padding-right: 10px;
+    vertical-align: top;
+}
+
+.key{
+    width: 110px;
+    color: #336699;
+    text-align: right;
+}
+
+/* Boxes */
+.box-l{
+    max-width: 250px;
+    clear: both;
+    display: inline-block;
+}
+
+.box-r{
+    width: auto;
+    max-width: 450px;
+    clear: both;
+    display: inline-block;
+    float: right;
 }
 
 /* Smaller Centered Content */
@@ -262,16 +295,6 @@ nav a{
 .center-small .delete-submit:hover{
     background-color: #ff6060;
     border-color: #ff6060;
-}
-
-/* Tables */
-td{
-    padding-right: 10px;
-}
-
-.key{
-    color: #336699;
-    text-align: right;
 }
 
 /* lists */

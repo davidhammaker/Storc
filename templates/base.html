@@ -20,29 +20,57 @@
         <div class="main">
             <div class="center">
                 <h2>{{ name }}</h2>
-                <h3>Physical Qualities</h3>
-                <table>
-                    <tr>
-                        <td class="key">Gender: </td>
-                        <td id="gender">{{ gender }}</td>
-                    </tr>
-                    <tr>
-                        <td class="key">Height: </td>
-                        <td id="height">Height</td>
-                    </tr>
-                    <tr>
-                        <td class="key">Weight: </td>
-                        <td id="weight">Weight</td>
-                    </tr>
-                    <tr>
-                        <td class="key">Hair color: </td>
-                        <td id="hair_color">Hair color</td>
-                    </tr>
-                    <tr>
-                        <td class="key">Eye color: </td>
-                        <td id="eye_color">Eye color</td>
-                    </tr>
-                </table>
+                <div class="box-l">
+                    <h3>Physical Qualities</h3>
+                    <table>
+                        <tr>
+                            <td class="key">Gender: </td>
+                            <td id="gender">{{ gender }}</td>
+                        </tr>
+                        <tr>
+                            <td class="key">Height: </td>
+                            <td id="height">Height</td>
+                        </tr>
+                        <tr>
+                            <td class="key">Weight: </td>
+                            <td id="weight">Weight</td>
+                        </tr>
+                        <tr>
+                            <td class="key">Hair color: </td>
+                            <td id="hair_color">Hair color</td>
+                        </tr>
+                        <tr>
+                            <td class="key">Eye color: </td>
+                            <td id="eye_color">Eye color</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="box-r">
+                    <h3>Example</h3>
+                    <table>
+                        <tr>
+                            <td class="key">Example:</td>
+                            <td>This is example text. This text is for an example. Example text has been inserted here. In this spot, example text is displayed.</td>
+                        </tr>
+                        <tr>
+                            <td class="key">Second Example:</td>
+                            <td>This is example text. This text is for an example. Example text has been inserted here. In this spot, example text is displayed.</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="box-l">
+                    <h3>Other</h3>
+                    <table>
+                        <tr>
+                            <td class="key">Item:</td>
+                            <td>Important information</td>
+                        </tr>
+                        <tr>
+                            <td class="key">Item:</td>
+                            <td>Additional important information</td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
         <script src="{{ url_for('static', filename='main.js') }}"></script>
