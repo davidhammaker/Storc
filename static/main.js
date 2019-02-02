@@ -14,8 +14,12 @@ function defineUniqueAttributes() {
 let colors = ['maroon', 'red', 'orange', 'coral', 'yellow', 'lime green', 'green', 'aqua', 'light blue', 'blue', 'dark blue', 'purple', 'violet', 'black', 'gray', 'white', 'brown'];
 
 let favoriteClothesGeneric;
+let favoriteClothesMale;
+let favoriteClothesFemale;
 function defineClothes() {
-    favoriteClothesGeneric = [`${articleChoice(colors)} beanie`, `${articleChoice(colors)} baseball cap`, `${articleChoice(colors)} scarf`, `${articleChoice(colors)} hoodie`, `${articleChoice(colors)} jacket`, `a leather jacket`, `jeans and ${articleChoice(colors)} T-shirt`, `shorts and ${articleChoice(colors)} T-shirt`];
+    favoriteClothesGeneric = [`${articleChoice(colors)} beanie`, `${articleChoice(colors)} baseball cap`, `${articleChoice(colors)} scarf`, `${articleChoice(colors)} hoodie`, `${articleChoice(colors)} jacket`, `a leather jacket`, `jeans and ${articleChoice(colors)} T-shirt`, `shorts and ${articleChoice(colors)} T-shirt`, `a sci-fi T-shirt`, `a video game T-shirt`, `${articleChoice(colors)} cardigan`];
+    favoriteClothesMale = [`a tuxedo whenever possible`, `a suit and tie`, `just denim overalls`, `a sports jersey`, `any shirt and ${articleChoice(colors)} bow tie`, `skinny jeans and ${articleChoice(colors)} button-up shirt`, `a plaid flannel shirt`];
+    favoriteClothesFemale = [`${articleChoice(colors)} evening gown`, `${articleChoice(colors)} dress`, `${articleChoice(colors)} skirt`, `${articleChoice(colors)} short skirt`, `skinny jeans and ${articleChoice(colors)} T-shirt`, `${choice(colors)} yoga pants`, `${articleChoice(colors)} blouse`];
 };
 
 function choice(list) {
@@ -86,8 +90,17 @@ function select() {
     let uniqueAttributeElement = document.getElementById('unique_attribute');
     assignAttribute(uniqueAttributes, uniqueAttributeElement);
 
+    let gender = document.getElementById('gender').textContent;
+    let favoriteClothes = favoriteClothesGeneric;
+    if (gender == 'Male') {
+        favoriteClothes = favoriteClothes.concat(favoriteClothesMale);
+    }
+    else {
+        favoriteClothes = favoriteClothes.concat(favoriteClothesFemale);
+    }
+
     let favoriteClothesElement = document.getElementById('favorite_clothes');
-    assignAttribute(favoriteClothesGeneric, favoriteClothesElement);
+    assignAttribute(favoriteClothes, favoriteClothesElement);
 };
 
 function scramble() {
