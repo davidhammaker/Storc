@@ -211,26 +211,26 @@ nav a{
 
 /* Tables */
 td{
-    padding-right: 10px;
-    vertical-align: top;
+    padding: 0 10px 10px 0;
 }
 
 .key{
     width: 110px;
     color: #336699;
-    text-align: right;
+    text-align: center;
+    vertical-align: top;
 }
 
 /* Boxes */
 .box-l{
-    max-width: 250px;
+    max-width: 300px;
     clear: both;
     display: inline-block;
 }
 
 .box-r{
     width: auto;
-    max-width: 450px;
+    max-width: 500px;
     clear: both;
     display: inline-block;
     float: right;
