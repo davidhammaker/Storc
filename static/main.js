@@ -6,8 +6,13 @@ hairColors = ['Black', 'Dark brown', 'Brown', 'Light brown', 'Dirty blond', 'Blo
 
 eyeColors = ['Brown', 'Blue', 'Green', 'Gray', 'Hazel'];
 
+function choice(list) {
+    let selection = list[Number.parseInt((Math.random() * list.length))];
+    return selection;
+};
+
 function assignAttribute(attributeList, attributeElement) {
-    let attribute = attributeList[Number.parseInt((Math.random() * attributeList.length))];
+    let attribute = choice(attributeList);
     attributeElement.textContent = attribute;
 };
 
