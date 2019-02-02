@@ -27,7 +27,35 @@ function select() {
     heightElement.textContent = height;
 
     let weightElement = document.getElementById('weight');
-    weightElement.textContent = Number.parseInt((Math.random() * 100) + 100) + ' lb';
+    let weight;
+    function weightChoice(minimum, maximum) {
+        return Number.parseInt((Math.random() * (maximum - minimum) + minimum));
+    };
+    if (heightRaw <= 62) {
+        weight = weightChoice(100, 150);
+    }
+    else if (heightRaw <= 64) {
+        weight = weightChoice(100, 160);
+    }
+    else if (heightRaw <= 66) {
+        weight = weightChoice(110, 170);
+    }
+    else if (heightRaw <= 68) {
+        weight = weightChoice(115, 180);
+    }
+    else if (heightRaw <= 70) {
+        weight = weightChoice(120, 190);
+    }
+    else if (heightRaw <= 72) {
+        weight = weightChoice(125, 200);
+    }
+    else if (heightRaw <= 74) {
+        weight = weightChoice(135, 210);
+    }
+    else {
+        weight = weightChoice(140, 220);
+    }
+    weightElement.textContent = weight + ' lb';
 
     let hairColorElement = document.getElementById('hair_color');
     assignAttribute(hairColors, hairColorElement);
