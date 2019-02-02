@@ -1,6 +1,6 @@
 import os
 import requests
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -15,7 +15,7 @@ def home():
     names_request = requests.get(random_name_url)
     names_list = names_request.json()['names']
     name = f'Name: {names_list[0]} {names_list[1]}'
-    return name
+    return render_template('base.html', name=name)
 
 
 if __name__ == '__main__':
