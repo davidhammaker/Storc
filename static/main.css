@@ -264,6 +264,16 @@ nav a{
     border-color: #ff6060;
 }
 
+/* Tables */
+td{
+    padding-right: 10px;
+}
+
+.key{
+    color: #336699;
+    text-align: right;
+}
+
 /* lists */
 .list{
     margin-left: 50px;
