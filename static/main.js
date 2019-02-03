@@ -22,6 +22,37 @@ function defineClothes() {
     favoriteClothesFemale = [`${articleChoice(colors)} evening gown`, `${articleChoice(colors)} dress`, `${articleChoice(colors)} skirt`, `${articleChoice(colors)} short skirt`, `skinny jeans and ${articleChoice(colors)} T-shirt`, `${choice(colors)} yoga pants`, `${articleChoice(colors)} blouse`];
 };
 
+let mannerisms = ['I frequently have one eyebrow raised.',
+                  'I talk with my hands.',
+                  'I keep very still. I don\'t move much.',
+                  'I\'m always tapping my foot or my fingers.',
+                  'I am very good at keeping eye contact.',
+                  'I struggle to maintain eye contact.',
+                  'I\'m always looking around. I\'m easily distracted.',
+                  'My nose is always turned up.',
+                  'I find myself looking down a lot.',
+                  'I have a habit of slouching.',
+                  'My posture improves when someone is speaking to me.',
+                  'I snap my fingers to help me remember things.',
+                  'My face is very expressive.',
+                  'I\'m always finding something to lean against.',
+                  'I cross my arms when I talk to someone.',
+                  'I tend to shove my hands in my pockets.',
+                  'My eyes drift to the ceiling when I\'m thinking.',
+                  'I stroke my chin when I\'m being serious.',
+                  'I hum approvingly while I\'m listening to someone.',
+                  'Sitting or standing, my legs are almost always crossed.',
+                  'I\'m always pushing my hair back.',
+                  'I bite my lip when I\'m concentrating.',
+                  'If possible, my hands are always folded and my legs are straight.',
+                  'Eye contact is not my priority. I only look at what I\'m doing.',
+                  'I wrinkle my nose when I\'m frustrated.',
+                  'I nod to myself when I have an idea.',
+                  'I walk in long, slow strides.',
+                  'I speed-walk everywhere I go.',
+                  'My face is impossible to read.',
+                  'I rub my hands together when I\'m exited, or when I have a plan.'];
+
 function choice(list) {
     let selection = list[Number.parseInt((Math.random() * list.length))];
     return selection;
@@ -108,6 +139,16 @@ function select() {
 
     let favoriteClothesElement = document.getElementById('favorite_clothes');
     assignAttribute(favoriteClothes, favoriteClothesElement);
+
+    let mannerismsOneElement = document.getElementById('mannerism_one');
+    let mannerismsTwoElement = document.getElementById('mannerism_two');
+    let mannerismOne = choice(mannerisms);
+    let mannerismTwo = choice(mannerisms);
+    do {
+        let mannerismTwo = choice(mannerisms);
+    } while (mannerismOne == mannerismTwo);
+    mannerismsOneElement.textContent = mannerismOne;
+    mannerismsTwoElement.textContent = mannerismTwo;
 };
 
 function scramble() {
