@@ -1,4 +1,4 @@
-# Story Character Generator
+# Storc | Character Generator
 
 A random character generator that creates a named character to inspire your creativity.
 

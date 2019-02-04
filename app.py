@@ -17,7 +17,7 @@ def home():
     #     f'&key={api_key}'
     # names_request = requests.get(random_name_url)
     # names_list = names_request.json()['names']
-    # name = f'Name: {names_list[0]} {names_list[1]}'
+    # name = f'{names_list[0]} {names_list[1]}'
 
     # Temporary name for development:
     name = 'John Doe'
