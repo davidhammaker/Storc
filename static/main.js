@@ -156,8 +156,28 @@ let mannerisms = [
 ];
 
 let speakingStyles = [
-    ''
-]
+    'I speak very rapidly, but I articulate well.',
+    'I talk so fast that I often mix up words.',
+    'I studder a bit.',
+    'I have trouble finishing a sentence. My voice trails off.',
+    'I speak quickly when I get excited or angry.',
+    'My words are slow and precise.',
+    'I am in no hurry to finish a sentence. I take my time with my words.',
+    'I tend to repeat myself. I say the same thing twice.',
+    'I take too long to answer a question.',
+    'I say only what I have to, and nothing I don\'t.',
+    'The pitch of my voice is a rollercoaster, always rising and falling.',
+    'My voice can be monotone at times.',
+    'I have a dynamic voice. My volume, speed, and tone are always changing.',
+    'I mumble the words I really want to say, but everything else is loud and clear.',
+    'My voice is soft, even when I want to speak up.',
+    'I have no volume control. When I open my mouth, the whole world hears.',
+    'I am a brilliant speaker, captivating individuals and crowds.',
+    'I am a big fan of one-word replies.',
+    'My tone has a calming effect on others.',
+    'When I speak, I always sound excited.',
+    'My tone has a pensive flavor.',
+];
 
 function choice(list) {
     let selection = list[Number.parseInt((Math.random() * list.length))];
@@ -258,6 +278,9 @@ function select() {
     } while (mannerismOne == mannerismTwo);
     mannerismsOneElement.textContent = mannerismOne;
     mannerismsTwoElement.textContent = mannerismTwo;
+
+    let speakingStyleElement = document.getElementById('speaking_style');
+    speakingStyleElement.textContent = choice(speakingStyles);
 };
 
 function scramble() {
