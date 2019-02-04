@@ -270,12 +270,9 @@ function select() {
     let mannerismsTwoElement = document.getElementById('mannerism_two');
     let mannerismOne = choice(mannerisms);
     let mannerismTwo = choice(mannerisms);
-    do {
-        let mannerismTwo = choice(mannerisms);
-        if (mannerismOne != mannerismTwo) {
-            break;
-        }
-    } while (mannerismOne == mannerismTwo);
+    while (mannerismOne == mannerismTwo) {
+        mannerismTwo = choice(mannerisms);
+    }
     mannerismsOneElement.textContent = mannerismOne;
     mannerismsTwoElement.textContent = mannerismTwo;
 
