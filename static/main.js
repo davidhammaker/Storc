@@ -1,57 +1,163 @@
 'use strict';
 
-let hairColors = ['Black', 'Dark brown', 'Brown', 'Light brown', 'Dirty blond', 'Blond', 'Strawberry blond', 'Red', 'Auburn', 'White', 'Silver'];
+let hairColors = [
+    'Black',
+    'Dark brown',
+    'Brown',
+    'Light brown',
+    'Dirty blond',
+    'Blond',
+    'Strawberry blond',
+    'Red',
+    'Auburn',
+    'White',
+    'Silver'
+];
 
-let eyeColors = ['Brown', 'Blue', 'Green', 'Gray', 'Hazel'];
+let eyeColors = [
+    'Brown',
+    'Blue',
+    'Green',
+    'Gray',
+    'Hazel'
+];
 
-let scars = ['Scar over left eye', 'Scar over right eye', 'Scar on nose', 'Scar on upper lip', 'Scar on lower lip', 'Scar on left cheek', 'Scar on right cheek', 'Scar on chin', 'Scar along jawline', 'Scar on forehead'];
+let scars = [
+    'Scar over left eye',
+    'Scar over right eye',
+    'Scar on nose',
+    'Scar on upper lip',
+    'Scar on lower lip',
+    'Scar on left cheek',
+    'Scar on right cheek',
+    'Scar on chin',
+    'Scar along jawline',
+    'Scar on forehead'
+];
 
 let uniqueAttributes;
 function defineUniqueAttributes() {
-    uniqueAttributes = ['Flawless complexion', 'Freckled face', 'Much acne', 'Big ears', 'Small ears', 'Big nose', 'Small nose', 'Perfect nose', 'Wide mouth', 'Small mouth', 'Wide eyes', 'Narrow eyes', 'Bushy eyebrows', 'Narrow eyebrows', 'Slight unibrow', 'High cheekbones', 'Square jaw', 'Pointed chin', 'Flat chin', 'Perfect jawline', 'Perfect teeth', 'Crooked teeth', 'Missing one tooth', choice(scars)];
+    uniqueAttributes = [
+        'Flawless complexion',
+        'Freckled face',
+        'Much acne',
+        'Big ears',
+        'Small ears',
+        'Big nose',
+        'Small nose',
+        'Perfect nose',
+        'Wide mouth',
+        'Small mouth',
+        'Wide eyes',
+        'Narrow eyes',
+        'Bushy eyebrows',
+        'Narrow eyebrows',
+        'Slight unibrow',
+        'High cheekbones',
+        'Square jaw',
+        'Pointed chin',
+        'Flat chin',
+        'Perfect jawline',
+        'Perfect teeth',
+        'Crooked teeth',
+        'Missing one tooth',
+        choice(scars)
+    ];
 };
 
-let colors = ['maroon', 'red', 'orange', 'coral', 'yellow', 'lime green', 'green', 'aqua', 'light blue', 'blue', 'dark blue', 'purple', 'violet', 'black', 'gray', 'white', 'brown'];
+let colors = [
+    'maroon',
+    'red',
+    'orange',
+    'coral',
+    'yellow',
+    'lime green',
+    'green',
+    'aqua',
+    'light blue',
+    'blue',
+    'dark blue',
+    'purple',
+    'violet',
+    'black',
+    'gray',
+    'white',
+    'brown'
+];
 
 let favoriteClothesGeneric;
 let favoriteClothesMale;
 let favoriteClothesFemale;
 function defineClothes() {
-    favoriteClothesGeneric = [`${articleChoice(colors)} beanie`, `${articleChoice(colors)} baseball cap`, `${articleChoice(colors)} scarf`, `${articleChoice(colors)} hoodie`, `${articleChoice(colors)} jacket`, `a leather jacket`, `jeans and ${articleChoice(colors)} T-shirt`, `shorts and ${articleChoice(colors)} T-shirt`, `a sci-fi T-shirt`, `a video game T-shirt`, `${articleChoice(colors)} cardigan`];
-    favoriteClothesMale = [`a tuxedo whenever possible`, `a suit and tie`, `just denim overalls`, `a sports jersey`, `any shirt and ${articleChoice(colors)} bow tie`, `skinny jeans and ${articleChoice(colors)} button-up shirt`, `a plaid flannel shirt`];
-    favoriteClothesFemale = [`${articleChoice(colors)} evening gown`, `${articleChoice(colors)} dress`, `${articleChoice(colors)} skirt`, `${articleChoice(colors)} short skirt`, `skinny jeans and ${articleChoice(colors)} T-shirt`, `${choice(colors)} yoga pants`, `${articleChoice(colors)} blouse`];
+    favoriteClothesGeneric = [
+        `${articleChoice(colors)} beanie`,
+        `${articleChoice(colors)} baseball cap`,
+        `${articleChoice(colors)} scarf`,
+        `${articleChoice(colors)} hoodie`,
+        `${articleChoice(colors)} jacket`,
+        `a leather jacket`,
+        `jeans and ${articleChoice(colors)} T-shirt`,
+        `shorts and ${articleChoice(colors)} T-shirt`,
+        `a sci-fi T-shirt`,
+        `a video game T-shirt`,
+        `${articleChoice(colors)} cardigan`
+    ];
+    favoriteClothesMale = [
+        `a tuxedo whenever possible`,
+        `a suit and tie`,
+        `just denim overalls`,
+        `a sports jersey`,
+        `any shirt and ${articleChoice(colors)} bow tie`,
+        `skinny jeans and ${articleChoice(colors)} button-up shirt`,
+        `a plaid flannel shirt`
+    ];
+    favoriteClothesFemale = [
+        `${articleChoice(colors)} evening gown`,
+        `${articleChoice(colors)} dress`,
+        `${articleChoice(colors)} skirt`,
+        `${articleChoice(colors)} short skirt`,
+        `skinny jeans and ${articleChoice(colors)} T-shirt`,
+        `${choice(colors)} yoga pants`,
+        `${articleChoice(colors)} blouse`
+    ];
 };
 
-let mannerisms = ['I frequently have one eyebrow raised.',
-                  'I talk with my hands.',
-                  'I keep very still. I don\'t move much.',
-                  'I\'m always tapping my foot or my fingers.',
-                  'I am very good at keeping eye contact.',
-                  'I struggle to maintain eye contact.',
-                  'I\'m always looking around. I\'m easily distracted.',
-                  'My nose is always turned up.',
-                  'I find myself looking down a lot.',
-                  'I have a habit of slouching.',
-                  'My posture improves when someone is speaking to me.',
-                  'I snap my fingers to help me remember things.',
-                  'My face is very expressive.',
-                  'I\'m always finding something to lean against.',
-                  'I cross my arms when I talk to someone.',
-                  'I tend to shove my hands in my pockets.',
-                  'My eyes drift to the ceiling when I\'m thinking.',
-                  'I stroke my chin when I\'m being serious.',
-                  'I hum approvingly while I\'m listening to someone.',
-                  'Sitting or standing, my legs are almost always crossed.',
-                  'I\'m always pushing my hair back.',
-                  'I bite my lip when I\'m concentrating.',
-                  'If possible, my hands are always folded and my legs are straight.',
-                  'Eye contact is not my priority. I only look at what I\'m doing.',
-                  'I wrinkle my nose when I\'m frustrated.',
-                  'I nod to myself when I have an idea.',
-                  'I walk in long, slow strides.',
-                  'I speed-walk everywhere I go.',
-                  'My face is impossible to read.',
-                  'I rub my hands together when I\'m exited, or when I have a plan.'];
+let mannerisms = [
+    'I frequently have one eyebrow raised.',
+    'I talk with my hands.',
+    'I keep very still. I don\'t move much.',
+    'I\'m always tapping my foot or my fingers.',
+    'I am very good at keeping eye contact.',
+    'I struggle to maintain eye contact.',
+    'I\'m always looking around. I\'m easily distracted.',
+    'My nose is always turned up.',
+    'I find myself looking down a lot.',
+    'I have a habit of slouching.',
+    'My posture improves when someone is speaking to me.',
+    'I snap my fingers to help me remember things.',
+    'My face is very expressive.',
+    'I\'m always finding something to lean against.',
+    'I cross my arms when I talk to someone.',
+    'I tend to shove my hands in my pockets.',
+    'My eyes drift to the ceiling when I\'m thinking.',
+    'I stroke my chin when I\'m being serious.',
+    'I hum approvingly while I\'m listening to someone.',
+    'Sitting or standing, my legs are almost always crossed.',
+    'I\'m always pushing my hair back.',
+    'I bite my lip when I\'m concentrating.',
+    'If possible, my hands are always folded and my legs are straight.',
+    'Eye contact is not my priority. I only look at what I\'m doing.',
+    'I wrinkle my nose when I\'m frustrated.',
+    'I nod to myself when I have an idea.',
+    'I walk in long, slow strides.',
+    'I speed-walk everywhere I go.',
+    'My face is impossible to read.',
+    'I rub my hands together when I\'m exited, or when I have a plan.'
+];
+
+let speakingStyles = [
+    ''
+]
 
 function choice(list) {
     let selection = list[Number.parseInt((Math.random() * list.length))];
