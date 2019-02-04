@@ -146,6 +146,9 @@ function select() {
     let mannerismTwo = choice(mannerisms);
     do {
         let mannerismTwo = choice(mannerisms);
+        if (mannerismOne != mannerismTwo) {
+            break;
+        }
     } while (mannerismOne == mannerismTwo);
     mannerismsOneElement.textContent = mannerismOne;
     mannerismsTwoElement.textContent = mannerismTwo;
