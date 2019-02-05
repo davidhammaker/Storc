@@ -179,6 +179,84 @@ let speakingStyles = [
     'My tone has a pensive flavor.',
 ];
 
+let athletics = [
+    'baseball',
+    'basketball',
+    'football',
+    'soccer',
+    'bowling',
+    'boxing',
+    'golf',
+    'hockey',
+    'tennis',
+    'running',
+    'fencing',
+    'martial arts',
+    'acrobatics',
+    'swimming'
+];
+let mediums = [
+    'acrylic paint',
+    'oil paint',
+    'watercolor paint',
+    'pencil',
+    'colored pencil',
+    'crayon',
+    'charcoal',
+    'pastel',
+    'oil pastel',
+    'clay',
+    'marker'
+];
+let artisans = [
+    'blacksmith',
+    'carpenter',
+    'glassblower',
+    'jeweler',
+    'leatherworker'
+];
+let instruments = [
+    'piano',
+    'violin',
+    'viola',
+    'cello',
+    'upright bass',
+    'bass',
+    'guitar',
+    'drums',
+    'trumpet',
+    'french horn',
+    'clarinet',
+    'flute',
+    'tuba',
+    'euphonium',
+    'saxophone'
+];
+let writtenWorks = [
+    'novels',
+    'short stories',
+    'flash fiction',
+    'poetry',
+    'comics',
+    'screenplays',
+    'plays',
+    'musicals',
+    'prose',
+    'technical papers'
+];
+let skills;
+function defineSkills() {
+    skills = [
+        `I'm an athlete, and I'm best at ${choice(athletics)}.`,
+        `I make great art. My best medium is ${choice(mediums)}.`,
+        `I am ${articleChoice(artisans)}, and I do a fine job.`,
+        `Music is my specialty. I play the ${choice(instruments)}.`,
+        `I am a talented singer.`,
+        `I am a gifted writer. I mostly write ${choice(writtenWorks)}.`,
+        `I am very persuasive.`
+    ];
+};
+
 function choice(list) {
     let selection = list[Number.parseInt((Math.random() * list.length))];
     return selection;
@@ -278,11 +356,15 @@ function select() {
 
     let speakingStyleElement = document.getElementById('speaking_style');
     speakingStyleElement.textContent = choice(speakingStyles);
+
+    let skillElement = document.getElementById('skill');
+    skillElement.textContent = choice(skills);
 };
 
 function scramble() {
     defineClothes();
     defineUniqueAttributes();
+    defineSkills();
     select();
 };
 
