@@ -482,12 +482,6 @@ function articleChoice(list) {
     }
     return selection;
 };
-
-function assignAttribute(attributeList, attributeElement) {
-    let attribute = choice(attributeList);
-    attributeElement.textContent = attribute;
-};
-
 function getGender() {
     let gender = document.getElementById('gender').textContent;
     return gender
