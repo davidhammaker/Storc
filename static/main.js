@@ -407,7 +407,8 @@ let exclusions = [
             'I talk with my hands.',
             'I\'m always tapping my foot or my fingers.',
             'I\'m always pushing my hair back.',
-            'I rub my hands together when I\'m exited, or when I have a plan.'
+            'I rub my hands together when I\'m exited, or when I have a plan.',
+            'I snap my fingers to help me remember things.'
         ]
     ],
     [
