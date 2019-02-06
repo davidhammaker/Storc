@@ -213,8 +213,24 @@ nav a{
 }
 
 /* Tables */
+table{
+    border-collapse: collapse;
+}
+
+tr{
+    border-top: 1px solid #b3cce6;
+}
+
+tr:nth-child(1){
+    border-top: 0px;
+}
+
+.no-border{
+    border-top: 0px;
+}
+
 td{
-    padding: 0 10px 10px 0;
+    padding: 5px 10px 5px 0;
 }
 
 .key{
@@ -226,7 +242,7 @@ td{
 
 /* Boxes */
 .box-l{
-    max-width: 300px;
+    max-width: 270px;
     clear: both;
     display: inline-block;
 }
