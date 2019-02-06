@@ -294,7 +294,7 @@ function defineFlaws() {
         'I turn close friends against each other if it serves my purpose.',
         'I struggle with an addiction.',
         `I'm ${choice(disabilities)}.`,
-        'I never speak, even when I want to.',
+        'I have a hard time finding my voice.',
         'I\'m scarred by something that happened to me in my past.',
         'I will always carry the burden of a terrible mistake.',
         'I firmly believe that everyone is hiding something from me.',
