@@ -373,6 +373,99 @@ function defineFears() {
     ];
 };
 
+let exclusions = [
+    [
+        [
+            'I keep very still. I don\'t move much.',
+            'If possible, my hands are always folded and my legs are straight.'
+        ],
+        [
+            'I talk with my hands.',
+            'I\'m always tapping my foot or my fingers.',
+            'I\'m always pushing my hair back.',
+            'I rub my hands together when I\'m exited, or when I have a plan.'
+        ]
+    ],
+    [
+        [
+            'I am very good at keeping eye contact.'
+        ],
+        [
+            'I struggle to maintain eye contact.',
+            'I\'m always looking around. I\'m easily distracted.',
+            'I find myself looking down a lot.',
+            'Eye contact is not my priority. I only look at what I\'m doing.',
+            'My eyes drift to the ceiling when I\'m thinking.'
+        ]
+    ],
+    [
+        [
+            'My face is impossible to read.'
+        ],
+        [
+            'I bite my lip when I\'m concentrating.',
+            'I wrinkle my nose when I\'m frustrated.',
+            'My face is very expressive.',
+            'I frequently have one eyebrow raised.',
+            'My eyes drift to the ceiling when I\'m thinking.'
+        ]
+    ],
+    [
+        [
+            'I walk in long, slow strides.'
+        ],
+        [
+            'I speed-walk everywhere I go.'
+        ]
+    ],
+    [
+        [
+            `I am a brilliant speaker, captivating individuals and crowds.`
+        ],
+        [
+            `I get really bad stage-fright.`,
+            'I have a hard time finding my voice.',
+            'I talk so fast that I often mix up words.',
+            'I have trouble finishing a sentence. My voice trails off.',
+            'My voice can be monotone at times.',
+            'I mumble the words I really want to say, but everything else is loud and clear.',
+            'My voice is soft, even when I want to speak up.'
+        ]
+    ],
+    [
+        [
+            `I'm an athlete, and I'm best at swimming.`
+        ],
+        [
+            `I stay away from water. I'm afraid of drowning.`
+        ]
+    ],
+    [
+        [
+            `I'm an athlete, and I'm best at acrobatics.`
+        ],
+        [
+            `I'm deathly afraid of heights.`
+        ]
+    ],
+    [
+        [
+            'I have a hard time finding my voice, even when I need to speak.'
+        ],
+        [
+            `I am very persuasive.`,
+            `I'm a good liar. I can make anyone believe anything.`,
+            'I speak very rapidly, but I articulate well.',
+            'I talk so fast that I often mix up words.',
+            'The pitch of my voice is a rollercoaster, always rising and falling.',
+            'I have a dynamic voice. My volume, speed, and tone are always changing.',
+            'I mumble the words I really want to say, but everything else is loud and clear.',
+            'I have no volume control. When I open my mouth, the whole world hears.',
+            'When I speak, I always sound excited.'
+        ]
+    ]
+];
+
 function choice(list) {
     let selection = list[Number.parseInt((Math.random() * list.length))];
     return selection;
@@ -554,6 +647,86 @@ function select() {
     let skill = getSkill();
     let flaw = getFlaw();
     let fear = getFear();
+
+    let allAttributes = [
+        mannerismOne,
+        mannerismTwo,
+        speakingStyle,
+        skill,
+        flaw,
+        fear
+    ];
+
+    let effectiveScramble = false;
+    while (!effectiveScramble) {
+        effectiveScramble = true;
+        for (let i = 0; i < exclusions.length; i++) {
+            let firstMatch = false;
+            let secondMatch = false;
+            let firstAttribute;
+            let secondAttribute;
+            for (let j = 0; j < allAttributes.length; j++) {
+                for (let k = 0; k < exclusions[i][0].length; k++) {
+                    if (allAttributes[j] === exclusions[i][0][k]) {
+                        firstMatch = true;
+                        firstAttribute = allAttributes[j];
+                    }
+                }
+                for (let k = 0; k < exclusions[i][1].length; k++) {
+                    if (allAttributes[j] === exclusions[i][1][k]) {
+                        secondMatch = true;
+                        secondAttribute = allAttributes[j];
+                    }
+                }
+            }
+            if (firstMatch && secondMatch) {
+                effectiveScramble = false;
+                if (secondAttribute === mannerismOne) {
+                    mannerismOne = choice(mannerisms);
+                    let mannerismsOneElement = document.getElementById('mannerism_one');
+                    mannerismsOneElement.textContent = mannerismOne;
+                }
+                else if (secondAttribute === mannerismTwo) {
+                    mannerismTwo = choice(mannerisms);
+                    let mannerismsTwoElement = document.getElementById('mannerism_two');
+                    mannerismsTwoElement.textContent = mannerismTwo;
+                }
+                else if (secondAttribute === speakingStyle) {
+                    speakingStyle = getSpeakingStyle();
+                }
+                else if (secondAttribute === skill) {
+                    skill = getSkill();
+                }
+                else if (secondAttribute === flaw) {
+                    flaw = getFlaw();
+                }
+                else if (secondAttribute === fear) {
+                    fear = getFear();
+                }
+                else {
+                    mannerismTwo = choice(mannerisms);
+                    let mannerismsTwoElement = document.getElementById('mannerism_two');
+                    mannerismsTwoElement.textContent = mannerismTwo;
+                    speakingStyle = getSpeakingStyle();
+                    skill = getSkill();
+                    flaw = getFlaw();
+                    fear = getFear();
+                }
+                allAttributes = [
+                    mannerismOne,
+                    mannerismTwo,
+                    speakingStyle,
+                    skill,
+                    flaw,
+                    fear
+                ];
+                break;
+            }
+        }
+        if (effectiveScramble) {
+            break;
+        }
+    }
 };
 
 function scramble() {
