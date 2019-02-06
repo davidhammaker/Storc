@@ -253,7 +253,13 @@ function defineSkills() {
         `Music is my specialty. I play the ${choice(instruments)}.`,
         `I am a talented singer.`,
         `I am a gifted writer. I mostly write ${choice(writtenWorks)}.`,
-        `I am very persuasive.`
+        `I am very persuasive.`,
+        `I am very good at mathematics.`,
+        `I have read hundreds, if not thousands, of books.`,
+        `I'm great with computers.`,
+        `I'm a natural leader.`,
+        `I have an excellent memory.`,
+        `I'm a good liar. I can make anyone believe anything.`
     ];
 };
 
