@@ -263,6 +263,50 @@ function defineSkills() {
     ];
 };
 
+let disabilities = [
+    'blind',
+    'deaf',
+    'a cripple',
+    'missing an eye',
+    'missing an arm',
+    'missing a leg'
+];
+let flaws;
+function defineFlaws() {
+    flaws = [
+        'I have a bad temper. The smallest thing can anger me.',
+        'I won\'t turn down a challenge, even if I know I should.',
+        'I can\'t walk away from a fight.',
+        'I go out of my way to prove I\'m better than my rivals.',
+        'I am easily manipulated, even when I\'m aware of others\' intentions.',
+        'I have a hard time standing up for myself.',
+        'I\'m always telling lies. Sometimes I lie for no reason.',
+        'I trust no one. Anyone might let me down.',
+        'I have a habit of intentionally irritating people.',
+        'I use humor at very innappropriate times.',
+        'No matter what anyone tells me, I feel insignificant.',
+        'I am envious, always wanting whatever I can\'t have.',
+        'I look down on others. Why live in denial of my own superiority?',
+        'I use other people, even hurt them, if I have something to gain.',
+        'I lie awake plotting ways to spite my rivals.',
+        'I defy all forms of authority. No one holds power over me.',
+        'Rumors and gossip are my weapons of choice.',
+        'I turn close friends against each other if it serves my purpose.',
+        'I struggle with an addiction.',
+        `I'm ${choice(disabilities)}.`,
+        'I never speak, even when I want to.',
+        'I\'m scarred by something that happened to me in my past.',
+        'I will always carry the burden of a terrible mistake.',
+        'I firmly believe that everyone is hiding something from me.',
+        'Money is the only true form of safety and security.',
+        'I love my material possessions more than anything.',
+        'I sometimes take things that don\'t belong to me.',
+        'I have a very low opinion of myself.',
+        'I tend to dwell on every little mistake I make.',
+        'I am unreliable. No one can depend on me.'
+    ];
+};
+
 function choice(list) {
     let selection = list[Number.parseInt((Math.random() * list.length))];
     return selection;
@@ -365,12 +409,16 @@ function select() {
 
     let skillElement = document.getElementById('skill');
     skillElement.textContent = choice(skills);
+
+    let flawElement = document.getElementById('flaw');
+    flawElement.textContent = choice(flaws);
 };
 
 function scramble() {
     defineClothes();
     defineUniqueAttributes();
     defineSkills();
+    defineFlaws();
     select();
 };
 
