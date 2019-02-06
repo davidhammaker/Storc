@@ -172,7 +172,6 @@ let speakingStyles = [
     'I mumble the words I really want to say, but everything else is loud and clear.',
     'My voice is soft, even when I want to speak up.',
     'I have no volume control. When I open my mouth, the whole world hears.',
-    'I am a brilliant speaker, captivating individuals and crowds.',
     'I am a big fan of one-word replies.',
     'My tone has a calming effect on others.',
     'When I speak, I always sound excited.',
@@ -259,7 +258,8 @@ function defineSkills() {
         `I'm great with computers.`,
         `I'm a natural leader.`,
         `I have an excellent memory.`,
-        `I'm a good liar. I can make anyone believe anything.`
+        `I'm a good liar. I can make anyone believe anything.`,
+        `I am a brilliant speaker, captivating individuals and crowds.`
     ];
 };
 
