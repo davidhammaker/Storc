@@ -1,5 +1,27 @@
 'use strict';
 
+// Define functions that assist with attribute definition and selection
+
+function choice(list) {
+    let selection = list[Number.parseInt((Math.random() * list.length))];
+    return selection;
+};
+
+function articleChoice(list) {
+    let selection = list[Number.parseInt((Math.random() * list.length))];
+    let letter = selection[0];
+    if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u') {
+        selection = 'an ' + selection;
+    }
+    else {
+        selection = 'a ' + selection;
+    }
+    return selection;
+};
+
+/* Define attributes (hairColor, eyeColor, uniqueAttributes and their
+subcategories, etc.) */
+
 let hairColors = [
     'Black',
     'Dark brown',
@@ -373,6 +395,8 @@ function defineFears() {
     ];
 };
 
+// Define an array of mutually exclusive attributes
+
 let exclusions = [
     [
         [
@@ -466,22 +490,8 @@ let exclusions = [
     ]
 ];
 
-function choice(list) {
-    let selection = list[Number.parseInt((Math.random() * list.length))];
-    return selection;
-};
+// Define functions that select and/or return character attributes
 
-function articleChoice(list) {
-    let selection = list[Number.parseInt((Math.random() * list.length))];
-    let letter = selection[0];
-    if (letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u') {
-        selection = 'an ' + selection;
-    }
-    else {
-        selection = 'a ' + selection;
-    }
-    return selection;
-};
 function getGender() {
     let gender = document.getElementById('gender').textContent;
     return gender
@@ -624,6 +634,8 @@ function getFear() {
     return fear;
 };
 
+// Select character attributes
+
 function select() {
     let heightAttributes = getHeight();
     let heightRaw = heightAttributes[0];
@@ -642,6 +654,8 @@ function select() {
     let flaw = getFlaw();
     let fear = getFear();
 
+    // Ensure that no attributes are mutually exclusive
+
     let allAttributes = [
         mannerismOne,
         mannerismTwo,
@@ -650,7 +664,6 @@ function select() {
         flaw,
         fear
     ];
-
     let effectiveScramble = false;
     while (!effectiveScramble) {
         effectiveScramble = true;
@@ -723,6 +736,8 @@ function select() {
     }
 };
 
+// Scramble all attributes
+
 function scramble() {
     defineClothes();
     defineUniqueAttributes();
@@ -731,5 +746,7 @@ function scramble() {
     defineFears();
     select();
 };
+
+// Initial scramble on page load
 
 scramble();
