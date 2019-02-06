@@ -388,16 +388,19 @@ function articleChoice(list) {
         selection = 'a ' + selection;
     }
     return selection;
-}
+};
 
 function assignAttribute(attributeList, attributeElement) {
     let attribute = choice(attributeList);
     attributeElement.textContent = attribute;
 };
 
-function select() {
+function getGender() {
     let gender = document.getElementById('gender').textContent;
+    return gender
+};
 
+function getHeight() {
     let heightElement = document.getElementById('height');
     let heightRaw;
     if (gender == 'Male') {
@@ -408,7 +411,10 @@ function select() {
     }
     let height = `${Number.parseInt(heightRaw / 12)}'${heightRaw % 12}"`
     heightElement.textContent = height;
+    return [heightRaw, height];
+};
 
+function getWeight(heightRaw) {
     let weightElement = document.getElementById('weight');
     let weight;
     function weightChoice(minimum, maximum) {
@@ -439,58 +445,115 @@ function select() {
         weight = weightChoice(130, 210);
     }
     weightElement.textContent = weight + ' lb';
+    return weight + ' lb';
+};
 
+function getHairColor() {
     let hairColorElement = document.getElementById('hair_color');
-    assignAttribute(hairColors, hairColorElement);
+    let hairColor = choice(hairColors);
+    hairColorElement.textContent = hairColor;
+    return hairColor;
+};
 
+function getEyeColor() {
     let eyeColorElement = document.getElementById('eye_color');
-    assignAttribute(eyeColors, eyeColorElement);
+    let eyeColor = choice(eyeColors);
+    eyeColorElement.textContent = eyeColor;
+    return eyeColor;
+};
 
+function getUniqueAttribute() {
     let uniqueAttributeElement = document.getElementById('unique_attribute');
-    assignAttribute(uniqueAttributes, uniqueAttributeElement);
+    let uniqueAttribute = choice(uniqueAttributes);
+    uniqueAttributeElement.textContent = uniqueAttribute;
+    return uniqueAttribute;
+};
 
+function getFavoriteClothes() {
     let favoriteClothes = favoriteClothesGeneric;
-    if (gender == 'Male') {
+    if (getGender() === 'Male') {
         favoriteClothes = favoriteClothes.concat(favoriteClothesMale);
     }
     else {
         favoriteClothes = favoriteClothes.concat(favoriteClothesFemale);
     }
-
     let favoriteClothesElement = document.getElementById('favorite_clothes');
-    assignAttribute(favoriteClothes, favoriteClothesElement);
+    let favoriteClothesChoice = choice(favoriteClothes);
+    favoriteClothesElement.textContent = favoriteClothesChoice;
+    return favoriteClothesChoice;
+};
 
-    let mannerismsOneElement = document.getElementById('mannerism_one');
-    let mannerismsTwoElement = document.getElementById('mannerism_two');
-    let mannerismOne = choice(mannerisms);
-    let mannerismTwo = choice(mannerisms);
-    while (mannerismOne == mannerismTwo) {
-        mannerismTwo = choice(mannerisms);
-    }
-    mannerismsOneElement.textContent = mannerismOne;
-    mannerismsTwoElement.textContent = mannerismTwo;
-
-    let speakingStyleElement = document.getElementById('speaking_style');
-    speakingStyleElement.textContent = choice(speakingStyles);
-
-    let skillElement = document.getElementById('skill');
-    skillElement.textContent = choice(skills);
-
-    let flawElement = document.getElementById('flaw');
-    flawElement.textContent = choice(flaws);
-
+function getHairStyle() {
     let hairElement = document.getElementById('hair');
     let hair;
-    if (gender == 'Male') {
+    if (getGender() === 'Male') {
         hair = choice(maleHair);
     }
     else {
         hair = choice(femaleHair);
     }
     hairElement.textContent = hair;
+    return hair;
+};
 
+function getMannerisms() {
+    let mannerismsOneElement = document.getElementById('mannerism_one');
+    let mannerismsTwoElement = document.getElementById('mannerism_two');
+    let mannerismOne = choice(mannerisms);
+    let mannerismTwo = choice(mannerisms);
+    while (mannerismOne === mannerismTwo) {
+        mannerismTwo = choice(mannerisms);
+    }
+    mannerismsOneElement.textContent = mannerismOne;
+    mannerismsTwoElement.textContent = mannerismTwo;
+    return [mannerismOne, mannerismTwo];
+};
+
+function getSpeakingStyle() {
+    let speakingStyleElement = document.getElementById('speaking_style');
+    let speakingStyle = choice(speakingStyles);
+    speakingStyleElement.textContent = speakingStyle;
+    return speakingStyle;
+};
+
+function getSkill() {
+    let skillElement = document.getElementById('skill');
+    let skill = choice(skills);
+    skillElement.textContent = skill;
+    return skill;
+};
+
+function getFlaw() {
+    let flawElement = document.getElementById('flaw');
+    let flaw = choice(flaws);
+    flawElement.textContent = flaw;
+    return flaw;
+};
+
+function getFear() {
     let fearElement = document.getElementById('fear');
-    fearElement.textContent = choice(fears);
+    let fear = choice(fears);
+    fearElement.textContent = fear;
+    return fear;
+};
+
+function select() {
+    let heightAttributes = getHeight();
+    let heightRaw = heightAttributes[0];
+    let height = heightAttributes[1];
+    let weight = getWeight(heightRaw);
+    let hairColor = getHairColor();
+    let eyeColor = getEyeColor();
+    let uniqueAttribute = getUniqueAttribute();
+    let favoriteClothesChoice = getFavoriteClothes();
+    let hairStyle = getHairStyle();
+    let mannerismsChoice = getMannerisms();
+    let mannerismOne = mannerismsChoice[0];
+    let mannerismTwo = mannerismsChoice[1];
+    let speakingStyle = getSpeakingStyle();
+    let skill = getSkill();
+    let flaw = getFlaw();
+    let fear = getFear();
 };
 
 function scramble() {
