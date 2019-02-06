@@ -307,6 +307,37 @@ function defineFlaws() {
     ];
 };
 
+let maleHair = [
+    'shaved off',
+    'neatly cut short',
+    'military cut',
+    'crew cut',
+    'short and unkempt',
+    'long and disheveled',
+    'long, but neat',
+    'styled with product',
+    'slicked back'
+];
+let femaleHair = [
+    'short',
+    'shoulder-length, straight',
+    'long, straight',
+    'very long, straight',
+    'shoulder-length, wavy',
+    'long, wavy',
+    'very long, wavy',
+    'shoulder-length, curly',
+    'long, curly',
+    'very long, curly',
+    'shoulder-length, unkempt',
+    'long, unkempt',
+    'very long, unkempt',
+    'long, tied back',
+    'very long, tied back',
+    'long, braided',
+    'very long, braided'
+];
+
 function choice(list) {
     let selection = list[Number.parseInt((Math.random() * list.length))];
     return selection;
@@ -412,6 +443,16 @@ function select() {
 
     let flawElement = document.getElementById('flaw');
     flawElement.textContent = choice(flaws);
+
+    let hairElement = document.getElementById('hair');
+    let hair;
+    if (gender == 'Male') {
+        hair = choice(maleHair);
+    }
+    else {
+        hair = choice(femaleHair);
+    }
+    hairElement.textContent = hair;
 };
 
 function scramble() {
