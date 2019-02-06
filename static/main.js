@@ -338,6 +338,41 @@ let femaleHair = [
     'very long, braided'
 ];
 
+let scaryCritters = [
+    'spiders',
+    'snakes',
+    'dogs',
+    'cats',
+    'birds',
+    'bees',
+    'frogs',
+    'sharks',
+    'cockroaches',
+    'rodents',
+    'bats',
+    'ants',
+    'all insects'
+];
+let fears;
+function defineFears() {
+    fears = [
+        `I am terrified of ${choice(scaryCritters)}.`,
+        `I stay away from sick people.`,
+        `I hate tight spaces, even elevators.`,
+        `I panic when I'm in a crowd.`,
+        `Thunder storms are my worst nightmare.`,
+        `I stay away from water. I'm afraid of drowning.`,
+        `I'm deathly afraid of heights.`,
+        `I hate doctors and hospitals.`,
+        `Keep the light on. I'm afraid of the dark.`,
+        `I'm scared that I'll be left behind or forgotten.`,
+        `I'm afraid to risk falling in love.`,
+        `I shy of camera lenses.`,
+        `I get really bad stage-fright.`,
+        `Above all, I'm afraid of dying.`
+    ];
+};
+
 function choice(list) {
     let selection = list[Number.parseInt((Math.random() * list.length))];
     return selection;
@@ -453,6 +488,9 @@ function select() {
         hair = choice(femaleHair);
     }
     hairElement.textContent = hair;
+
+    let fearElement = document.getElementById('fear');
+    fearElement.textContent = choice(fears);
 };
 
 function scramble() {
@@ -460,6 +498,7 @@ function scramble() {
     defineUniqueAttributes();
     defineSkills();
     defineFlaws();
+    defineFears();
     select();
 };
 
