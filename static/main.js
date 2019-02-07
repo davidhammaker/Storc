@@ -628,6 +628,18 @@ let exclusions = [
             `I'm an athlete, and I'm best at acrobatics.`,
             `I'm an athlete, and I'm best at swimming.`
         ]
+    ],
+    [
+        [
+            'I trust no one. Anyone might let me down.'
+        ],
+        [
+            `I'm lucky to have a few very close friends.`,
+            `There are a lot of people I call "friends," but we aren't close.`,
+            `I have many friends, but only one best friend.`,
+            `I've got lots of friends, and a few that are very close to me.`,
+            `I feel like I'm surrounded by great friends.`
+        ]
     ]
 ];
 
