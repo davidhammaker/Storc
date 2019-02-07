@@ -512,6 +512,91 @@ let exclusions = [
             'I have no volume control. When I open my mouth, the whole world hears.',
             'When I speak, I always sound excited.'
         ]
+    ],
+    [
+        [
+            'I\'m blind.'
+        ],
+        [
+            'A great book is all I need to have a good time.',
+            'I adore all cute animals.',
+            'I\'m always up for a good movie.',
+            'Fine art is a priceless treasure in my eyes.',
+            `I have read hundreds, if not thousands, of books.`,
+            `I'm great with computers.`,
+            `I make great art. My best medium is acrylic paint.`,
+            `I make great art. My best medium is oil paint.`,
+            `I make great art. My best medium is watercolor paint.`,
+            `I make great art. My best medium is pencil.`,
+            `I make great art. My best medium is colored pencil.`,
+            `I make great art. My best medium is crayon.`,
+            `I make great art. My best medium is charcoal.`,
+            `I make great art. My best medium is pastel.`,
+            `I make great art. My best medium is oil pastel.`,
+            `I make great art. My best medium is clay.`,
+            `I make great art. My best medium is marker.`,
+            `I am a blacksmith, and I do a fine job.`,
+            `I am a glassblower, and I do a fine job.`,
+            `I am a jeweler, and I do a fine job.`,
+            `I'm an athlete, and I'm best at baseball.`,
+            `I'm an athlete, and I'm best at basketball.`,
+            `I'm an athlete, and I'm best at football.`,
+            `I'm an athlete, and I'm best at soccer.`,
+            `I'm an athlete, and I'm best at bowling.`,
+            `I'm an athlete, and I'm best at boxing.`,
+            `I'm an athlete, and I'm best at golf.`,
+            `I'm an athlete, and I'm best at hockey.`,
+            `I'm an athlete, and I'm best at tennis.`,
+            `I'm an athlete, and I'm best at running.`,
+            `I'm an athlete, and I'm best at fencing.`,
+            `I'm an athlete, and I'm best at martial arts.`,
+            `I'm an athlete, and I'm best at acrobatics.`,
+            `I'm an athlete, and I'm best at swimming.`,
+            `Keep the light on. I'm afraid of the dark.`,
+            `I shy of camera lenses.`
+        ]
+    ],
+    [
+        [
+            'I\'m deaf.'
+        ],
+        [
+            'My favorite music always brightens my spirits.',
+            `Music is my specialty. I play the piano.`,
+            `Music is my specialty. I play the violin.`,
+            `Music is my specialty. I play the viola.`,
+            `Music is my specialty. I play the cello.`,
+            `Music is my specialty. I play the upright bass.`,
+            `Music is my specialty. I play the bass.`,
+            `Music is my specialty. I play the guitar.`,
+            `Music is my specialty. I play the drums.`,
+            `Music is my specialty. I play the trumpet.`,
+            `Music is my specialty. I play the french horn.`,
+            `Music is my specialty. I play the clarinet.`,
+            `Music is my specialty. I play the flute.`,
+            `Music is my specialty. I play the tuba.`,
+            `Music is my specialty. I play the euphonium.`,
+            `Music is my specialty. I play the saxophone.`,
+            `I am a talented singer.`,
+            `I am a gifted writer. I mostly write musicals.`,
+            `I am a brilliant speaker, captivating individuals and crowds.`
+        ]
+    ],
+    [
+        [
+            'I\'m missing an arm.'
+        ],
+        [
+            `I'm an athlete, and I'm best at baseball.`,
+            `I'm an athlete, and I'm best at basketball.`,
+            `I'm an athlete, and I'm best at football.`,
+            `I'm an athlete, and I'm best at boxing.`,
+            `I'm an athlete, and I'm best at golf.`,
+            `I'm an athlete, and I'm best at hockey.`,
+            `I'm an athlete, and I'm best at martial arts.`,
+            `I'm an athlete, and I'm best at acrobatics.`,
+            `I'm an athlete, and I'm best at swimming.`
+        ]
     ]
 ];
 
