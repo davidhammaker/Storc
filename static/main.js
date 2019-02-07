@@ -665,6 +665,21 @@ let exclusions = [
             `I've got lots of friends, and a few that are very close to me.`,
             `I feel like I'm surrounded by great friends.`
         ]
+    ],
+    [
+        [
+            `I'm afraid to risk falling in love.`
+        ],
+        [
+            `I am pursuing someone, but I've been put in the friend-zone.`,
+            `I'm in a serious relationship, and things are going well!`,
+            `I am engaged! Marriage is right around the corner.`,
+            `I'm married, but we don't have any kids.`,
+            `The two of us are married with one kid.`,
+            `The two of us are married with two kids.`,
+            `The two of us are married with three kids.`,
+            `The two of us are married with lots of kids.`
+        ]
     ]
 ];
 
