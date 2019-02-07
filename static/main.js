@@ -395,6 +395,30 @@ function defineFears() {
     ];
 };
 
+let favoriteThings = [
+    'I love winning a game or a competition.',
+    'I enjoy learning something new and interesting.',
+    'A great book is all I need to have a good time.',
+    'Good food always brings me cheer.',
+    'I adore all cute animals.',
+    'I love a good thrill, especially if it\'s dangerous.',
+    'I feel great after completing a hard task.',
+    'When I help others, my life has meaning.',
+    'Great stories are what I live for.',
+    'I\'m always up for a good movie.',
+    'I sleep better when I know that justice has been served.',
+    'My favorite music always brightens my spirits.',
+    'Fine art is a priceless treasure in my eyes.',
+    'A great play can really inspire me.',
+    'I\'m happiest when I\'m enjoying the sunshine.',
+    'Rainfall may make others sad, but I\'ve always liked it.',
+    'To me, there\'s nothing like a peaceful snowfall.',
+    'I have a special appreciation for wildlife.',
+    'The latest and greatest technologies have my attention.',
+    'Old-fashioned traditions and objects are precious to me.',
+    'There\'s nothing like a comfortable piece of clothing.'
+];
+
 // Define an array of mutually exclusive attributes
 
 let exclusions = [
@@ -635,6 +659,13 @@ function getFear() {
     return fear;
 };
 
+function getFavoriteThing() {
+    let favoriteThingElement = document.getElementById('favorite');
+    let favoriteThing = choice(favoriteThings);
+    favoriteThingElement.textContent = favoriteThing;
+    return favoriteThing
+};
+
 // Select character attributes
 
 function select() {
@@ -654,6 +685,7 @@ function select() {
     let skill = getSkill();
     let flaw = getFlaw();
     let fear = getFear();
+    let favoriteThing = getFavoriteThing();
 
     // Ensure that no attributes are mutually exclusive
 
