@@ -389,7 +389,7 @@ function defineFears() {
         `Keep the light on. I'm afraid of the dark.`,
         `I'm scared that I'll be left behind or forgotten.`,
         `I'm afraid to risk falling in love.`,
-        `I shy of camera lenses.`,
+        `I shy away from camera lenses.`,
         `I get really bad stage-fright.`,
         `Above all, I'm afraid of dying.`
     ];
@@ -609,7 +609,7 @@ let exclusions = [
             `I'm an athlete, and I'm best at acrobatics.`,
             `I'm an athlete, and I'm best at swimming.`,
             `Keep the light on. I'm afraid of the dark.`,
-            `I shy of camera lenses.`
+            `I shy away from camera lenses.`
         ]
     ],
     [
