@@ -763,6 +763,7 @@ function getEyeColor() {
 };
 
 function getUniqueAttribute() {
+    defineUniqueAttributes();
     let uniqueAttributeElement = document.getElementById('unique_attribute');
     let uniqueAttribute = choice(uniqueAttributes);
     uniqueAttributeElement.textContent = uniqueAttribute;
@@ -770,6 +771,7 @@ function getUniqueAttribute() {
 };
 
 function getFavoriteClothes() {
+    defineClothes();
     let favoriteClothes = favoriteClothesGeneric;
     if (getGender() === 'Male') {
         favoriteClothes = favoriteClothes.concat(favoriteClothesMale);
@@ -817,6 +819,7 @@ function getSpeakingStyle() {
 };
 
 function getSkill() {
+    defineSkills();
     let skillElement = document.getElementById('skill');
     let skill = choice(skills);
     skillElement.textContent = skill;
@@ -824,6 +827,7 @@ function getSkill() {
 };
 
 function getFlaw() {
+    defineFlaws();
     let flawElement = document.getElementById('flaw');
     let flaw = choice(flaws);
     flawElement.textContent = flaw;
@@ -831,6 +835,7 @@ function getFlaw() {
 };
 
 function getFear() {
+    defineFears();
     let fearElement = document.getElementById('fear');
     let fear = choice(fears);
     fearElement.textContent = fear;
@@ -888,15 +893,16 @@ function getFriends() {
 };
 
 function getSignificantOther() {
+    defineSignificantOthers();
     let significantOtherElement = document.getElementById('significant_other');
     let significantOther = choice(significantOthers);
     significantOtherElement.textContent = significantOther;
     return significantOther;
 };
 
-// Select character attributes
+// Scramble character attributes
 
-function select() {
+function scramble() {
     let heightAttributes = getHeight();
     let heightRaw = heightAttributes[0];
     let height = heightAttributes[1];
@@ -1022,18 +1028,6 @@ function select() {
             break;
         }
     }
-};
-
-// Scramble all attributes
-
-function scramble() {
-    defineClothes();
-    defineUniqueAttributes();
-    defineSkills();
-    defineFlaws();
-    defineFears();
-    defineSignificantOthers();
-    select();
 };
 
 // Mix individual attributes
