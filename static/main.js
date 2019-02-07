@@ -988,6 +988,10 @@ function select() {
                     skill = getSkill();
                     flaw = getFlaw();
                     fear = getFear();
+                    favoriteThing = getFavoriteThing();
+                    family = getFamily();
+                    friendsChoice = getFriends();
+                    significantOther = getSignificantOther();
                 }
                 allAttributes = [
                     mannerismOne,
@@ -995,7 +999,11 @@ function select() {
                     speakingStyle,
                     skill,
                     flaw,
-                    fear
+                    fear,
+                    favoriteThing,
+                    family,
+                    friendsChoice,
+                    significantOther
                 ];
                 break;
             }
