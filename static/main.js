@@ -916,7 +916,11 @@ function select() {
         speakingStyle,
         skill,
         flaw,
-        fear
+        fear,
+        favoriteThing,
+        family,
+        friendsChoice,
+        significantOther
     ];
     let effectiveScramble = false;
     while (!effectiveScramble) {
@@ -963,6 +967,18 @@ function select() {
                 }
                 else if (secondAttribute === fear) {
                     fear = getFear();
+                }
+                else if (secondAttribute === favoriteThing) {
+                    favoriteThing = getFavoriteThing();
+                }
+                else if (secondAttribute === family) {
+                    family = getFamily();
+                }
+                else if (secondAttribute === friendsChoice) {
+                    friendsChoice = getFriends();
+                }
+                else if (secondAttribute === significantOther) {
+                    significantOther = getSignificantOther();
                 }
                 else {
                     mannerismTwo = choice(mannerisms);
