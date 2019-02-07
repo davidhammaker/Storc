@@ -610,7 +610,7 @@ function getGender() {
 function getHeight() {
     let heightElement = document.getElementById('height');
     let heightRaw;
-    if (gender == 'Male') {
+    if (getGender() === 'Male') {
         heightRaw = Number.parseInt((Math.random() * 13) + 64);
     }
     else {
