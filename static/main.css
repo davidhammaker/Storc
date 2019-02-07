@@ -16,7 +16,7 @@ h1{
 /* Navigation */
 nav{
     background-color: #336699;
-    height: 85px;
+    height: 55px;
 }
 
 nav a{
@@ -26,14 +26,14 @@ nav a{
 
 .nav-l{
     float: left;
-    margin: 20px 0 20px 50px;
+    margin: 5px 0 5px 50px;
     font-size: 40px;
 }
 
 .nav-r{
     float: right;
     font-size: medium;
-    margin: 40px 100px 0px 40px;
+    margin: 20px 100px 0px 20px;
 }
 
 .nav-r li{
@@ -44,7 +44,7 @@ nav a{
 /* Content */
 .main{
     max-width: 850px;
-    margin: 50px auto 0 auto;
+    margin: 25px auto 0 auto;
 }
 
 .main h3{
