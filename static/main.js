@@ -450,6 +450,31 @@ let friends = [
     `I feel like I'm surrounded by great friends.`
 ];
 
+let kids = [
+    'one kid',
+    'two kids',
+    'three kids',
+    'lots of kids'
+];
+let significantOthers;
+function defineSignificantOthers() {
+    significantOthers = [
+        `I'm not really interested in dating right now.`,
+        `I'm single, but I wish I wasn't.`,
+        `I have strong feelings for someone, but we aren't together.`,
+        `I am pursuing someone, but I've been put in the friend-zone.`,
+        `I've just started dating someone.`,
+        `I'm in a serious relationship, and things are going well!`,
+        `We've been together for a while, but it's not looking so good.`,
+        `I am engaged! Marriage is right around the corner.`,
+        `I've just had a break-up.`,
+        `I'm at the end of a long string of break-ups.`,
+        `I'm married, but we don't have any kids.`,
+        `The two of us are married with ${choice(kids)}.`,
+        `I was in love, but my significant other died.`
+    ];
+};
+
 // Define an array of mutually exclusive attributes
 
 let exclusions = [
@@ -837,6 +862,13 @@ function getFriends() {
     return friendsChoice;
 };
 
+function getSignificantOther() {
+    let significantOtherElement = document.getElementById('significant_other');
+    let significantOther = choice(significantOthers);
+    significantOtherElement.textContent = significantOther;
+    return significantOther;
+};
+
 // Select character attributes
 
 function select() {
@@ -859,6 +891,7 @@ function select() {
     let favoriteThing = getFavoriteThing();
     let family = getFamily();
     let friendsChoice = getFriends();
+    let significantOther = getSignificantOther();
 
     // Ensure that no attributes are mutually exclusive
 
@@ -950,6 +983,7 @@ function scramble() {
     defineSkills();
     defineFlaws();
     defineFears();
+    defineSignificantOthers();
     select();
 };
 
