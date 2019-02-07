@@ -440,6 +440,16 @@ let sisters = [
     'four sisters'
 ];
 
+let friends = [
+    `I don't really have any friends.`,
+    `I have one really good friend.`,
+    `I'm lucky to have a few very close friends.`,
+    `There are a lot of people I call "friends," but we aren't close.`,
+    `I have many friends, but only one best friend.`,
+    `I've got lots of friends, and a few that are very close to me.`,
+    `I feel like I'm surrounded by great friends.`
+];
+
 // Define an array of mutually exclusive attributes
 
 let exclusions = [
@@ -625,7 +635,7 @@ let exclusions = [
 
 function getGender() {
     let gender = document.getElementById('gender').textContent;
-    return gender
+    return gender;
 };
 
 function getHeight() {
@@ -769,7 +779,7 @@ function getFavoriteThing() {
     let favoriteThingElement = document.getElementById('favorite');
     let favoriteThing = choice(favoriteThings);
     favoriteThingElement.textContent = favoriteThing;
-    return favoriteThing
+    return favoriteThing;
 };
 
 function getFamily() {
@@ -805,7 +815,14 @@ function getFamily() {
         family = `I'm on my own.`;
     }
     familyElement.textContent = family;
-    return family
+    return family;
+};
+
+function getFriends() {
+    let friendsElement = document.getElementById('friends');
+    let friendsChoice = choice(friends);
+    friendsElement.textContent = friendsChoice;
+    return friendsChoice;
 };
 
 // Select character attributes
@@ -829,6 +846,7 @@ function select() {
     let fear = getFear();
     let favoriteThing = getFavoriteThing();
     let family = getFamily();
+    let friendsChoice = getFriends();
 
     // Ensure that no attributes are mutually exclusive
 
