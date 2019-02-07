@@ -704,6 +704,16 @@ function getHeight() {
     return [heightRaw, height];
 };
 
+function parseHeight(height) {
+    height = height + '';
+    let heightNumbers = height.replace('\'', '');
+    heightNumbers = heightNumbers.replace('""', '');
+    let feet = heightNumbers[0];
+    let inches = heightNumbers.replace(feet, '');
+    let heightRaw = Number.parseInt(feet * 12) + Number.parseInt(inches);
+    return heightRaw;
+};
+
 function getWeight(heightRaw) {
     let weightElement = document.getElementById('weight');
     let weight;
@@ -1025,6 +1035,31 @@ function scramble() {
     defineSignificantOthers();
     select();
 };
+
+// Mix individual attributes
+
+let heightMixer = document.getElementById('mix_height').addEventListener('click', getHeight);
+let weightMixer = document.getElementById('mix_weight').addEventListener('click', function() {
+    getWeight(parseHeight(document.getElementById('height').textContent))
+});
+let hairColorMixer = document.getElementById('mix_hair_color').addEventListener('click', getHairColor);
+let eyeColorMixer = document.getElementById('mix_eye_color').addEventListener('click', getEyeColor);
+let uniqueAttributeMixer = document.getElementById('mix_unique_attribute').addEventListener('click', getUniqueAttribute);
+let favoriteClothesChoiceMixer = document.getElementById('mix_favorite_clothes').addEventListener('click', getFavoriteClothes);
+let hairStyleMixer = document.getElementById('mix_hair').addEventListener('click', getHairStyle);
+let mannerismsChoiceMixer = document.getElementById('mix_mannerisms').addEventListener('click', function() {
+    let mannerismsChoice = getMannerisms();
+    let mannerismOne = mannerismsChoice[0];
+    let mannerismTwo = mannerismsChoice[1];
+});
+let speakingStyleMixer = document.getElementById('mix_speaking_style').addEventListener('click', getSpeakingStyle);
+let skillMixer = document.getElementById('mix_skill').addEventListener('click', getSkill);
+let flawMixer = document.getElementById('mix_flaw').addEventListener('click', getFlaw);
+let fearMixer = document.getElementById('mix_fear').addEventListener('click', getFear);
+let favoriteThingMixer = document.getElementById('mix_favorite').addEventListener('click', getFavoriteThing);
+let familyMixer = document.getElementById('mix_family').addEventListener('click', getFamily);
+let friendsChoiceMixer = document.getElementById('mix_friends').addEventListener('click', getFriends);
+let significantOtherMixer = document.getElementById('mix_significant_other').addEventListener('click', getSignificantOther);
 
 // Initial scramble on page load
 

@@ -231,6 +231,7 @@ tr:nth-child(1){
 
 td{
     padding: 5px 10px 5px 0;
+    width: 100%;
 }
 
 .key{
@@ -274,6 +275,12 @@ td{
 
 .button-r{
     float: right;
+}
+
+.mix_attribute{
+    font-size: small;
+    vertical-align: middle;
+    padding: 2px;
 }
 
 /* Smaller Centered Content */
