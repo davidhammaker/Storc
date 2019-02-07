@@ -419,6 +419,27 @@ let favoriteThings = [
     'There\'s nothing like a comfortable piece of clothing.'
 ];
 
+let parents = [
+    null,
+    'both my parents',
+    'my father',
+    'my mother'
+];
+let brothers = [
+    null,
+    'one brother',
+    'two brothers',
+    'three brothers',
+    'four brothers'
+];
+let sisters = [
+    null,
+    'one sister',
+    'two sisters',
+    'three sisters',
+    'four sisters'
+];
+
 // Define an array of mutually exclusive attributes
 
 let exclusions = [
@@ -751,6 +772,42 @@ function getFavoriteThing() {
     return favoriteThing
 };
 
+function getFamily() {
+    let family;
+    let familyElement = document.getElementById('family');
+    let familyObject = {
+        parents: choice(parents),
+        brothers: choice(brothers),
+        sisters: choice(sisters)
+    };
+    if (familyObject.parents && familyObject.brothers && familyObject.sisters) {
+        family = `I have ${familyObject.parents}, ${familyObject.brothers}, and ${familyObject.sisters}.`;
+    }
+    else if (familyObject.parents && familyObject.brothers) {
+        family = `I have ${familyObject.parents} and ${familyObject.brothers}.`;
+    }
+    else if (familyObject.parents && familyObject.sisters) {
+        family = `I have ${familyObject.parents} and ${familyObject.sisters}.`;
+    }
+    else if (familyObject.brothers && familyObject.sisters) {
+        family = `I have ${familyObject.brothers} and ${familyObject.sisters}.`;
+    }
+    else if (familyObject.parents) {
+        family = `I have ${familyObject.parents}.`;
+    }
+    else if (familyObject.brothers) {
+        family = `I have ${familyObject.brothers}.`;
+    }
+    else if (familyObject.sisters) {
+        family = `I have ${familyObject.sisters}.`;
+    }
+    else {
+        family = `I'm on my own.`;
+    }
+    familyElement.textContent = family;
+    return family
+};
+
 // Select character attributes
 
 function select() {
@@ -771,6 +828,7 @@ function select() {
     let flaw = getFlaw();
     let fear = getFear();
     let favoriteThing = getFavoriteThing();
+    let family = getFamily();
 
     // Ensure that no attributes are mutually exclusive
 
