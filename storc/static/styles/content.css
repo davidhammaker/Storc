@@ -1,0 +1,43 @@
+.container{
+    max-width: 1000px;
+    margin: auto;
+}
+
+.box{
+    background: #ffffff;
+    padding: 25px;
+    vertical-align: top;
+    margin: 0 15px 0 15px;
+}
+
+.multi{
+    display: inline-block;
+}
+
+.tall{
+    height: 550px;
+}
+
+.wide{
+    max-width: 575px;
+}
+
+.narrow{
+    width: 250px;
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    float: right;
+}
+
+.center{
+    margin: auto;
+}
+
+.center-text{
+    text-align: center;
+}

@@ -1,0 +1,28 @@
+nav{
+    background-color: #336699;
+    height: 55px;
+    margin-bottom: 25px;
+}
+
+nav a{
+    color: #ffffff;
+}
+
+nav a:hover{
+    color: #ffffff;
+    text-shadow: 0 0 5px #ffffff;
+}
+
+.nav-l{
+    float: left;
+    margin: 5px 0 5px 50px;
+    font-size: 40px;
+}
+
+.nav-r{
+    float: right;
+    font-size: medium;
+    margin: 20px 100px 0px 20px;
+    display: inline-block;
+    padding: 0 20px;
+}

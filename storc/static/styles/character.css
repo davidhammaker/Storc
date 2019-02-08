@@ -1,0 +1,42 @@
+table {
+    border-collapse: collapse;
+    margin: 0 10px;
+}
+
+tr{
+    border-top: 1px solid #b3cce6;
+}
+
+td{
+    padding: 5px 0;
+}
+
+tr:nth-child(1){
+    border-top: 0px;
+}
+
+td:nth-child(1) {
+    width: 110px;
+    padding-right: 10px;
+    color: #336699;
+    text-align: center;
+    vertical-align: top;
+}
+
+td:nth-child(2){
+    width: 100%;
+    padding-right: 15px;
+}
+
+td button{
+    padding: 0 2px;
+    font-size: small;
+}
+
+.second-cell {
+    border-top: 0px;
+}
+
+#mannerism_two {
+    all: inherit;
+}
