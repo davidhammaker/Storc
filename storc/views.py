@@ -1,9 +1,8 @@
 import os
-from random import choice
 import requests
-from flask import Flask, render_template
-
-app = Flask(__name__)
+from random import choice
+from flask import render_template
+from storc import app
 
 
 @app.route('/')
@@ -28,7 +27,3 @@ def new_character():
     name = 'John Doe'
     return render_template('new_character.html', name=name,
                            gender=gender.title())
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
