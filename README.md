@@ -20,7 +20,7 @@ If you would like to use the Behind the Name API for character name creation, yo
 
 _When using this tool, please be aware that the tool is not yet complete._
 
-To use the application, start by cloning this repository. Use `pip` to install "Flask" and "requests". Run the application with `$ python app.py`. You can then view the application at [localhost:5000](http://localhost:5000/).
+To use the application, start by cloning this repository. Use `pip` to install "Flask" and "requests". Run the application with `$ python run.py`. You can then view the application at [localhost:5000](http://localhost:5000/).
 
 ## Copyright
 
