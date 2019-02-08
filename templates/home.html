@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="main">
+    <div class="col-l">
+        <h1>Welcome to Storc</h1>
+        <br>
+        <em>Delivering unique characters for your next creative work!</em>
+        <br>
+        <br>
+        <h2>What is Storc?</h2>
+        <p>Storc was created to inspire writers by providing unique, dynamic characters for any literary work.</p>
+        <br>
+        <p>Storc allows you to make randomly generated characters, complete with unique names! The goal to help you get a jump start on your next writing project, or to assist you in getting through a tough writer's block.</p>
+        <br>
+        <br>
+        <p>Want to <a href="{{ url_for('new_character') }}">give it a try</a>?</p>
+    </div>
+    <div class="col-r">
+        <h2>Title</h2>
+        <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+        </ul>
+    </div>
+</div>
+{% endblock content %}

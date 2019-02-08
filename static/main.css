@@ -52,48 +52,11 @@ nav a{
 }
 
 /* Left Column */
-.col-l{
-    float: left;
+.col-r{
+    float: right;
     width: 200px;
     background-color: #ffffff;
     padding: 25px;
-}
-
-.col-l h2{
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    border-bottom-color: #b3cce6;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-}
-
-.col-l ul{
-    margin-left: 10px;
-    list-style: none;
-}
-
-.col-l ul li{
-    font-size: large;
-    line-height: 30px;
-}
-
-.col-l ul li a{
-    color: #000000;
-    text-decoration: none;
-}
-
-.col-l ul li a:hover{
-    color: #4080bf;
-    text-shadow: 0 0 5px #4080bf;
-}
-
-/* Right Column */
-.col-r{
-    float: right;
-    width: 500px;
-    background-color: #ffffff;
-    padding: 25px;
-    margin-left: 20px;
 }
 
 .col-r h2{
@@ -104,19 +67,56 @@ nav a{
     border-bottom-width: 1px;
 }
 
-.col-r .page-num{
+.col-r ul{
+    margin-left: 10px;
+    list-style: none;
+}
+
+.col-r ul li{
+    font-size: large;
+    line-height: 30px;
+}
+
+.col-r ul li a{
+    color: #000000;
+    text-decoration: none;
+}
+
+.col-r ul li a:hover{
+    color: #4080bf;
+    text-shadow: 0 0 5px #4080bf;
+}
+
+/* Right Column */
+.col-l{
+    float: left;
+    width: 500px;
+    background-color: #ffffff;
+    padding: 25px;
+    margin-left: 20px;
+}
+
+.col-l h2{
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    border-bottom-color: #b3cce6;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+
+.col-l .page-num{
     color: #ffffff;
     text-decoration: none;
     padding: 5px;
     background-color: #336699;
 }
 
-.col-r .page-num:hover{
+.col-l .page-num:hover{
     background-color: #4080bf;
     border-color: #4080bf;
 }
 
-.col-r .page-num-current{
+.col-l .page-num-current{
     color: #336699;
     text-decoration: none;
     padding: 5px;
@@ -125,6 +125,18 @@ nav a{
     border-width: 2px;
     border-style: solid;
     border-radius: 5px;
+}
+
+.col-l a{
+    color: #4080bf;
+    text-decoration: none;
+    transition: 0.25s;
+}
+
+.col-l a:hover{
+    color: #4080bf;
+    text-shadow: 0 0 5px #4080bf;
+    transition: 0.25s;
 }
 
 .listed{

@@ -8,6 +8,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
+    return render_template('home.html')
+
+
+@app.route('/new_character')
+def new_character():
     gender = choice(['male', 'female'])
 
     # The following lines have been commented out for development:
@@ -21,7 +26,7 @@ def home():
 
     # Temporary name for development:
     name = 'John Doe'
-    return render_template('base.html', name=name,
+    return render_template('new_character.html', name=name,
                            gender=gender.title())
 
 
