@@ -1055,6 +1055,30 @@ let familyMixer = document.getElementById('mix_family').addEventListener('click'
 let friendsChoiceMixer = document.getElementById('mix_friends').addEventListener('click', getFriends);
 let significantOtherMixer = document.getElementById('mix_significant_other').addEventListener('click', getSignificantOther);
 
+// Save character
+
+function Character() {
+    this.name = document.getElementById('name').textContent;
+    this.gender = document.getElementById('gender').textContent;
+    this.height = document.getElementById('height').textContent;
+    this.weight = document.getElementById('weight').textContent;
+    this.hair_color = document.getElementById('hair_color').textContent;
+    this.eye_color = document.getElementById('eye_color').textContent;
+    this.unique_attribute = document.getElementById('unique_attribute').textContent;
+    this.mannerism_one = document.getElementById('mannerism_one').textContent;
+    this.mannerism_two = document.getElementById('mannerism_two').textContent;
+    this.speaking_style = document.getElementById('speaking_style').textContent;
+    this.skill = document.getElementById('skill').textContent;
+    this.flaw = document.getElementById('flaw').textContent;
+    this.fear = document.getElementById('fear').textContent;
+    this.favorite = document.getElementById('favorite').textContent;
+    this.family = document.getElementById('family').textContent;
+    this.friends = document.getElementById('friends').textContent;
+    this.significant_other = document.getElementById('significant_other').textContent;
+    this.favorite_clothes = document.getElementById('favorite_clothes').textContent;
+    this.hair = document.getElementById('hair').textContent;
+};
+
 // Initial scramble on page load
 
 scramble();
