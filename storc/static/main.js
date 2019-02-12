@@ -329,7 +329,7 @@ function defineFlaws() {
         'I have a very low opinion of myself.',
         'I tend to dwell on every little mistake I make.',
         'I am unreliable. No one can depend on me.',
-        'I don\'t like the way I look, and I would do anythong to change it.',
+        'I don\'t like the way I look, and I would do anything to change it.',
         'Meeting new people is a huge struggle for me.',
         'I never learn from my mistakes, so I usually repeat them.'
     ];
