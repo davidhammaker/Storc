@@ -27,7 +27,6 @@ let hairColors = [
     'Dark brown',
     'Brown',
     'Light brown',
-    'Dirty blond',
     'Blond',
     'Strawberry blond',
     'Red',
@@ -37,9 +36,11 @@ let hairColors = [
 ];
 
 let eyeColors = [
+    'Amber',
     'Brown',
     'Blue',
     'Green',
+    'Light blue',
     'Gray',
     'Hazel'
 ];
@@ -58,33 +59,35 @@ let scars = [
 ];
 
 let uniqueAttributes;
+let uniqueAttributesMale = [
+    'Bearded',
+    'Mustached'
+];
 function defineUniqueAttributes() {
     uniqueAttributes = [
         'Flawless complexion',
         'Freckled face',
-        'Much acne',
-        'Big ears',
-        'Small ears',
-        'Big nose',
-        'Small nose',
         'Perfect nose',
-        'Wide mouth',
-        'Small mouth',
         'Wide eyes',
-        'Narrow eyes',
-        'Bushy eyebrows',
-        'Narrow eyebrows',
-        'Slight unibrow',
         'High cheekbones',
         'Square jaw',
-        'Pointed chin',
-        'Flat chin',
         'Perfect jawline',
         'Perfect teeth',
-        'Crooked teeth',
-        'Missing one tooth',
-        choice(scars)
+        choice(scars),
+        'Bright eyes',
+        'Keen eyes',
+        'Well-proportioned',
+        'Attractive proportions',
+        'Muscular',
+        'Pleasant smile',
+        'Strong hands',
+        'Long fingers',
+        'Bespectacled',
+        'Rosy cheeks'
     ];
+    if (getGender() === 'Male') {
+        uniqueAttributes = uniqueAttributes.concat(uniqueAttributesMale);
+    }
 };
 
 let colors = [
@@ -127,7 +130,7 @@ function defineClothes() {
     favoriteClothesMale = [
         `a tuxedo whenever possible`,
         `a suit and tie`,
-        `just denim overalls`,
+        `denim overalls`,
         `a sports jersey`,
         `any shirt and ${articleChoice(colors)} bow tie`,
         `skinny jeans and ${articleChoice(colors)} button-up shirt`,
@@ -325,7 +328,10 @@ function defineFlaws() {
         'I sometimes take things that don\'t belong to me.',
         'I have a very low opinion of myself.',
         'I tend to dwell on every little mistake I make.',
-        'I am unreliable. No one can depend on me.'
+        'I am unreliable. No one can depend on me.',
+        'I don\'t like the way I look, and I would do anythong to change it.',
+        'Meeting new people is a huge struggle for me.',
+        'I never learn from my mistakes, so I usually repeat them.'
     ];
 };
 
