@@ -1,7 +1,7 @@
 import os
 import requests
 from random import choice
-from flask import render_template
+from flask import render_template, request
 from storc import app
 
 
@@ -27,3 +27,10 @@ def new_character():
     name = 'John Doe'
     return render_template('new_character.html', name=name,
                            gender=gender.title())
+
+
+@app.route('/save_character', methods=['POST'])
+def save_character():
+    character = request.form
+    character_data = {key: character[key] for key in character.keys()}
+    return 'Character Data Received'
