@@ -28,6 +28,10 @@ td:nth-child(2){
     padding-right: 15px;
 }
 
+td:nth-child(3){
+    vertical-align: top;
+}
+
 td button{
     padding: 0 2px;
     font-size: small;
