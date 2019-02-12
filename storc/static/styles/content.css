@@ -22,8 +22,12 @@
     max-width: 575px;
 }
 
-.narrow{
+.narrower{
     width: 250px;
+}
+
+.narrow{
+    width: 300px;
 }
 
 .left{
