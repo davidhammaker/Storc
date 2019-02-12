@@ -23,67 +23,67 @@ function articleChoice(list) {
 subcategories, etc.) */
 
 let hairColors = [
-    'Black',
-    'Dark brown',
-    'Brown',
-    'Light brown',
-    'Blond',
-    'Strawberry blond',
-    'Red',
-    'Auburn',
-    'White',
-    'Silver'
+    'black',
+    'dark brown',
+    'brown',
+    'light brown',
+    'blond',
+    'strawberry blond',
+    'red',
+    'auburn',
+    'white',
+    'silver'
 ];
 
 let eyeColors = [
-    'Amber',
-    'Brown',
-    'Blue',
-    'Green',
-    'Light blue',
-    'Gray',
-    'Hazel'
+    'amber',
+    'brown',
+    'blue',
+    'green',
+    'light blue',
+    'gray',
+    'hazel'
 ];
 
 let scars = [
-    'Scar over left eye',
-    'Scar over right eye',
-    'Scar on nose',
-    'Scar on upper lip',
-    'Scar on lower lip',
-    'Scar on left cheek',
-    'Scar on right cheek',
-    'Scar on chin',
-    'Scar along jawline',
-    'Scar on forehead'
+    'scar over left eye',
+    'scar over right eye',
+    'scar on nose',
+    'scar on upper lip',
+    'scar on lower lip',
+    'scar on left cheek',
+    'scar on right cheek',
+    'scar on chin',
+    'scar along jawline',
+    'scar on forehead'
 ];
 
 let uniqueAttributes;
 let uniqueAttributesMale = [
-    'Bearded',
-    'Mustached'
+    'bearded',
+    'mustached'
 ];
 function defineUniqueAttributes() {
     uniqueAttributes = [
-        'Flawless complexion',
-        'Freckled face',
-        'Perfect nose',
-        'Wide eyes',
-        'High cheekbones',
-        'Square jaw',
-        'Perfect jawline',
-        'Perfect teeth',
+        'flawless complexion',
+        'freckled face',
+        'perfect nose',
+        'wide eyes',
+        'high cheekbones',
+        'square jaw',
+        'perfect jawline',
+        'perfect teeth',
         choice(scars),
-        'Bright eyes',
-        'Keen eyes',
-        'Well-proportioned',
-        'Attractive proportions',
-        'Muscular',
-        'Pleasant smile',
-        'Strong hands',
-        'Long fingers',
-        'Bespectacled',
-        'Rosy cheeks'
+        'bright eyes',
+        'keen eyes',
+        'well-proportioned',
+        'attractive proportions',
+        'muscular',
+        'bespectacled',
+        'pleasant smile',
+        'strong hands',
+        'long fingers',
+        'rosy cheeks'
     ];
     if (getGender() === 'Male') {
         uniqueAttributes = uniqueAttributes.concat(uniqueAttributesMale);
