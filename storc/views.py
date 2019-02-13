@@ -2,9 +2,22 @@ import os
 import requests
 from random import choice
 from flask import render_template, request, flash, redirect, url_for
-from storc import app, db, bcrypt
+from flask_mail import Message
+from storc import app, db, bcrypt, mail
 from storc.forms import EmailRegistrationForm
 from storc.models import User
+
+
+def send_verify_email(user):
+    token = user.get_token()
+    message = Message(
+        'Verify Your Email',
+        sender='storcwebsite@gmail.com',
+        recipients=[user.email])
+    message.body = f"Thanks for signing up with Storc!\n\nTo verify " \
+        f"your email address, please click the link below:\n\n" \
+        f"{url_for('verify_email', token=token, _external=True)}"
+    mail.send(message)
 
 
 @app.route('/')
@@ -47,9 +60,29 @@ def sign_up():
             username=form.username.data,
             name=form.name.data,
             email=form.email.data,
-            password=pw_hash)
+            password=pw_hash,
+            validated=False)
         db.session.add(user)
         db.session.commit()
-        flash('You\'ve successfully signed up!', 'good')
+        send_verify_email(user)
+        flash(
+            f'Check your email! We sent a verification link to '
+            f'"{form.email.data}".', 'good')
         return redirect(url_for('home'))
     return render_template('sign_up.html', form=form)
+
+
+@app.route('/verify_email/<token>')
+def verify_email(token):
+    # TODO: Insert redirect for authenticated users.
+    user = User.validate_token(token)
+    if not user:
+        flash('That token is invalid.')
+        return redirect(url_for('send_verify_request'))
+    user.validated = True
+    db.session.add(user)
+    db.session.commit()
+    flash(
+        'Your email address has been validated! You may now log in.',
+        'good')
+    return redirect(url_for('home'))
