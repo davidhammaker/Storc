@@ -4,7 +4,7 @@ from random import choice
 from flask import render_template, request, flash, redirect, url_for
 from flask_mail import Message
 from storc import app, db, bcrypt, mail
-from storc.forms import EmailRegistrationForm
+from storc.forms import EmailRegistrationForm, EmailVerifyForm
 from storc.models import User
 
 
@@ -72,12 +72,37 @@ def sign_up():
     return render_template('sign_up.html', form=form)
 
 
+@app.route('/verify_email', methods=['GET', 'POST'])
+def send_verify_request():
+    # TODO: Insert redirect for authenticated users.
+    form = EmailVerifyForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            if user.validated:
+                flash(
+                    'That email address has already been verified!',
+                    'neutral')
+                return redirect(url_for('home'))
+            send_verify_email(user)
+            flash(
+                f'Check your email! We sent a verification link to '
+                f'"{form.email.data}".', 'good')
+            return redirect(url_for('home'))
+        else:
+            flash(
+                'That email address has not been registered.',
+                'neutral')
+            return redirect(url_for('sign_up'))
+    return render_template('send_verify.html', form=form)
+
+
 @app.route('/verify_email/<token>')
 def verify_email(token):
     # TODO: Insert redirect for authenticated users.
     user = User.validate_token(token)
     if not user:
-        flash('That token is invalid.')
+        flash('That token is invalid.', 'bad')
         return redirect(url_for('send_verify_request'))
     user.validated = True
     db.session.add(user)

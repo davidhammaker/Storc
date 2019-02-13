@@ -35,6 +35,13 @@ class EmailRegistrationForm(FlaskForm):
                 'That email address is already in use.')
 
 
+class EmailVerifyForm(FlaskForm):
+    email = StringField('Email Address', validators=[
+        DataRequired(),
+        Email()])
+    submit = SubmitField('Submit')
+
+
 class EmailLoginForm(FlaskForm):
     email = StringField('Email Address', validators=[
         DataRequired(),

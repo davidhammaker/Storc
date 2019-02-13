@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="box narrow center">
+        <h2>Verify Email Address</h2>
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            {% if form.email.errors %}
+                <h4>{{ form.email.label(class="error") }}</h4>
+                {{ form.email(class="form-field error-field") }}
+                {% for error in form.email.errors %}
+                    <span class="error small-font">{{ error }}</span>
+                {% endfor %}
+            {% else %}
+                <h4>{{ form.email.label }}</h4>
+                {{ form.email(class="form-field") }}
+            {% endif %}
+            <br>
+            <br>
+            {{ form.submit(class="submit") }}
+        </form>
+    </div>
+</div>
+{% endblock content %}
