@@ -13,6 +13,11 @@ nav a:hover{
     text-shadow: 0 0 5px #ffffff;
 }
 
+nav li{
+    display: inline-block;
+    padding-left: 20px;
+}
+
 .nav-l{
     float: left;
     margin: 5px 0 5px 50px;
