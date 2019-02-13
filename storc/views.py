@@ -1,8 +1,10 @@
 import os
 import requests
 from random import choice
-from flask import render_template, request
-from storc import app
+from flask import render_template, request, flash, redirect, url_for
+from storc import app, db, bcrypt
+from storc.forms import EmailRegistrationForm
+from storc.models import User
 
 
 @app.route('/')
@@ -34,3 +36,19 @@ def save_character():
     character = request.form
     character_data = {key: character[key] for key in character.keys()}
     return 'Character Data Received'
+
+
+@app.route('/sign_up', methods=['GET', 'POST'])
+def sign_up():
+    form = EmailRegistrationForm()
+    if form.validate_on_submit():
+        pw_hash = bcrypt.generate_password_hash(form.password.data)
+        user = User(
+            username=form.username.data,
+            name=form.name.data,
+            email=form.email.data,
+            password=pw_hash)
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('sign_up.html', form=form)
