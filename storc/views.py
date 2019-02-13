@@ -50,5 +50,6 @@ def sign_up():
             password=pw_hash)
         db.session.add(user)
         db.session.commit()
+        flash('You\'ve successfully signed up!', 'good')
         return redirect(url_for('home'))
     return render_template('sign_up.html', form=form)

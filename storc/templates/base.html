@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/content.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/character.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/form.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/flash.css') }}">
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     </head>
     <body>
@@ -25,6 +26,15 @@
                 </ul>
             </div>
         </nav>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash wide center {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         {% block content %}
         {% endblock content %}
     </body>
