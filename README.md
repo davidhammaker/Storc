@@ -10,7 +10,13 @@ This tool is intended for anyone who is struggling to come up with unique charac
 
 Requires Python 3.6 or higher to work properly.
 
-Requires "Flask" and "requests".
+Requires the installation of all packages listed in `requirements.txt`.
+
+Requires that the following environment variables be set appropriately:
+* "STORC_DB" (Should be a database URI. See [here](http://flask-sqlalchemy.pocoo.org/2.3/quickstart/).)
+* "STORC_SECRET" (Should be a random hash or complex string.)
+* "BTN_KEY" (Optional. See below.)
+
 
 Character names are fetched from the [Behind the Name](https://www.behindthename.com/) API. For development purposes, the lines of code that fetch a name from Behind the Name are commented out.
 
@@ -20,7 +26,7 @@ If you would like to use the Behind the Name API for character name creation, yo
 
 _When using this tool, please be aware that the tool is not yet complete._
 
-To use the application, start by cloning this repository. Use `pip` to install "Flask" and "requests". Run the application with `$ python run.py`. You can then view the application at [localhost:5000](http://localhost:5000/).
+To use the application, start by cloning this repository. Use `$ pip install -r requirements.txt` to install all necessary requirements. Run the application with `$ python run.py`. You can then view the application at [localhost:5000](http://localhost:5000/).
 
 ## Copyright
 
