@@ -1,6 +1,12 @@
 from datetime import datetime
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from storc import app, db
+from flask_login import UserMixin
+from storc import app, db, login_manager
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
 class Character(db.Model):
@@ -13,7 +19,7 @@ class Character(db.Model):
         nullable=False)
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True)
     name = db.Column(db.String)

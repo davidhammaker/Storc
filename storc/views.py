@@ -3,8 +3,10 @@ import requests
 from random import choice
 from flask import render_template, request, flash, redirect, url_for
 from flask_mail import Message
+from flask_login import login_user
 from storc import app, db, bcrypt, mail
-from storc.forms import EmailRegistrationForm, EmailVerifyForm
+from storc.forms import (
+    EmailRegistrationForm, EmailVerifyForm, EmailLoginForm)
 from storc.models import User
 
 
@@ -111,3 +113,28 @@ def verify_email(token):
         'Your email address has been validated! You may now log in.',
         'good')
     return redirect(url_for('home'))
+
+
+@app.route('/email_login', methods=('GET', 'POST'))
+def email_login():
+    # TODO: Insert redirect for authenticated users.
+    form = EmailLoginForm()
+    if form.validate_on_submit():
+        pw_hash = bcrypt.generate_password_hash(form.password.data)
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(
+                user.password, form.password.data) and user.validated:
+            login_user(user, remember=form.remember_me.data)
+            flash('You have successfully logged in!', 'good')
+            return redirect(url_for('home'))
+        elif not user:
+            flash('That email address has no matches in our system.',
+                'bad')
+        elif not user.validated:
+            flash('That email address has not been verified.', 'bad')
+            return redirect(url_for('send_verify_request'))
+        else:
+            flash(
+                'Failed to log in. Please check your email and '
+                'password.', 'bad')
+    return render_template('login.html', form=form)
