@@ -115,4 +115,12 @@
     </div>
 </div>
 <script src="{{ url_for('static', filename='main.js') }}"></script>
+<script type="text/javascript">
+    document.getElementById('save').addEventListener('click', function() {
+        let newCharacter = new Character;
+        let characterPromise = $.post(
+            '{{ url_for('save_character') }}', newCharacter
+        );
+    });
+</script>
 {% endblock content %}

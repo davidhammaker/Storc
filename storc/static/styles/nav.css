@@ -1,4 +1,5 @@
 nav{
+    color: #ffffff;
     background-color: #336699;
     height: 55px;
     margin-bottom: 25px;
@@ -11,6 +12,11 @@ nav a{
 nav a:hover{
     color: #ffffff;
     text-shadow: 0 0 5px #ffffff;
+}
+
+nav li{
+    display: inline-block;
+    padding-left: 20px;
 }
 
 .nav-l{

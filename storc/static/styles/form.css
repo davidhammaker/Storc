@@ -1,0 +1,36 @@
+.form-field{
+    background-color: #ecf2f9;
+    width: 100%;
+    margin: 10px 0;
+    border-style: none none solid none;
+    border-width: 1px;
+    border-color: #4080bf;
+    font-family: "Courier New", Courier, monospace;
+    font-size: large;
+}
+
+.submit{
+    color: #ffffff;
+    font-size: large;
+    background-color: #336699;
+    border: none;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.submit:hover{
+    background-color: #4080bf;
+}
+
+.submit:active{
+    background-color: #b3cce6;
+    color: #336699;
+}
+
+.error{
+    color: red;
+}
+
+.error-field{
+    background-color: #f9ecf2;
+    border-color: #bf4080;
+}

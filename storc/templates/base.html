@@ -6,8 +6,11 @@
         <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/nav.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/menu.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/content.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/character.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/form.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/flash.css') }}">
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     </head>
     <body>
@@ -18,11 +21,37 @@
                 </a>
             </div>
             <div class="nav-r">
-                <ul>
-                    <li><a href="#">New Character</a></li>
-                </ul>
+                {% if current_user.is_authenticated %}
+                    <ul>
+                        <li>
+                            <div class="menu">
+                                <span>Welcome, {{ current_user.name }}! ▼</span>
+                                <div class="menu-content">
+                                    <ul>
+                                        <li>item 1</li>
+                                        <li>item 2</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                {% else %}
+                    <ul>
+                        <li><a href="{{ url_for('sign_up') }}">Sign Up</a></li>
+                        <li><a href="{{ url_for('email_login') }}">Log In</a></li>
+                    </ul>
+                {% endif %}
             </div>
         </nav>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash wide center {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         {% block content %}
         {% endblock content %}
     </body>

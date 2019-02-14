@@ -22,12 +22,16 @@
     max-width: 575px;
 }
 
+.narrow{
+    width: 300px;
+}
+
 .narrower{
     width: 250px;
 }
 
-.narrow{
-    width: 300px;
+.narrowest{
+    width: 150px;
 }
 
 .left{
@@ -44,4 +48,8 @@
 
 .center-text{
     text-align: center;
+}
+
+.small-font{
+    font-size: small;
 }

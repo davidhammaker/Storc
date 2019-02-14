@@ -1,0 +1,39 @@
+.menu{
+    position: relative;
+    display: inline-block;
+}
+
+.menu span{
+    padding-bottom: 17px;
+}
+
+.menu-content{
+    color: #ffffff;
+    background-color: #4080bf;
+    position: absolute;
+    top: 35px;
+    width: 100%;
+    display: none;
+}
+
+.menu-content li{
+    padding: 10px 0;
+    display: block;
+    line-height: 1.6;
+    text-align: center;
+    text-shadow: none;
+}
+
+.menu:hover{
+    color: #ffffff;
+    text-shadow: 0 0 5px #ffffff;
+}
+
+.menu-content li:hover{
+    background-color: #b3cce6;
+    color: #336699;
+}
+
+.menu:hover .menu-content{
+    display: block;
+}
