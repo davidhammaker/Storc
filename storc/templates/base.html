@@ -6,6 +6,7 @@
         <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/nav.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/menu.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/content.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/character.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/form.css') }}">
@@ -22,7 +23,17 @@
             <div class="nav-r">
                 {% if current_user.is_authenticated %}
                     <ul>
-                        <li>Welcome, {{ current_user.name }}!<button id="menu" type="button" name="button">▼</button></li>
+                        <li>
+                            <div class="menu">
+                                <span>Welcome, {{ current_user.name }}! ▼</span>
+                                <div class="menu-content">
+                                    <ul>
+                                        <li>item 1</li>
+                                        <li>item 2</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 {% else %}
                     <ul>
