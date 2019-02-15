@@ -3,6 +3,7 @@ from wtforms import (
     StringField, PasswordField, BooleanField, SubmitField)
 from wtforms.validators import (
     DataRequired, Length, Email, EqualTo, ValidationError)
+from storc import db
 from storc.models import User
 
 
@@ -26,7 +27,12 @@ class EmailRegistrationForm(FlaskForm):
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user:
-            raise ValidationError('That username is already in use.')
+            if user.validated:
+                raise ValidationError(
+                    'That username is already in use.')
+            else:
+                db.session.delete(user)
+                db.session.commit()
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
