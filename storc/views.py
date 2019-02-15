@@ -3,7 +3,7 @@ import requests
 from random import choice
 from flask import render_template, request, flash, redirect, url_for
 from flask_mail import Message
-from flask_login import login_user
+from flask_login import login_user, logout_user
 from storc import app, db, bcrypt, mail
 from storc.forms import (
     EmailRegistrationForm, EmailVerifyForm, EmailLoginForm)
@@ -138,3 +138,10 @@ def email_login():
                 'Failed to log in. Please check your email and '
                 'password.', 'bad')
     return render_template('login.html', form=form)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    flash('You have logged out.', 'neutral')
+    return redirect(url_for('home'))
