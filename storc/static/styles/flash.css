@@ -3,19 +3,17 @@
     font-style: italic;
     text-align: center;
     margin-bottom: 25px;
+    background-color: #ffffff;
 }
 
 .good{
-    background-color: #b3e6cc;
     box-shadow: 0 0 10px #b3e6cc;
 }
 
 .bad{
-    background-color: #e6b3cc;
     box-shadow: 0 0 10px #e6b3cc;
 }
 
 .neutral{
-    background-color: #b3cce6;
     box-shadow: 0 0 10px #b3cce6;
 }
