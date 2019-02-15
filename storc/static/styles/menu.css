@@ -12,28 +12,40 @@
     background-color: #4080bf;
     position: absolute;
     top: 35px;
-    width: 100%;
     display: none;
-}
-
-.menu-content li{
-    padding: 10px 0;
-    display: block;
-    line-height: 1.6;
-    text-align: center;
-    text-shadow: none;
+    width: 100%;
 }
 
 .menu:hover{
-    color: #ffffff;
     text-shadow: 0 0 5px #ffffff;
-}
-
-.menu-content li:hover{
-    background-color: #b3cce6;
-    color: #336699;
 }
 
 .menu:hover .menu-content{
     display: block;
+}
+
+.menu:hover .menu-content li{
+    display: block;
+}
+
+.menu:hover .menu-content a{
+    display: block;
+}
+
+.menu-content li{
+    padding: 0;
+}
+
+.menu-content a{
+    transition: 0s;
+    text-shadow: 0 0 0;
+    text-align: center;
+    line-height: 1.8;
+}
+
+.menu-content a:hover{
+    transition: 0s;
+    background-color: #b3cce6;
+    color: #336699;
+    text-shadow: 0 0 0;
 }
