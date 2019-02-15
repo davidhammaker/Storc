@@ -125,10 +125,15 @@ def email_login():
         if user and bcrypt.check_password_hash(
                 user.password, form.password.data) and user.validated:
             login_user(user, remember=form.remember_me.data)
+            next_page = request.args.get('next')
             flash('You have successfully logged in!', 'good')
-            return redirect(url_for('home'))
+            if next_page:
+                return redirect(url_for(next_page))
+            else:
+                return redirect(url_for('home'))
         elif not user:
-            flash('That email address has no matches in our system.',
+            flash(
+                'That email address has no matches in our system.',
                 'bad')
         elif not user.validated:
             flash('That email address has not been verified.', 'bad')
