@@ -15,12 +15,13 @@ Requires the installation of all packages listed in `requirements.txt`.
 Requires that the following environment variables be set appropriately:
 * "STORC_DB" (Should be a database URI. See [here](http://flask-sqlalchemy.pocoo.org/2.3/quickstart/).)
 * "STORC_SECRET" (Should be a random hash or complex string.)
-* "BTN_KEY" (Optional. See below.)
+* "STORC_EMAIL_USER"\* (The email address from which the application sends emails.)
+* "STORC_EMAIL_PASS"\* (The password for the email address.)
+* "BTN_KEY"\*\* (The API key for Behind the Name)
 
+\* Depending on the domain of the email address you use, you may be prevented from allowing the application to log in. This is the case with Gmail, for example, which prevents "less secure applications" from gaining access to its accounts by default. If the email provider you use is blocking "less secure applications", you will have to go into account settings to grant access.
 
-Character names are fetched from the [Behind the Name](https://www.behindthename.com/) API. For development purposes, the lines of code that fetch a name from Behind the Name are commented out.
-
-If you would like to use the Behind the Name API for character name creation, you must first set the environment variable "BTN_KEY" to your Behind the Name API key. To obtain an API key, follow the instructions found on the Behind the Name website, [here](https://www.behindthename.com/api/). Once you have set "BTN_KEY", open `app.py`, un-comment the lines of code beneath the comment, `# The following lines have been commented out for development:`, and remove or comment out `name = 'John Doe'`.
+\*\* Character names are fetched from the [Behind the Name](https://www.behindthename.com/) API. To use this API, you must first set the environment variable "BTN_KEY" to your Behind the Name API key. To obtain an API key, follow the instructions found on the Behind the Name website, [here](https://www.behindthename.com/api/). Once you have set "BTN_KEY", open `app.py`, un-comment the lines of code beneath the comment, `# The following lines have been commented out for development:`, and remove or comment out `name = 'John Doe'`.
 
 ## Usage
 
