@@ -1,5 +1,6 @@
 import os
 import requests
+import json
 from random import choice
 from flask import render_template, request, flash, redirect, url_for
 from flask_mail import Message
@@ -7,7 +8,7 @@ from flask_login import login_user, logout_user, current_user
 from storc import app, db, bcrypt, mail
 from storc.forms import (
     EmailRegistrationForm, EmailVerifyForm, EmailLoginForm)
-from storc.models import User
+from storc.models import User, Character
 
 
 def send_verify_email(user):
@@ -48,9 +49,15 @@ def new_character():
 
 @app.route('/save_character', methods=['POST'])
 def save_character():
-    character = request.form
-    character_data = {key: character[key] for key in character.keys()}
-    return 'Character Data Received'
+    new_character = request.form
+    character_data =\
+        {key: new_character[key] for key in new_character.keys()}
+    character =\
+        Character(data=json.dumps(character_data), user=current_user)
+    db.session.add(character)
+    db.session.commit()
+    flash('Your character has been saved!', 'good')
+    return 'Character saved successfully.'
 
 
 @app.route('/sign_up', methods=['GET', 'POST'])

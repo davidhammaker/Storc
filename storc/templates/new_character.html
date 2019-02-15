@@ -123,8 +123,9 @@
     document.getElementById('save').addEventListener('click', function() {
         let newCharacter = new Character;
         let characterPromise = $.post(
-            '{{ url_for('save_character') }}', newCharacter
+            "{{ url_for('save_character') }}", newCharacter
         );
+        window.location = "{{ url_for('home')}}";
     });
 </script>
 {% endblock content %}
