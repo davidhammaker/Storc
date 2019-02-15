@@ -110,7 +110,11 @@
     <br>
     <div class="box narrow center">
         <ul class="center-text">
-            <li class="multi"><button id="save" type="button">Save</button></li>
+            {% if current_user.is_authenticated %}
+                <li class="multi"><button id="save" type="button">Save</button></li>
+            {% else %}
+                <li class="multi"><em>You'll have to <a href="{{ url_for('email_login') }}">log in</a> to save your character!</em></li>
+            {% endif %}
         </ul>
     </div>
 </div>
