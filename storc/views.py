@@ -7,7 +7,8 @@ from flask_mail import Message
 from flask_login import login_user, logout_user, current_user
 from storc import app, db, bcrypt, mail
 from storc.forms import (
-    EmailRegistrationForm, EmailVerifyForm, EmailLoginForm)
+    EmailRegistrationForm, EmailVerifyForm, EmailLoginForm,
+    ResetPasswordForm)
 from storc.models import User, Character
 
 
@@ -20,6 +21,18 @@ def send_verify_email(user):
     message.body = f"Thanks for signing up with Storc!\n\nTo verify " \
         f"your email address, please click the link below:\n\n" \
         f"{url_for('verify_email', token=token, _external=True)}"
+    mail.send(message)
+
+
+def send_pw_reset_email(user):
+    token = user.get_token()
+    message = Message(
+        'Reset Your Password',
+        sender='storcwebsite@gmail.com',
+        recipients=[user.email])
+    message.body = f"To verify reset your password, click the link " \
+        f"below:\n\n" \
+        f"{url_for('reset_password', token=token, _external=True)}"
     mail.send(message)
 
 
@@ -155,3 +168,43 @@ def logout():
     logout_user()
     flash('You have logged out.', 'neutral')
     return redirect(url_for('home'))
+
+
+@app.route('/reset_password', methods=['GET', 'POST'])
+def reset_password_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = EmailVerifyForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            send_pw_reset_email(user)
+            flash(
+                f'Check your email! We sent a link to '
+                f'"{form.email.data}".', 'good')
+        else:
+            flash(
+                'That email address has no matches in our system.',
+                'bad')
+    return render_template('reset_password_request.html', form=form)
+
+
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    user = User.validate_token(token)
+    if not user:
+        flash('That token is invalid.', 'bad')
+        return redirect(url_for('reset_password_request'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        pw_hash = bcrypt.generate_password_hash(form.password.data)
+        user.password = pw_hash
+        db.session.add(user)
+        db.session.commit()
+        flash(
+            'Your password has been reset! You may now log in.',
+            'good')
+        return redirect(url_for('email_login'))
+    return render_template('reset_password.html', form=form)

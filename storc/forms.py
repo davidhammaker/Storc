@@ -56,3 +56,13 @@ class EmailLoginForm(FlaskForm):
         DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Log In')
+
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[
+        DataRequired(),
+        Length(min=6, max=72)])
+    confirm_password = PasswordField('Confirm Password', validators=[
+        DataRequired(),
+        EqualTo('password')])
+    submit = SubmitField('Submit')
