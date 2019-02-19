@@ -4,6 +4,7 @@ from wtforms import (
 from flask_wtf.file import FileField, FileAllowed
 from wtforms.validators import (
     DataRequired, Length, Email, EqualTo, ValidationError)
+from flask_login import current_user
 from storc import db
 from storc.models import User
 
@@ -86,15 +87,17 @@ class SettingsForm(FlaskForm):
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user:
-            if user.validated:
-                raise ValidationError(
-                    'That username is already in use.')
-            else:
-                db.session.delete(user)
-                db.session.commit()
+            if user != current_user:
+                if user.validated:
+                    raise ValidationError(
+                        'That username is already in use.')
+                else:
+                    db.session.delete(user)
+                    db.session.commit()
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
-            raise ValidationError(
-                'That email address is already in use.')
+            if user != current_user:
+                raise ValidationError(
+                    'That email address is already in use.')
