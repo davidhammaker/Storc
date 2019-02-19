@@ -293,7 +293,6 @@ def settings():
                 f'An email has been sent to "{user.temp_email}". '
                 f'Check your email to verify the change!', 'good')
         if form.profile_picture.data:
-            data = form.profile_picture.data.stream.read()
             _, extension = os.path.splitext(
                 form.profile_picture.data.filename)
             old_picture = None
@@ -302,9 +301,16 @@ def settings():
             user.profile_picture = f'{secrets.token_hex(8)}{extension}'
             db.session.add(user)
             db.session.commit()
+            size = (200, 200)
+            i = Image.open(form.profile_picture.data)
+            i.thumbnail(size)
+            i.save(f'{user.profile_picture}')
+            data = open(f'{user.profile_picture}', 'rb').read()
+            # data = form.profile_picture.data.stream.read()
             if old_picture:
                 delete_old_picture(old_picture)
             upload_profile_picture(data, user.profile_picture)
+            os.remove(f'{user.profile_picture}')
     return render_template(
         'settings.html', form=form, image_path=image_path)
 

@@ -6,3 +6,4 @@ flask-login
 flask-dance
 flask-bcrypt
 flask-mail
+pillow
