@@ -275,15 +275,61 @@ def settings():
     image_path = get_profile_picture(current_user)
     if form.validate_on_submit():
         user = current_user
-        if (form.name.data != user.name) or (
-                form.username.data != user.username):
+        if (
+                form.name.data != user.name) or (
+                form.username.data != user.username) or (
+                form.profile_picture.data):
+            message = 'Changes have been saved!'
             if form.name.data != user.name:
                 user.name = form.name.data
             if form.username.data != user.username:
                 user.username = form.username.data
             db.session.add(user)
             db.session.commit()
-            flash('Changes have been saved.', 'good')
+            if form.profile_picture.data:
+                _, extension = os.path.splitext(
+                    form.profile_picture.data.filename)
+                old_picture = None
+                if user.profile_picture != 'default.jpg':
+                    old_picture = user.profile_picture
+                user.profile_picture = \
+                    f'{secrets.token_hex(8)}{extension}'
+                db.session.add(user)
+                db.session.commit()
+                size = (200, 200)
+                i = Image.open(form.profile_picture.data)
+                i.thumbnail(size)
+                if i.height != 200 and i.width != 200:
+                    background = Image.open(
+                        'storc/static/profile_background.jpg')
+                    distance_h = (200 - i.height) // 2
+                    distance_w = (200 - i.width) // 2
+                    background.paste(i, (distance_w, distance_h))
+                    final_image = background
+                elif i.height != 200:
+                    background = Image.open(
+                        'storc/static/profile_background.jpg')
+                    distance = (200 - i.height) // 2
+                    background.paste(i, (0, distance))
+                    final_image = background
+                elif i.width != 200:
+                    background = Image.open(
+                        'storc/static/profile_background.jpg')
+                    distance = (200 - i.width) // 2
+                    background.paste(i, (distance, 0))
+                    final_image = background
+                else:
+                    final_image = i
+                final_image.save(f'{user.profile_picture}')
+                data = open(f'{user.profile_picture}', 'rb').read()
+                if old_picture:
+                    delete_old_picture(old_picture)
+                upload_profile_picture(data, user.profile_picture)
+                os.remove(f'{user.profile_picture}')
+                message = (
+                    'Changes have been saved! Your new profile picture '
+                    'will be ready soon.')
+            flash(message, 'good')
         if form.email.data != user.email:
             user.temp_email = form.email.data
             db.session.add(user)
@@ -292,45 +338,6 @@ def settings():
             flash(
                 f'An email has been sent to "{user.temp_email}". '
                 f'Check your email to verify the change!', 'good')
-        if form.profile_picture.data:
-            _, extension = os.path.splitext(
-                form.profile_picture.data.filename)
-            old_picture = None
-            if user.profile_picture != 'default.jpg':
-                old_picture = user.profile_picture
-            user.profile_picture = f'{secrets.token_hex(8)}{extension}'
-            db.session.add(user)
-            db.session.commit()
-            size = (200, 200)
-            i = Image.open(form.profile_picture.data)
-            i.thumbnail(size)
-            if i.height != 200 and i.width != 200:
-                background = Image.open(
-                    'storc/static/profile_background.jpg')
-                distance_h = (200 - i.height) // 2
-                distance_w = (200 - i.width) // 2
-                background.paste(i, (distance_w, distance_h))
-                final_image = background
-            elif i.height != 200:
-                background = Image.open(
-                    'storc/static/profile_background.jpg')
-                distance = (200 - i.height) // 2
-                background.paste(i, (0, distance))
-                final_image = background
-            elif i.width != 200:
-                background = Image.open(
-                    'storc/static/profile_background.jpg')
-                distance = (200 - i.width) // 2
-                background.paste(i, (distance, 0))
-                final_image = background
-            else:
-                final_image = i
-            final_image.save(f'{user.profile_picture}')
-            data = open(f'{user.profile_picture}', 'rb').read()
-            if old_picture:
-                delete_old_picture(old_picture)
-            upload_profile_picture(data, user.profile_picture)
-            os.remove(f'{user.profile_picture}')
     return render_template(
         'settings.html', form=form, image_path=image_path)
 
