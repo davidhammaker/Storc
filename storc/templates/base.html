@@ -28,7 +28,7 @@
                                 <span>Welcome, {{ current_user.name }}! ▼</span>
                                 <div class="menu-content">
                                     <ul>
-                                        <li><a href="#">Settings</a></li>
+                                        <li><a href="{{ url_for('settings') }}">Settings</a></li>
                                         <li><a href="{{ url_for('logout') }}">Log Out</a></li>
                                     </ul>
                                 </div>

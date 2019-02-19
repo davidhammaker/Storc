@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="box wide center">
+        <h2>Account Settings</h2>
+        <form action="" method="POST">
+            {{ form.hidden_tag() }}
+            {% if form.name.errors %}
+                <h4>{{ form.name.label(class="error") }}</h4>
+                {{ form.name(class="form-field error-field", value=current_user.name) }}
+                {% for error in form.name.errors %}
+                    <span class="error small-font">{{ error }}</span>
+                {% endfor %}
+            {% else %}
+                <h4>{{ form.name.label }}</h4>
+                {{ form.name(class="form-field", value=current_user.name) }}
+            {% endif %}
+            <br>
+            <br>
+            {% if form.username.errors %}
+                <h4>{{ form.username.label(class="error") }}</h4>
+                {{ form.username(class="form-field error-field", value=current_user.username) }}
+                {% for error in form.username.errors %}
+                    <span class="error small-font">{{ error }}</span>
+                {% endfor %}
+            {% else %}
+                <h4>{{ form.username.label }}</h4>
+                {{ form.username(class="form-field", value=current_user.username) }}
+            {% endif %}
+            <br>
+            <br>
+            {% if form.email.errors %}
+                <h4>{{ form.email.label(class="error") }}</h4>
+                {{ form.email(class="form-field error-field", value=current_user.email) }}
+                {% for error in form.email.errors %}
+                    <span class="error small-font">{{ error }}</span>
+                {% endfor %}
+            {% else %}
+                <h4>{{ form.email.label }}</h4>
+                {{ form.email(class="form-field", value=current_user.email) }}
+            {% endif %}
+            <br>
+            <br>
+            {{ form.submit(class="submit") }}
+        </form>
+    </div>
+</div>
+{% endblock content %}

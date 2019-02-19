@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import (
     StringField, PasswordField, BooleanField, SubmitField)
+from flask_wtf.file import FileField, FileAllowed
 from wtforms.validators import (
     DataRequired, Length, Email, EqualTo, ValidationError)
 from storc import db
@@ -66,3 +67,34 @@ class ResetPasswordForm(FlaskForm):
         DataRequired(),
         EqualTo('password')])
     submit = SubmitField('Submit')
+
+
+class SettingsForm(FlaskForm):
+    name = StringField('First Name', validators=[
+        DataRequired(),
+        Length(max=32)])
+    username = StringField('Username', validators=[
+        DataRequired(),
+        Length(min=2, max=32)])
+    email = StringField('Email Address', validators=[
+        DataRequired(),
+        Email()])
+    profile_picture = FileField('Profile Picture', validators=[
+        FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Save Changes')
+
+    def validate_username(self, username):
+        user = User.query.filter_by(username=username.data).first()
+        if user:
+            if user.validated:
+                raise ValidationError(
+                    'That username is already in use.')
+            else:
+                db.session.delete(user)
+                db.session.commit()
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError(
+                'That email address is already in use.')

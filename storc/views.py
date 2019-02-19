@@ -4,11 +4,12 @@ import json
 from random import choice
 from flask import render_template, request, flash, redirect, url_for
 from flask_mail import Message
-from flask_login import login_user, logout_user, current_user
+from flask_login import (
+    login_user, logout_user, current_user, login_required)
 from storc import app, db, bcrypt, mail
 from storc.forms import (
     EmailRegistrationForm, EmailVerifyForm, EmailLoginForm,
-    ResetPasswordForm)
+    ResetPasswordForm, SettingsForm)
 from storc.models import User, Character
 
 
@@ -33,6 +34,19 @@ def send_pw_reset_email(user):
     message.body = f"To verify reset your password, click the link " \
         f"below:\n\n" \
         f"{url_for('reset_password', token=token, _external=True)}"
+    mail.send(message)
+
+
+def send_new_email(user):
+    token = user.get_token()
+    message = Message(
+        'Verify Your New Email',
+        sender='storcwebsite@gmail.com',
+        recipients=[user.temp_email])
+    message.body = f"The email address associated with your Storc " \
+        f"account has changed.\n\nTo verify your new email address, " \
+        f"please click the link below:\n\n" \
+        f"{url_for('new_email', token=token, _external=True)}"
     mail.send(message)
 
 
@@ -143,6 +157,12 @@ def email_login():
         if user and bcrypt.check_password_hash(
                 user.password, form.password.data) and user.validated:
             login_user(user, remember=form.remember_me.data)
+
+            # Remove temp_email, if any exists.
+            user.temp_email = None
+            db.session.add(user)
+            db.session.commit()
+
             next_page = request.args.get('next')
             flash('You have successfully logged in!', 'good')
             if next_page:
@@ -208,3 +228,42 @@ def reset_password(token):
             'good')
         return redirect(url_for('email_login'))
     return render_template('reset_password.html', form=form)
+
+
+@app.route('/settings', methods=['GET', 'POST'])
+@login_required
+def settings():
+    form = SettingsForm()
+    if form.validate_on_submit():
+        user = current_user
+        if (form.name.data != user.name) or (
+                form.username.data != user.username):
+            if form.name.data != user.name:
+                user.name = form.name.data
+            if form.username.data != user.username:
+                user.username = form.username.data
+            db.session.add(user)
+            db.session.commit()
+            flash('Changes have been saved.', 'good')
+        if form.email.data != user.email:
+            user.temp_email = form.email.data
+            db.session.add(user)
+            db.session.commit()
+            send_new_email(user)
+            flash(f'An email has been sent to "{user.temp_email}". '
+                f'Check your email to verify the change!', 'good')
+    return render_template('settings.html', form=form)
+
+
+@app.route('/new_email/<token>')
+def new_email(token):
+    user = User.validate_token(token)
+    if not user:
+        flash('That token is invalid.', 'bad')
+    else:
+        user.email = user.temp_email
+        user.temp_email = None
+        db.session.add(user)
+        db.session.commit()
+        flash('Your new email address has been verified!', 'good')
+    return redirect(url_for('email_login'))
