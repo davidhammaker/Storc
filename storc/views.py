@@ -64,6 +64,18 @@ def get_profile_picture(user):
     return response.json()['link']
 
 
+def delete_old_picture(old_picture):
+    url = "https://api.dropboxapi.com/2/files/delete_v2"
+    key = os.environ.get('STORC_DROPBOX_KEY')
+    headers = {
+        "Authorization": f"Bearer {key}",
+        "Content-Type": "application/json"}
+    data = {"path": f"/{old_picture}"}
+    response = requests.post(
+        url, headers=headers, data=json.dumps(data))
+    return response.json()
+
+
 def upload_profile_picture(data, filename):
     url = "https://content.dropboxapi.com/2/files/upload"
     key = os.environ.get('STORC_DROPBOX_KEY')
@@ -284,12 +296,15 @@ def settings():
             data = form.profile_picture.data.stream.read()
             _, extension = os.path.splitext(
                 form.profile_picture.data.filename)
+            old_picture = None
+            if user.profile_picture != 'default.jpg':
+                old_picture = user.profile_picture
             user.profile_picture = f'{secrets.token_hex(8)}{extension}'
             db.session.add(user)
             db.session.commit()
-            response = upload_profile_picture(
-                data, user.profile_picture)
-            print(response)
+            if old_picture:
+                delete_old_picture(old_picture)
+            upload_profile_picture(data, user.profile_picture)
     return render_template(
         'settings.html', form=form, image_path=image_path)
 
