@@ -13,6 +13,7 @@ class Character(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     data = db.Column(db.String)
     date = db.Column(db.DateTime, default=datetime.utcnow)
+    private = db.Column(db.Boolean, default=False)
     user_id = db.Column(
         db.Integer,
         db.ForeignKey('user.id'),
