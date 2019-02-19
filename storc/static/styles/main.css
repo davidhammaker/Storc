@@ -51,3 +51,7 @@ button:active{
     background-color: #b3cce6;
     color: #336699;
 }
+
+.profile-picture{
+    border-radius: 100%;
+}

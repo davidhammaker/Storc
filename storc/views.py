@@ -1,11 +1,13 @@
 import os
 import requests
 import json
+import secrets
 from random import choice
 from flask import render_template, request, flash, redirect, url_for
 from flask_mail import Message
 from flask_login import (
     login_user, logout_user, current_user, login_required)
+from PIL import Image
 from storc import app, db, bcrypt, mail
 from storc.forms import (
     EmailRegistrationForm, EmailVerifyForm, EmailLoginForm,
@@ -48,6 +50,30 @@ def send_new_email(user):
         f"please click the link below:\n\n" \
         f"{url_for('new_email', token=token, _external=True)}"
     mail.send(message)
+
+
+def get_profile_picture(user):
+    url = "https://api.dropboxapi.com/2/files/get_temporary_link"
+    key = os.environ.get('STORC_DROPBOX_KEY')
+    headers = {
+        "Authorization": f"Bearer {key}",
+        "Content-Type": "application/json"}
+    data = {"path": f"/{user.profile_picture}"}
+    response = requests.post(
+        url, headers=headers, data=json.dumps(data))
+    return response.json()['link']
+
+
+def upload_profile_picture(data, filename):
+    url = "https://content.dropboxapi.com/2/files/upload"
+    key = os.environ.get('STORC_DROPBOX_KEY')
+    dropbox_api_arg = "{\"path\":\"/" + f'{filename}' + "\"}"
+    headers = {
+        "Authorization": f"Bearer {key}",
+        "Content-Type": "application/octet-stream",
+        "Dropbox-API-Arg": dropbox_api_arg}
+    response = requests.post(url, headers=headers, data=data)
+    return response.json()
 
 
 @app.route('/')
@@ -234,6 +260,7 @@ def reset_password(token):
 @login_required
 def settings():
     form = SettingsForm()
+    image_path = get_profile_picture(current_user)
     if form.validate_on_submit():
         user = current_user
         if (form.name.data != user.name) or (
@@ -250,9 +277,21 @@ def settings():
             db.session.add(user)
             db.session.commit()
             send_new_email(user)
-            flash(f'An email has been sent to "{user.temp_email}". '
+            flash(
+                f'An email has been sent to "{user.temp_email}". '
                 f'Check your email to verify the change!', 'good')
-    return render_template('settings.html', form=form)
+        if form.profile_picture.data:
+            data = form.profile_picture.data.stream.read()
+            _, extension = os.path.splitext(
+                form.profile_picture.data.filename)
+            user.profile_picture = f'{secrets.token_hex(8)}{extension}'
+            db.session.add(user)
+            db.session.commit()
+            response = upload_profile_picture(
+                data, user.profile_picture)
+            print(response)
+    return render_template(
+        'settings.html', form=form, image_path=image_path)
 
 
 @app.route('/new_email/<token>')
