@@ -113,7 +113,7 @@
             {% if current_user.is_authenticated %}
                 <li class="multi"><button id="save" type="button">Save</button></li>
             {% else %}
-                <li class="multi"><em>The character above will not be saved. You'll have to <a href="{{ url_for('email_login', next='new_character') }}">log in</a> to save characters!</em></li>
+                <li class="multi"><em>The character above will not be saved. You'll have to <a href="{{ url_for('users.email_login', next='new_character') }}">log in</a> to save characters!</em></li>
             {% endif %}
         </ul>
     </div>
@@ -123,9 +123,9 @@
     document.getElementById('save').addEventListener('click', function() {
         let newCharacter = new Character;
         let characterPromise = $.post(
-            "{{ url_for('save_character') }}", newCharacter
+            "{{ url_for('characters.save_character') }}", newCharacter
         );
-        window.location = "{{ url_for('home')}}";
+        window.location = "{{ url_for('main.home')}}";
     });
 </script>
 {% endblock content %}

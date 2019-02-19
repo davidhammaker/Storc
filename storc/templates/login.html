@@ -28,7 +28,7 @@
                 <h4>{{ form.password.label }}</h4>
                 {{ form.password(class="form-field") }}
             {% endif %}
-            <small><em><a href="{{ url_for('reset_password_request') }}">Forgot your password?</a></em></small>
+            <small><em><a href="{{ url_for('users.reset_password_request') }}">Forgot your password?</a></em></small>
             <br>
             <br>
             <h4>{{ form.remember_me }} {{ form.remember_me.label }}</h4>
@@ -38,7 +38,7 @@
             <br>
             <br>
             <br>
-            <small><em>Don't have an account? <a href="{{ url_for('sign_up') }}">Sign up!</a></em></small>
+            <small><em>Don't have an account? <a href="{{ url_for('users.sign_up') }}">Sign up!</a></em></small>
         </form>
     </div>
 </div>

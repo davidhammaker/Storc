@@ -1,7 +1,8 @@
 from datetime import datetime
+from flask import current_app
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask_login import UserMixin
-from storc import app, db, login_manager
+from storc import db, login_manager
 
 
 @login_manager.user_loader
@@ -33,12 +34,12 @@ class User(db.Model, UserMixin):
     characters = db.relationship('Character', backref='user', lazy=True)
 
     def get_token(self, expire=1800):
-        s = Serializer(app.config['SECRET_KEY'], expire)
+        s = Serializer(current_app.config['SECRET_KEY'], expire)
         return s.dumps({'user_id': self.id})
 
     @staticmethod
     def validate_token(token):
-        s = Serializer(app.config['SECRET_KEY'])
+        s = Serializer(current_app.config['SECRET_KEY'])
         try:
             user_id = s.loads(token)['user_id']
         except:
