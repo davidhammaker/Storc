@@ -304,9 +304,29 @@ def settings():
             size = (200, 200)
             i = Image.open(form.profile_picture.data)
             i.thumbnail(size)
-            i.save(f'{user.profile_picture}')
+            if i.height != 200 and i.width != 200:
+                background = Image.open(
+                    'storc/static/profile_background.jpg')
+                distance_h = (200 - i.height) // 2
+                distance_w = (200 - i.width) // 2
+                background.paste(i, (distance_w, distance_h))
+                final_image = background
+            elif i.height != 200:
+                background = Image.open(
+                    'storc/static/profile_background.jpg')
+                distance = (200 - i.height) // 2
+                background.paste(i, (0, distance))
+                final_image = background
+            elif i.width != 200:
+                background = Image.open(
+                    'storc/static/profile_background.jpg')
+                distance = (200 - i.width) // 2
+                background.paste(i, (distance, 0))
+                final_image = background
+            else:
+                final_image = i
+            final_image.save(f'{user.profile_picture}')
             data = open(f'{user.profile_picture}', 'rb').read()
-            # data = form.profile_picture.data.stream.read()
             if old_picture:
                 delete_old_picture(old_picture)
             upload_profile_picture(data, user.profile_picture)
