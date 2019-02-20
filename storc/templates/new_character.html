@@ -113,7 +113,7 @@
             {% if current_user.is_authenticated %}
                 <li class="multi"><button id="save" type="button">Save</button></li>
             {% else %}
-                <li class="multi"><em>The character above will not be saved. You'll have to <a href="{{ url_for('users.email_login', next='new_character') }}">log in</a> to save characters!</em></li>
+                <li class="multi"><em>The character above will not be saved. You'll have to <a href="{{ url_for('users.email_login', next='characters.new_character') }}">log in</a> to save characters!</em></li>
             {% endif %}
         </ul>
     </div>
