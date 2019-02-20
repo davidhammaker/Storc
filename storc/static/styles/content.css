@@ -53,3 +53,9 @@
 .small-font{
     font-size: small;
 }
+
+.home-list{
+    font-size: large;
+    line-height: 1.6;
+    margin-left: 20px;
+}
