@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>Storc | Character Generator</title>
+        <title>Storc | {% if title %}{{title}}{% else %}Character Generator{% endif %}</title>
         <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/nav.css') }}">

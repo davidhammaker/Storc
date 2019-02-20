@@ -43,4 +43,7 @@ def character(id):
     character = Character.query.get_or_404(id)
     data = json.loads(character.data)
     return render_template(
-        'character.html', data=data, character=character)
+        'character.html',
+        data=data,
+        character=character,
+        title=data['name'])
