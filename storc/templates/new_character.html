@@ -125,7 +125,8 @@
         let characterPromise = $.post(
             "{{ url_for('characters.save_character') }}", newCharacter
         );
-        window.location = "{{ url_for('main.home')}}";
+        setTimeout(function(){
+            window.location = "{{ url_for('characters.save_character') }}"}, 200);
     });
 </script>
 {% endblock content %}
