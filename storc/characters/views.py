@@ -1,5 +1,4 @@
 import os
-import json
 from random import choice
 import requests
 from flask import render_template, request, flash, Blueprint
@@ -28,22 +27,37 @@ def new_character():
 @characters.route('/save_character', methods=['POST'])
 def save_character():
     new_character = request.form
-    character_data =\
-        {key: new_character[key] for key in new_character.keys()}
-    character =\
-        Character(data=json.dumps(character_data), user=current_user)
+    character = Character(
+        name=new_character['name'],
+        gender=new_character['gender'],
+        height=new_character['height'],
+        weight=new_character['weight'],
+        hair_color=new_character['hair_color'],
+        eye_color=new_character['eye_color'],
+        unique_attribute=new_character['unique_attribute'],
+        favorite_clothes=new_character['favorite_clothes'],
+        hair=new_character['hair'],
+        mannerism_one=new_character['mannerism_one'],
+        mannerism_two=new_character['mannerism_two'],
+        speaking_style=new_character['speaking_style'],
+        skill=new_character['skill'],
+        flaw=new_character['flaw'],
+        fear=new_character['fear'],
+        favorite=new_character['favorite'],
+        family=new_character['family'],
+        friends=new_character['friends'],
+        significant_other=new_character['significant_other'],
+        user=current_user)
     db.session.add(character)
     db.session.commit()
     flash('Your character has been saved!', 'good')
     return 'Character saved successfully.'
 
 
-@characters.route('/character/<id>')
+@characters.route('/character/<int:id>')
 def character(id):
     character = Character.query.get_or_404(id)
-    data = json.loads(character.data)
     return render_template(
         'character.html',
-        data=data,
         character=character,
-        title=data['name'])
+        title=character.name)

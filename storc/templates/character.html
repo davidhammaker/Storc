@@ -4,33 +4,33 @@
 <div class="container">
     <div class="box tall">
         <span class="right">{{ character.user.username }}</span>
-        <h2 id="name">{{ data['name'] }}</h2>
+        <h2 id="name">{{ character.name }}</h2>
         <div class="narrow left">
             <h3>Physical Qualities</h3>
             <table>
                 <tr>
                     <td>Gender: </td>
-                    <td>{{ data['gender'] }}</td>
+                    <td>{{ character.gender }}</td>
                 </tr>
                 <tr>
                     <td>Height: </td>
-                    <td>{{ data['height'] }}</td>
+                    <td>{{ character.height }}</td>
                 </tr>
                 <tr>
                     <td>Weight: </td>
-                    <td>{{ data['weight'] }}</td>
+                    <td>{{ character.weight }}</td>
                 </tr>
                 <tr>
                     <td>Hair color: </td>
-                    <td>{{ data['hair_color'] }}</td>
+                    <td>{{ character.hair_color }}</td>
                 </tr>
                 <tr>
                     <td>Eye color: </td>
-                    <td>{{ data['eye_color'] }}</td>
+                    <td>{{ character.eye_color }}</td>
                 </tr>
                 <tr>
                     <td>Unique Attribute: </td>
-                    <td>{{ data['unique_attribute'] }}</td>
+                    <td>{{ character.unique_attribute }}</td>
                 </tr>
             </table>
             <br>
@@ -38,11 +38,11 @@
             <table>
                 <tr>
                     <td>Favorite clothes:</td>
-                    <td>{{ data['favorite_clothes'] }}</td>
+                    <td>{{ character.favorite_clothes }}</td>
                 </tr>
                 <tr>
                     <td>Hair:</td>
-                    <td>{{ data['hair'] }}</td>
+                    <td>{{ character.hair }}</td>
                 </tr>
             </table>
         </div>
@@ -51,42 +51,42 @@
             <table>
                 <tr>
                     <td rowspan="2">Common Mannerisms:</td>
-                    <td>{{ data['mannerism_one'] }}</td>
+                    <td>{{ character.mannerism_one }}</td>
                 </tr>
                 <tr class="second-cell">
-                    <td class="second-cell" id="mannerism_two">{{ data['mannerism_two'] }}</td>
+                    <td class="second-cell" id="mannerism_two">{{ character.mannerism_two }}</td>
                 </tr>
                 <tr>
                     <td>Speaking Style:</td>
-                    <td>{{ data['speaking_style'] }}</td>
+                    <td>{{ character.speaking_style }}</td>
                 </tr>
                 <tr>
                     <td>Skill:</td>
-                    <td>{{ data['skill'] }}</td>
+                    <td>{{ character.skill }}</td>
                 </tr>
                 <tr>
                     <td>Flaw:</td>
-                    <td>{{ data['flaw'] }}</td>
+                    <td>{{ character.flaw }}</td>
                 </tr>
                 <tr>
                     <td>Fear:</td>
-                    <td>{{ data['fear'] }}</td>
+                    <td>{{ character.fear }}</td>
                 </tr>
                 <tr>
                     <td>Favorite Thing:</td>
-                    <td>{{ data['favorite'] }}</td>
+                    <td>{{ character.favorite }}</td>
                 </tr>
                 <tr>
                     <td>Family:</td>
-                    <td>{{ data['family'] }}</td>
+                    <td>{{ character.family }}</td>
                 </tr>
                 <tr>
                     <td>Friends:</td>
-                    <td>{{ data['friends'] }}</td>
+                    <td>{{ character.friends }}</td>
                 </tr>
                 <tr>
                     <td>Significant Other:</td>
-                    <td>{{ data['significant_other'] }}</td>
+                    <td>{{ character.significant_other }}</td>
                 </tr>
             </table>
         </div>
