@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="box tall">
+        <span class="right">{{ character.user.username }}</span>
+        <h2 id="name">{{ data['name'] }}</h2>
+        <div class="narrow left">
+            <h3>Physical Qualities</h3>
+            <table>
+                <tr>
+                    <td>Gender: </td>
+                    <td>{{ data['gender'] }}</td>
+                </tr>
+                <tr>
+                    <td>Height: </td>
+                    <td>{{ data['height'] }}</td>
+                </tr>
+                <tr>
+                    <td>Weight: </td>
+                    <td>{{ data['weight'] }}</td>
+                </tr>
+                <tr>
+                    <td>Hair color: </td>
+                    <td>{{ data['hair_color'] }}</td>
+                </tr>
+                <tr>
+                    <td>Eye color: </td>
+                    <td>{{ data['eye_color'] }}</td>
+                </tr>
+                <tr>
+                    <td>Unique Attribute: </td>
+                    <td>{{ data['unique_attribute'] }}</td>
+                </tr>
+            </table>
+            <br>
+            <h3>My Style</h3>
+            <table>
+                <tr>
+                    <td>Favorite clothes:</td>
+                    <td>{{ data['favorite_clothes'] }}</td>
+                </tr>
+                <tr>
+                    <td>Hair:</td>
+                    <td>{{ data['hair'] }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="wide right">
+            <h3>About Me</h3>
+            <table>
+                <tr>
+                    <td rowspan="2">Common Mannerisms:</td>
+                    <td>{{ data['mannerism_one'] }}</td>
+                </tr>
+                <tr class="second-cell">
+                    <td class="second-cell" id="mannerism_two">{{ data['mannerism_two'] }}</td>
+                </tr>
+                <tr>
+                    <td>Speaking Style:</td>
+                    <td>{{ data['speaking_style'] }}</td>
+                </tr>
+                <tr>
+                    <td>Skill:</td>
+                    <td>{{ data['skill'] }}</td>
+                </tr>
+                <tr>
+                    <td>Flaw:</td>
+                    <td>{{ data['flaw'] }}</td>
+                </tr>
+                <tr>
+                    <td>Fear:</td>
+                    <td>{{ data['fear'] }}</td>
+                </tr>
+                <tr>
+                    <td>Favorite Thing:</td>
+                    <td>{{ data['favorite'] }}</td>
+                </tr>
+                <tr>
+                    <td>Family:</td>
+                    <td>{{ data['family'] }}</td>
+                </tr>
+                <tr>
+                    <td>Friends:</td>
+                    <td>{{ data['friends'] }}</td>
+                </tr>
+                <tr>
+                    <td>Significant Other:</td>
+                    <td>{{ data['significant_other'] }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br>
+</div>
+{% endblock content %}

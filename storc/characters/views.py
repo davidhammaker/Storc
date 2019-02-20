@@ -36,3 +36,11 @@ def save_character():
     db.session.commit()
     flash('Your character has been saved!', 'good')
     return 'Character saved successfully.'
+
+
+@characters.route('/character/<id>')
+def character(id):
+    character = Character.query.get_or_404(id)
+    data = json.loads(character.data)
+    return render_template(
+        'character.html', data=data, character=character)
