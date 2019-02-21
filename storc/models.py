@@ -39,6 +39,11 @@ class Character(db.Model):
         db.ForeignKey('user.id'),
         nullable=False)
 
+    def __repr__(self):
+        """Character representation."""
+        return f"Character(id={self.id}, name={self.name}," \
+            f"date={self.date}, user_id={self.user_id})"
+
 
 class User(db.Model, UserMixin):
     """The User model for the SQLAlchemy database."""
@@ -52,6 +57,11 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String)
     validated = db.Column(db.Boolean)
     characters = db.relationship('Character', backref='user', lazy=True)
+
+    def __repr__(self):
+        """User representation."""
+        return f"User(id={self.id}, username={self.username}," \
+            f"email={self.email}, validated={self.validated})"
 
     def get_token(self, expire=1800):
         """
