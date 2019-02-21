@@ -220,9 +220,12 @@ def reset_password_request():
     instance.
     """
 
-    # TODO: remove this conditional and add an anchor to this view function from users' settings
     if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
+        send_pw_reset_email(current_user)
+        flash(
+            f'Check your email! We sent a link to '
+            f'"{current_user.email}".', 'good')
+        return redirect(url_for('users.settings'))
 
     form = EmailVerifyForm()
     if form.validate_on_submit():
@@ -251,11 +254,6 @@ def reset_password(token):
     'users.email_login', or 'reset_password.html' template with a form
     instance.
     """
-
-    # TODO: remove this conditional
-    if current_user.is_authenticated:
-        return redirect(url_for('main.home'))
-
     user = User.validate_token(token)
 
     # If the token is invalid, redirect to
@@ -268,6 +266,13 @@ def reset_password(token):
     form = ResetPasswordForm()
     if form.validate_on_submit():
 
+        # Note whether the user was logged in, then log out
+        was_logged_in = False
+        if current_user.is_authenticated:
+            was_logged_in = True
+            logout_user()
+            flash('You have logged out.', 'neutral')
+
         # Hash the user's password before it is stored in the database
         pw_hash = bcrypt.generate_password_hash(form.password.data)
 
@@ -277,6 +282,13 @@ def reset_password(token):
         flash(
             'Your password has been reset! You may now log in.',
             'good')
+
+        # If the user was logged in, redirect to 'users.settings' after
+        # logging in
+        if was_logged_in:
+            return redirect(
+                url_for('users.email_login', next='users.settings'))
+
         return redirect(url_for('users.email_login'))
     return render_template('reset_password.html', form=form)
 

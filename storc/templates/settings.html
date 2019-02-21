@@ -46,6 +46,10 @@
                 {% endif %}
                 <br>
                 <br>
+                <h4>Password</h4>
+                <a href="{{ url_for('users.reset_password_request') }}">Request new password.</a>
+                <br>
+                <br>
                 {% if form.profile_picture.errors %}
                     <h4>{{ form.profile_picture.label(class="error") }}</h4>
                     {{ form.profile_picture(class="form-field error-field", value=current_user.profile_picture) }}
