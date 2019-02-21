@@ -3,7 +3,7 @@ from random import choice
 import requests
 from flask import (
     render_template, request, flash, Blueprint, redirect, url_for)
-from flask_login import current_user
+from flask_login import current_user, login_required
 from storc import db
 from storc.models import Character
 
@@ -37,7 +37,7 @@ def new_character():
 
 
 @characters.route('/save_character', methods=['GET', 'POST'])
-# TODO: add @login_required
+@login_required
 def save_character():
     """
     Store Character instances in the database, or redirect to a user's

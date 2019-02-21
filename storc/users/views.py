@@ -195,7 +195,7 @@ def email_login():
 
 
 @users.route('/logout')
-# TODO: make sure only authenticated users can log out (@login_required)
+@login_required
 def logout():
     """
     Log out the current user.
