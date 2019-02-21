@@ -10,6 +10,7 @@ from storc.models import User
 
 
 class EmailRegistrationForm(FlaskForm):
+    """A form for user registration via email."""
     name = StringField('First Name', validators=[
         Length(max=32)])
     username = StringField('Username', validators=[
@@ -27,6 +28,11 @@ class EmailRegistrationForm(FlaskForm):
     submit = SubmitField('Submit')
 
     def validate_username(self, username):
+        """
+        Check a user's username entry for duplicates.
+
+        :param username: The user's requested username.
+        """
         user = User.query.filter_by(username=username.data).first()
         if user:
             if user.validated:
@@ -37,6 +43,11 @@ class EmailRegistrationForm(FlaskForm):
                 db.session.commit()
 
     def validate_email(self, email):
+        """
+        Check a user's email address entry for duplicates.
+
+        :param email: The user's requested email address.
+        """
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError(
@@ -44,6 +55,7 @@ class EmailRegistrationForm(FlaskForm):
 
 
 class EmailVerifyForm(FlaskForm):
+    """A form for requesting a URL for email address verification."""
     email = StringField('Email Address', validators=[
         DataRequired(),
         Email()])
@@ -51,6 +63,7 @@ class EmailVerifyForm(FlaskForm):
 
 
 class EmailLoginForm(FlaskForm):
+    """A form for user login via email."""
     email = StringField('Email Address', validators=[
         DataRequired(),
         Email()])
@@ -61,6 +74,7 @@ class EmailLoginForm(FlaskForm):
 
 
 class ResetPasswordForm(FlaskForm):
+    """A form for requesting a password reset email."""
     password = PasswordField('Password', validators=[
         DataRequired(),
         Length(min=6, max=72)])
@@ -71,6 +85,7 @@ class ResetPasswordForm(FlaskForm):
 
 
 class SettingsForm(FlaskForm):
+    """A form for updating user account information."""
     name = StringField('First Name', validators=[
         DataRequired(),
         Length(max=32)])
@@ -85,6 +100,11 @@ class SettingsForm(FlaskForm):
     submit = SubmitField('Save Changes')
 
     def validate_username(self, username):
+        """
+        Check a user's username entry for duplicates.
+
+        :param username: The user's requested username.
+        """
         user = User.query.filter_by(username=username.data).first()
         if user:
             if user != current_user:
@@ -96,6 +116,11 @@ class SettingsForm(FlaskForm):
                     db.session.commit()
 
     def validate_email(self, email):
+        """
+        Check a user's email address entry for duplicates.
+
+        :param email: The user's requested email address.
+        """
         user = User.query.filter_by(email=email.data).first()
         if user:
             if user != current_user:

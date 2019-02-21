@@ -11,6 +11,7 @@ def load_user(user_id):
 
 
 class Character(db.Model):
+    """The Character model for the SQLAlchemy database."""
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     gender = db.Column(db.String, nullable=False)
@@ -40,6 +41,7 @@ class Character(db.Model):
 
 
 class User(db.Model, UserMixin):
+    """The User model for the SQLAlchemy database."""
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True)
     name = db.Column(db.String)
@@ -52,11 +54,24 @@ class User(db.Model, UserMixin):
     characters = db.relationship('Character', backref='user', lazy=True)
 
     def get_token(self, expire=1800):
+        """
+        Create a token for the user for verification and security
+        purposes.
+
+        :param expire: time in seconds until the token expires.
+        :return: serialized token specific to the user.
+        """
         s = Serializer(current_app.config['SECRET_KEY'], expire)
         return s.dumps({'user_id': self.id})
 
     @staticmethod
     def validate_token(token):
+        """
+        Validate user token.
+
+        :param token: the token to be validated.
+        :return: None or a user.
+        """
         s = Serializer(current_app.config['SECRET_KEY'])
         try:
             user_id = s.loads(token)['user_id']

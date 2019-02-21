@@ -13,6 +13,12 @@ login_manager = LoginManager()
 
 
 def create_app(config_class=Config):
+    """
+    Create a new app instance.
+
+    :param config_class: the application's configuration class.
+    :return: the application instance.
+    """
     app = Flask(__name__)
     app.config.from_object(config_class)
 

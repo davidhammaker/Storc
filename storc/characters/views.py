@@ -13,7 +13,16 @@ characters = Blueprint('characters', __name__)
 
 @characters.route('/new_character')
 def new_character():
+    """
+    Render a template for generating random characters.
+
+    :return: 'new_character.html' template with a name, gender, and id.
+    """
+
+    # Select a random gender
     gender = choice(['male', 'female'])
+
+    # Use the gender to fetch a random name from Behind the Name
     api_key = os.environ.get('BTN_KEY')
     random_name_url = f'https://www.behindthename.com/api/random.json' \
         f'?usage=eng&number=1&randomsurname=yes&gender={gender[0]}' \
@@ -21,8 +30,12 @@ def new_character():
     names_request = requests.get(random_name_url)
     names_list = names_request.json()['names']
     name = f'{names_list[0]} {names_list[1]}'
+
+    # TODO: remove unused 'character_last'
     character_last = \
         Character.query.order_by(Character.date.desc()).first()
+
+    # TODO: remove unused 'id'
     return render_template(
         'new_character.html',
         name=name,
@@ -31,7 +44,17 @@ def new_character():
 
 
 @characters.route('/save_character', methods=['GET', 'POST'])
+# TODO: add @login_required
 def save_character():
+    """
+    Store Character instances in the database, or redirect to a user's
+    most recently saved Character.
+
+    :return: message of success or redirect to 'characters.character'
+    with a Character id.
+    """
+
+    # On a post request, save the posted data as a new character
     if request.method == 'POST':
         new_character = request.form
         character = Character(
@@ -58,7 +81,13 @@ def save_character():
         db.session.add(character)
         db.session.commit()
         flash('Your character has been saved!', 'good')
+
+        # The post came from 'static/main.js', and the returned string
+        # is a response telling JavaScript that the post was successful
         return 'Character saved successfully.'
+
+    # On a GET request, determine the user's most recent character and
+    # redirect the user to that character's page
     else:
         character_last = Character.query\
             .order_by(Character.date.desc())\
@@ -70,6 +99,13 @@ def save_character():
 
 @characters.route('/character/<int:id>')
 def character(id):
+    """
+    Render a template that displays a generated Character from the
+    database.
+
+    :param id: the Character id.
+    :return: 'character.html' template with a Character and a title.
+    """
     character = Character.query.get_or_404(id)
     return render_template(
         'character.html',
