@@ -331,10 +331,11 @@ def settings():
 
                 # If the user's old profile picture was not the default
                 # profile picture, delete it
-                # TODO: move 'old_picture' deletion up here
                 old_picture = None
                 if user.profile_picture != 'default.jpg':
                     old_picture = user.profile_picture
+                if old_picture:
+                    delete_old_picture(old_picture)
 
                 # Save the filename of the profile picture as a random
                 # hex with the correct file extension
@@ -377,10 +378,6 @@ def settings():
                 # then read the image in binary from the directory
                 final_image.save(f'{user.profile_picture}')
                 data = open(f'{user.profile_picture}', 'rb').read()
-
-                # TODO: move old picture deletion to above 'TODO' note
-                if old_picture:
-                    delete_old_picture(old_picture)
 
                 # Upload the binary data and the filename to Dropbox
                 upload_profile_picture(data, user.profile_picture)
