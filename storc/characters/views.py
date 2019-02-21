@@ -30,17 +30,10 @@ def new_character():
     names_request = requests.get(random_name_url)
     names_list = names_request.json()['names']
     name = f'{names_list[0]} {names_list[1]}'
-
-    # TODO: remove unused 'character_last'
-    character_last = \
-        Character.query.order_by(Character.date.desc()).first()
-
-    # TODO: remove unused 'id'
     return render_template(
         'new_character.html',
         name=name,
-        gender=gender.title(),
-        id=(character_last.id + 1))
+        gender=gender.title())
 
 
 @characters.route('/save_character', methods=['GET', 'POST'])
