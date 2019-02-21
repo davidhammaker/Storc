@@ -125,8 +125,14 @@
         let characterPromise = $.post(
             "{{ url_for('characters.save_character') }}", newCharacter
         );
-        setTimeout(function(){
-            window.location = "{{ url_for('characters.save_character') }}"}, 200);
+        function characterRedirect(value) {
+            console.log(`Message: ${value}`);
+            window.location = "{{ url_for('characters.save_character') }}";
+        };
+        characterPromise.then(
+            value => characterRedirect(value),
+            error => console.log(`Message: ${error}`)
+        );
     });
 </script>
 {% endblock content %}
