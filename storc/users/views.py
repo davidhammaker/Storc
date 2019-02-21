@@ -149,10 +149,6 @@ def email_login():
 
     form = EmailLoginForm()
     if form.validate_on_submit():
-
-        # TODO: remove unused 'pw_hash'
-        pw_hash = bcrypt.generate_password_hash(form.password.data)
-
         user = User.query.filter_by(email=form.email.data).first()
 
         # Check that the user exists, that the password matches, and
