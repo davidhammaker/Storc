@@ -110,6 +110,12 @@ def verify_email(token):
         flash('That token is invalid.', 'bad')
         return redirect(url_for('users.send_verify_request'))
 
+    # If a user is already validated, redirect to 'users.email_login'
+    if user.validated:
+        flash(
+            'That email address has already been verified!', 'neutral')
+        return redirect(url_for('users.email_login'))
+
     # If a different user is logged in at the time the email is
     # verified, log out that user
     if current_user.is_authenticated:
