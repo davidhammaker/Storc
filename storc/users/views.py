@@ -414,14 +414,19 @@ def new_email(token):
 
     :param token: the token included in the URL in the verification
     email.
-    :return: a redirect to 'users.email_login'.
+    :return: a redirect to 'users.settings' or 'users.email_login'.
     """
     user = User.validate_token(token)
     if not user:
         flash('That token is invalid.', 'bad')
     else:
 
-        # TODO: make sure that a 'temp_email' of 'None' cannot be accidentally stored if the user logs in and then goes back and clicks the URL
+        # Prevent users from setting 'email' to 'None', since
+        # 'temp_email' becomes 'None' after a successful login
+        if not user.temp_email:
+            flash('Your new email address could not be verified. '
+                  'Please try again.', 'bad')
+            return redirect(url_for('users.settings'))
 
         user.email = user.temp_email
         user.temp_email = None
