@@ -303,7 +303,6 @@ def settings():
     path for the current user's profile picture.
     """
     form = SettingsForm()
-    image_path = get_profile_picture(current_user)
     if form.validate_on_submit():
         user = current_user
 
@@ -385,9 +384,6 @@ def settings():
                 # Delete the image stored in the working directory
                 os.remove(f'{user.profile_picture}')
 
-                message = (
-                    'Changes have been saved! Your new profile picture '
-                    'will be ready soon.')
             flash(message, 'good')
 
         # If the email address has been updated, store the new email
@@ -402,6 +398,7 @@ def settings():
                 f'An email has been sent to "{user.temp_email}". '
                 f'Check your email to verify the change!', 'good')
 
+    image_path = get_profile_picture(current_user)
     return render_template(
         'settings.html', form=form, image_path=image_path)
 
