@@ -20,6 +20,8 @@
         <h2>Character Bank</h2>
         <ul>
             <li class="option-list"><a href="{{ url_for('characters.all_characters') }}">All Characters</a></li>
+            <li class="option-list"><a href="{{ url_for('characters.all_characters', gender='Male') }}">Male Characters</a></li>
+            <li class="option-list"><a href="{{ url_for('characters.all_characters', gender='Female') }}">Female Characters</a></li>
         </ul>
         <br>
         <h2>Recent Characters</h2>

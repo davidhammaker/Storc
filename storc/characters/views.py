@@ -116,7 +116,17 @@ def all_characters():
     characters.
     """
     page = request.args.get('page', 1, type=int)
-    characters = Character.query.order_by(Character.name)\
-        .paginate(page=page, per_page=20)
-    # print(characters.__dict__)
-    return render_template('all_characters.html', characters=characters)
+
+    # If 'gender' query parameter exists, only show characters of that
+    # gender
+    gender = request.args.get('gender')
+    if gender:
+        characters = Character.query.order_by(Character.name) \
+            .filter_by(gender=gender) \
+            .paginate(page=page, per_page=20)
+
+    else:
+        characters = Character.query.order_by(Character.name) \
+            .paginate(page=page, per_page=20)
+    return render_template(
+        'all_characters.html', characters=characters, gender=gender)
