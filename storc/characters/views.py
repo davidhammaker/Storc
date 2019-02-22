@@ -109,8 +109,8 @@ def character(id):
 @characters.route('/all_characters')
 def all_characters():
     """
-    Render a template that displays a paginated view of all characters
-    in alphabetical order, listing 20 characters at a time.
+    Render a template that displays a paginated view of all non-private
+    characters in alphabetical order, listing 20 characters at a time.
 
     :return: 'all_characters.html' template with a list of up to 20
     characters.
@@ -122,11 +122,12 @@ def all_characters():
     gender = request.args.get('gender')
     if gender:
         characters = Character.query.order_by(Character.name) \
-            .filter_by(gender=gender) \
+            .filter_by(gender=gender, private=False) \
             .paginate(page=page, per_page=20)
 
     else:
         characters = Character.query.order_by(Character.name) \
+            .filter_by(private=False) \
             .paginate(page=page, per_page=20)
     return render_template(
         'all_characters.html', characters=characters, gender=gender)
