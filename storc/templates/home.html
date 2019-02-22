@@ -20,7 +20,7 @@
         <h2>Recent Characters</h2>
         <ul>
             {% for character in characters %}
-                <li class="home-list"><a href="{{ url_for('characters.character', id=character.id) }}">{{ character.name }}</a></li>
+                <li class="character-list"><a href="{{ url_for('characters.character', id=character.id) }}">{{ character.name }}</a></li>
             {% endfor %}
         </ul>
     </div>

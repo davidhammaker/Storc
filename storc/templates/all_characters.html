@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="box wide center">
+        <h2>All Characters</h2>
+        <ul>
+            {% for character in characters.items %}
+                <li class="character-list"><a href="{{ url_for('characters.character', id=character.id) }}">{{ character.name }}</a> by {{ character.user.username }}</li>
+            {% endfor %}
+        </ul>
+        <br>
+        <ul class="center-text">
+            {% for page in characters.iter_pages() %}
+                <li class="multi">
+                    {% if page %}
+                        <a class="" href="{{ url_for('characters.all_characters', page=page) }}">{{ page }}</a>
+                    {% else %}
+                        -
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock content %}

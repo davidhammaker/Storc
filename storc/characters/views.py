@@ -104,3 +104,19 @@ def character(id):
         'character.html',
         character=character,
         title=character.name)
+
+
+@characters.route('/all_characters')
+def all_characters():
+    """
+    Render a template that displays a paginated view of all characters
+    in alphabetical order, listing 20 characters at a time.
+
+    :return: 'all_characters.html' template with a list of up to 20
+    characters.
+    """
+    page = request.args.get('page', 1, type=int)
+    characters = Character.query.order_by(Character.name)\
+        .paginate(page=page, per_page=20)
+    # print(characters.__dict__)
+    return render_template('all_characters.html', characters=characters)
