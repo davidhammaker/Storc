@@ -17,6 +17,11 @@
         <p>Want to <a href="{{ url_for('characters.new_character') }}">give it a try</a>?</p>
     </div>
     <div class="box narrower right multi">
+        <h2>Character Bank</h2>
+        <ul>
+            <li class="option-list"><a href="{{ url_for('characters.all_characters') }}">All Characters</a></li>
+        </ul>
+        <br>
         <h2>Recent Characters</h2>
         <ul>
             {% for character in characters %}
