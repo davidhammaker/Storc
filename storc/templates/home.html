@@ -22,6 +22,7 @@
             <li class="option-list"><a href="{{ url_for('characters.all_characters') }}">All Characters</a></li>
             <li class="option-list"><a href="{{ url_for('characters.all_characters', gender='Male') }}">Male Characters</a></li>
             <li class="option-list"><a href="{{ url_for('characters.all_characters', gender='Female') }}">Female Characters</a></li>
+            {% if current_user.is_authenticated %}<li class="option-list"><a href="{{ url_for('characters.all_characters', user=current_user.username) }}">My Characters</a></li>{% endif %}
         </ul>
         <br>
         <h2>Recent Characters</h2>
