@@ -92,5 +92,34 @@
         </div>
     </div>
     <br>
+    {% if character.user == current_user %}
+        <div class="box narrow center">
+            <ul class="center-text">
+                {% if character.private %}
+                    <li class="multi"><button id="private" type="button">Make Public</button></li>
+                {% else %}
+                    <li class="multi"><button id="private" type="button">Make Private</button></li>
+                {% endif %}
+            </ul>
+        </div>
+    {% endif %}
 </div>
+{% if character.user == current_user %}
+    <script type="text/javascript">
+        document.getElementById('private').addEventListener('click', function() {
+            character_id = {'id': {{ character.id }}}
+            let characterPromise = $.post(
+                "{{ url_for('characters.change_privacy') }}", character_id
+            );
+            function characterRedirect(value) {
+                console.log(`Message: ${value}`);
+                window.location = "{{ url_for('characters.character', id=character.id) }}";
+            };
+            characterPromise.then(
+                value => characterRedirect(value),
+                error => console.log(`Message: ${error}`)
+            );
+        });
+    </script>
+{% endif %}
 {% endblock content %}

@@ -138,3 +138,25 @@ def all_characters():
             .paginate(page=page, per_page=20)
     return render_template(
         'all_characters.html', characters=characters, gender=gender)
+
+
+@characters.route('/make_private', methods=['POST'])
+@login_required
+def change_privacy():
+    """
+    Receive and respond to a POST request by updating a Character's
+    privacy setting in the database and sending an appropriate success
+    message.
+
+    :return: A success message
+    """
+    character_id = request.form['id']
+    character = Character.query.filter_by(id=character_id).first()
+    character.private = not character.private
+    db.session.add(character)
+    db.session.commit()
+    if character.private:
+        flash('This character is now private.', 'good')
+    else:
+        flash('This character is now public.', 'good')
+    return 'Privacy settings successfully updated.'
