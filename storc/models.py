@@ -33,7 +33,7 @@ class Character(db.Model):
     friends = db.Column(db.String, nullable=False)
     significant_other = db.Column(db.String, nullable=False)
     date = db.Column(db.DateTime, default=datetime.utcnow)
-    private = db.Column(db.Boolean, default=False)
+    private = db.Column(db.Boolean, default=True)
     user_id = db.Column(
         db.Integer,
         db.ForeignKey('user.id'),
