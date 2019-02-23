@@ -6,7 +6,7 @@ from flask import (
     abort)
 from flask_login import current_user, login_required
 from storc import db
-from storc.models import Character
+from storc.models import User, Character
 
 
 characters = Blueprint('characters', __name__)
@@ -123,11 +123,29 @@ def all_characters():
     characters.
     """
     page = request.args.get('page', 1, type=int)
+    gender = request.args.get('gender')
+    username = request.args.get('user')
+    user = User.query.filter_by(username=username).first()
+
+    # If 'user' query parameter exists, only show characters by that
+    # user
+    if user:
+
+        # If 'user' is current user, include private characters
+        if current_user == user:
+            characters = Character.query.order_by(Character.name)\
+                .filter_by(user=user)\
+                .paginate(page=page, per_page=20)
+
+        # If 'user' is not current user, exclude private characters
+        else:
+            characters = Character.query.order_by(Character.name) \
+                .filter_by(user=user, private=False) \
+                .paginate(page=page, per_page=20)
 
     # If 'gender' query parameter exists, only show characters of that
     # gender
-    gender = request.args.get('gender')
-    if gender:
+    elif gender:
         characters = Character.query.order_by(Character.name) \
             .filter_by(gender=gender, private=False) \
             .paginate(page=page, per_page=20)
@@ -137,7 +155,10 @@ def all_characters():
             .filter_by(private=False) \
             .paginate(page=page, per_page=20)
     return render_template(
-        'all_characters.html', characters=characters, gender=gender)
+        'all_characters.html',
+        characters=characters,
+        gender=gender,
+        user=user)
 
 
 @characters.route('/make_private', methods=['POST'])

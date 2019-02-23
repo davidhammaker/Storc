@@ -14,7 +14,7 @@
             {% for page in characters.iter_pages() %}
                 <li class="multi">
                     {% if page %}
-                        <a class="" href="{{ url_for('characters.all_characters', page=page, gender=gender) }}">{{ page }}</a>
+                        <a class="" href="{{ url_for('characters.all_characters', page=page, gender=gender, user=user.username) }}">{{ page }}</a>
                     {% else %}
                         -
                     {% endif %}
