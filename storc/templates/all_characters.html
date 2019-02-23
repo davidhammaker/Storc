@@ -3,7 +3,19 @@
 {% block content %}
 <div class="container">
     <div class="box wide center">
-        <h2>All Characters</h2>
+        <h2>
+            {% if user %}
+                {% if current_user==user %}
+                    My Characters
+                {% else %}
+                    Characters by {{ user.username }}
+                {% endif %}
+            {% elif gender %}
+                {{ gender }} Characters
+            {% else %}
+                All Characters
+            {% endif %}
+        </h2>
         <ul>
             {% for character in characters.items %}
                 <li class="character-list"><a href="{{ url_for('characters.character', id=character.id) }}">{{ character.name }}</a> by {{ character.user.username }}</li>
