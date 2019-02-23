@@ -41,7 +41,7 @@ class Character(db.Model):
 
     def __repr__(self):
         """Character representation."""
-        return f"Character(id={self.id}, name={self.name}," \
+        return f"Character(id={self.id}, name={self.name}, " \
             f"date={self.date}, user_id={self.user_id})"
 
 
@@ -60,7 +60,7 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         """User representation."""
-        return f"User(id={self.id}, username={self.username}," \
+        return f"User(id={self.id}, username={self.username}, " \
             f"email={self.email}, validated={self.validated})"
 
     def get_token(self, expire=1800):
