@@ -23,13 +23,17 @@
         </ul>
         <br>
         <ul class="center-text">
-            {% for page in characters.iter_pages() %}
+            {% for page_num in characters.iter_pages() %}
                 <li class="multi">
-                    {% if page %}
-                        {% if user %}
-                            <a class="" href="{{ url_for('characters.all_characters', page=page, gender=gender, user=user.username) }}">{{ page }}</a>
+                    {% if page_num %}
+                        {% if page_num == page %}
+                                <strong>{{ page_num }}</strong>
                         {% else %}
-                            <a class="" href="{{ url_for('characters.all_characters', page=page, gender=gender) }}">{{ page }}</a>
+                            {% if user %}
+                                <a class="" href="{{ url_for('characters.all_characters', page_num=page_num, gender=gender, user=user.username) }}">{{ page_num }}</a>
+                            {% else %}
+                                <a class="" href="{{ url_for('characters.all_characters', page_num=page_num, gender=gender) }}">{{ page_num }}</a>
+                            {% endif %}
                         {% endif %}
                     {% else %}
                         -

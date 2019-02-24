@@ -122,7 +122,7 @@ def all_characters():
     :return: 'all_characters.html' template with a list of up to 20
     characters.
     """
-    page = request.args.get('page', 1, type=int)
+    page = request.args.get('page_num', 1, type=int)
     gender = request.args.get('gender')
     username = request.args.get('user')
     user = User.query.filter_by(username=username).first()
@@ -158,7 +158,8 @@ def all_characters():
         'all_characters.html',
         characters=characters,
         gender=gender,
-        user=user)
+        user=user,
+        page=page)
 
 
 @characters.route('/make_private', methods=['POST'])
