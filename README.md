@@ -38,7 +38,6 @@ If you are running the application for the first time, run `$ python run.py --se
 ## Future Development
 
 The following features will hopefully be implemented in the near future:
-* Character editing and deletion.
 * Facebook and Google sign-in options.
 * Open Graph metadata (to improve sharing on social media).
 * Mobile-friendly style modifications.
