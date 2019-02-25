@@ -102,15 +102,16 @@
                     <li class="multi"><button id="private" type="button">Make Private</button></li>
                 {% endif %}
                 <li class="multi"><a href="{{ url_for('characters.edit', id=character.id) }}"><button type="button">Edit</button></a></li>
-                <li class="multi"><a href="#"><button type="button">Delete</button></a></li>
+                <li class="multi"><button id="delete" type="button">Delete</button></li>
             </ul>
         </div>
     {% endif %}
 </div>
 {% if character.user == current_user %}
     <script type="text/javascript">
+        let character_id = {'id': {{ character.id }}}
+        
         document.getElementById('private').addEventListener('click', function() {
-            character_id = {'id': {{ character.id }}}
             let characterPromise = $.post(
                 "{{ url_for('characters.change_privacy') }}", character_id
             );
@@ -122,6 +123,23 @@
                 value => characterRedirect(value),
                 error => console.log(`Message: ${error}`)
             );
+        });
+
+        document.getElementById('delete').addEventListener('click', function() {
+            let deleteConfirm = window.confirm('Are you sure you want to delete {{ character.name }}?');
+            if (deleteConfirm) {
+                let deletePromise = $.post(
+                    "{{ url_for('characters.delete', id=character.id) }}", character_id
+                );
+                function homeRedirect(value) {
+                    console.log(`Message: ${value}`);
+                    window.location = "{{ url_for('main.home') }}";
+                };
+                deletePromise.then(
+                    value => homeRedirect(value),
+                    error => console.log(`Message: ${error}`)
+                );
+            }
         });
     </script>
 {% endif %}

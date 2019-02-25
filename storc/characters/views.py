@@ -244,3 +244,25 @@ def edit(id):
         name=character.name,
         gender=character.gender,
         character=character)
+
+
+@characters.route('/character/<int:id>/delete', methods=['POST'])
+@login_required
+def delete(id):
+    """
+    Receive POST requests for deleting characters.
+
+    :param id: id of the character to be deleted.
+    :return: an abort with a 403, or a success message.
+    """
+    character_id = request.form['id']
+    character = Character.query.get_or_404(character_id)
+
+    # Prevent unauthorized users from deleting a character
+    if current_user != character.user:
+        return abort(403)
+
+    db.session.delete(character)
+    db.session.commit()
+    flash(f'{character.name} has been deleted.', 'neutral')
+    return 'Character deleted successfully.'
