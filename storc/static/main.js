@@ -1087,4 +1087,4 @@ function Character() {
 
 // Initial scramble on page load
 
-scramble();
+// scramble();

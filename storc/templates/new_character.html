@@ -14,27 +14,27 @@
                 </tr>
                 <tr>
                     <td>Height: </td>
-                    <td id="height">Height</td>
+                    <td id="height">{% if character %}{{ character.height }}{% endif %}</td>
                     <td><button id="mix_height" type="button">Mix</button></td>
                 </tr>
                 <tr>
                     <td>Weight: </td>
-                    <td id="weight">Weight</td>
+                    <td id="weight">{% if character %}{{ character.weight }}{% endif %}</td>
                     <td><button id="mix_weight" type="button">Mix</button></td>
                 </tr>
                 <tr>
                     <td>Hair color: </td>
-                    <td id="hair_color">Hair color</td>
+                    <td id="hair_color">{% if character %}{{ character.hair_color }}{% endif %}</td>
                     <td><button id="mix_hair_color" type="button">Mix</button></td>
                 </tr>
                 <tr>
                     <td>Eye color: </td>
-                    <td id="eye_color">Eye color</td>
+                    <td id="eye_color">{% if character %}{{ character.eye_color }}{% endif %}</td>
                     <td><button id="mix_eye_color" type="button">Mix</button></td>
                 </tr>
                 <tr>
                     <td>Unique Attribute: </td>
-                    <td id="unique_attribute">unique attribute</td>
+                    <td id="unique_attribute">{% if character %}{{ character.unique_attribute }}{% endif %}</td>
                     <td><button id="mix_unique_attribute" type="button">Mix</button></td>
                 </tr>
             </table>
@@ -43,12 +43,12 @@
             <table>
                 <tr>
                     <td>Favorite clothes:</td>
-                    <td id="favorite_clothes">favorite clothes</td>
+                    <td id="favorite_clothes">{% if character %}{{ character.favorite_clothes }}{% endif %}</td>
                     <td><button id="mix_favorite_clothes" type="button">Mix</button></td>
                 </tr>
                 <tr>
                     <td>Hair:</td>
-                    <td id="hair">hair</td>
+                    <td id="hair">{% if character %}{{ character.hair }}{% endif %}</td>
                     <td><button id="mix_hair" type="button">Mix</button></td>
                 </tr>
             </table>
@@ -58,50 +58,50 @@
             <table>
                 <tr>
                     <td rowspan="2">Common Mannerisms:</td>
-                    <td id="mannerism_one">mannerism one</td>
+                    <td id="mannerism_one">{% if character %}{{ character.mannerism_one }}{% endif %}</td>
                     <td rowspan="2"><button id="mix_mannerisms" type="button">Mix</button></td>
                 </tr>
                 <tr class="second-cell">
-                    <td class="second-cell" id="mannerism_two">mannerism two</td>
+                    <td class="second-cell" id="mannerism_two">{% if character %}{{ character.mannerism_two }}{% endif %}</td>
                 </tr>
                 <tr>
                     <td>Speaking Style:</td>
-                    <td id="speaking_style">speaking style</td>
+                    <td id="speaking_style">{% if character %}{{ character.speaking_style }}{% endif %}</td>
                     <td><button id="mix_speaking_style" type="button">Mix</button></td>
                 </tr>
                 <tr>
                     <td>Skill:</td>
-                    <td id="skill">skill</td>
+                    <td id="skill">{% if character %}{{ character.skill }}{% endif %}</td>
                     <td><button id="mix_skill" type="button">Mix</button></td>
                 </tr>
                 <tr>
                     <td>Flaw:</td>
-                    <td id="flaw">flaw</td>
+                    <td id="flaw">{% if character %}{{ character.flaw }}{% endif %}</td>
                     <td><button id="mix_flaw" type="button">Mix</button></td>
                 </tr>
                 <tr>
                     <td>Fear:</td>
-                    <td id="fear">fear</td>
+                    <td id="fear">{% if character %}{{ character.fear }}{% endif %}</td>
                     <td><button id="mix_fear" type="button">Mix</button></td>
                 </tr>
                 <tr>
                     <td>Favorite Thing:</td>
-                    <td id="favorite">favorite thing</td>
+                    <td id="favorite">{% if character %}{{ character.favorite }}{% endif %}</td>
                     <td><button id="mix_favorite" type="button">Mix</button></td>
                 </tr>
                 <tr>
                     <td>Family:</td>
-                    <td id="family">family</td>
+                    <td id="family">{% if character %}{{ character.family }}{% endif %}</td>
                     <td><button id="mix_family" type="button">Mix</button></td>
                 </tr>
                 <tr>
                     <td>Friends:</td>
-                    <td id="friends">friends</td>
+                    <td id="friends">{% if character %}{{ character.friends }}{% endif %}</td>
                     <td><button id="mix_friends" type="button">Mix</button></td>
                 </tr>
                 <tr>
                     <td>Significant Other:</td>
-                    <td id="significant_other">significant other</td>
+                    <td id="significant_other">{% if character %}{{ character.significant_other }}{% endif %}</td>
                     <td><button id="mix_significant_other" type="button">Mix</button></td>
                 </tr>
             </table>
@@ -123,11 +123,19 @@
     document.getElementById('save').addEventListener('click', function() {
         let newCharacter = new Character;
         let characterPromise = $.post(
-            "{{ url_for('characters.save_character') }}", newCharacter
+            {% if character %}
+                "{{ url_for('characters.edit', id=character.id) }}", newCharacter
+            {% else %}
+                "{{ url_for('characters.save_character') }}", newCharacter
+            {% endif %}
         );
         function characterRedirect(value) {
             console.log(`Message: ${value}`);
-            window.location = "{{ url_for('characters.save_character') }}";
+            {% if character %}
+                window.location = "{{ url_for('characters.character', id=character.id) }}"
+            {% else %}
+                window.location = "{{ url_for('characters.save_character') }}";
+            {% endif %}
         };
         characterPromise.then(
             value => characterRedirect(value),
@@ -135,4 +143,9 @@
         );
     });
 </script>
+{% if not character %}
+    <script type="text/javascript">
+        scramble();
+    </script>
+{% endif %}
 {% endblock content %}

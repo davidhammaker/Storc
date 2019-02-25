@@ -34,7 +34,8 @@ def new_character():
     return render_template(
         'new_character.html',
         name=name,
-        gender=gender.title())
+        gender=gender.title(),
+        character=None)
 
 
 @characters.route('/save_character', methods=['GET', 'POST'])
@@ -182,3 +183,60 @@ def change_privacy():
     else:
         flash('This character is now public.', 'good')
     return 'Privacy settings successfully updated.'
+
+
+@characters.route('/character/<int:id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit(id):
+    """
+    Render a template for editing and updating a character, and receive
+    POST requests with updated characters.
+
+    :param id: the id of the character to be updated.
+    :return: an abort with a 403, a success message, or
+    'new_character.html' template with character data.
+    """
+    character = Character.query.get_or_404(id)
+
+    if current_user != character.user:
+        return abort(403)
+
+    # On a post request, update the character with the posted data
+    if request.method == 'POST':
+        edited_character = request.form
+        character.id = id
+        character.name = edited_character['name']
+        character.gender = edited_character['gender']
+        character.height = edited_character['height']
+        character.weight = edited_character['weight']
+        character.hair_color = edited_character['hair_color']
+        character.eye_color = edited_character['eye_color']
+        character.unique_attribute = \
+            edited_character['unique_attribute']
+        character.favorite_clothes = \
+            edited_character['favorite_clothes']
+        character.hair = edited_character['hair']
+        character.mannerism_one = edited_character['mannerism_one']
+        character.mannerism_two = edited_character['mannerism_two']
+        character.speaking_style = edited_character['speaking_style']
+        character.skill = edited_character['skill']
+        character.flaw = edited_character['flaw']
+        character.fear = edited_character['fear']
+        character.favorite = edited_character['favorite']
+        character.family = edited_character['family']
+        character.friends = edited_character['friends']
+        character.significant_other = \
+            edited_character['significant_other']
+        character.user = current_user
+        db.session.commit()
+        flash('Your character has been saved!', 'good')
+
+        # The post came from 'static/main.js', and the returned string
+        # is a response telling JavaScript that the post was successful
+        return 'Character saved successfully.'
+
+    return render_template(
+        'new_character.html',
+        name=character.name,
+        gender=character.gender,
+        character=character)
