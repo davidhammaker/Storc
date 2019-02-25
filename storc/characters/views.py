@@ -7,6 +7,7 @@ from flask import (
 from flask_login import current_user, login_required
 from storc import db
 from storc.models import User, Character
+from storc.users.utils import get_profile_picture
 
 
 characters = Blueprint('characters', __name__)
@@ -108,10 +109,13 @@ def character(id):
     if character.private and current_user != character.user:
         return abort(403)
 
+    image_path = get_profile_picture(character.user)
+
     return render_template(
         'character.html',
         character=character,
-        title=character.name)
+        title=character.name,
+        image_path=image_path)
 
 
 @characters.route('/all_characters')

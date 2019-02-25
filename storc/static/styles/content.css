@@ -65,3 +65,17 @@
     line-height: 1.6;
     margin-left: 20px;
 }
+
+.profile-picture{
+    border-radius: 100%;
+}
+
+.tiny{
+    height: 30px;
+}
+
+.next-to-pic{
+    position: relative;
+    top: 7px;
+    padding-left: 8px;
+}
