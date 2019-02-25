@@ -35,6 +35,16 @@ To use the application, start by cloning this repository. Use `$ pip install -r 
 
 If you are running the application for the first time, run `$ python run.py --setup`. Otherwise, you can run the application with `$ python run.py`. You can then view the application at [localhost:5000](http://localhost:5000/).
 
+## Future Development
+
+The following features will hopefully be implemented in the near future:
+* Character editing and deletion.
+* Facebook and Google sign-in options.
+* Open Graph metadata (to improve sharing on social media).
+* Mobile-friendly style modifications.
+* Other character saving options (printing or PDF).
+* Blank character templates.
+
 ## Copyright
 
 © 2018-2019 David J. Hammaker
