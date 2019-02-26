@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, request
 from storc.models import Character
 
 
@@ -16,3 +16,17 @@ def home():
         Character.query.filter_by(private=False)\
         .order_by(Character.date.desc()).limit(10)
     return render_template('home.html', characters=characters)
+
+
+@main.route('/login')
+def login():
+    """
+    Render a list of all login methods.
+
+    :return: 'login.html' template with 'next_page', if any exists.
+    """
+
+    # If a 'next' argument exists in the URL, persist the argument.
+    next_page = request.args.get('next')
+
+    return render_template('login.html', next_page=next_page)

@@ -133,14 +133,14 @@ def verify_email(token):
     return redirect(url_for('users.email_login'))
 
 
-@users.route('/email_login', methods=('GET', 'POST'))
+@users.route('/login/email', methods=('GET', 'POST'))
 def email_login():
     """
     Render a form that allows users to log in with an email address.
 
     :return: a redirect to 'main.home', 'users.send_verify_request', or
     any view function represented by the URL parameter 'next', or
-    'login.html' template with a form instance.
+    'email_login.html' template with a form instance.
     """
 
     # Redirect authenticated users to 'main.home'
@@ -193,7 +193,7 @@ def email_login():
             flash(
                 'Failed to log in. Please check your email and '
                 'password.', 'bad')
-    return render_template('login.html', form=form)
+    return render_template('email_login.html', form=form)
 
 
 @users.route('/logout')
