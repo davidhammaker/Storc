@@ -56,6 +56,7 @@ class User(db.Model, UserMixin):
     temp_email = db.Column(db.String, default=None)
     password = db.Column(db.String)
     validated = db.Column(db.Boolean)
+    login = db.Column(db.String, default='email')
     characters = db.relationship('Character', backref='user', lazy=True)
 
     def __repr__(self):
