@@ -21,8 +21,12 @@ def new_character():
     :return: 'new_character.html' template with a name, gender, and id.
     """
 
-    # Select a random gender
-    gender = choice(['male', 'female'])
+    # Use supplied gender, if possible
+    gender = request.args.get('gender')
+
+    # Select a random gender if none is provided
+    if not gender:
+        gender = choice(['male', 'female'])
 
     # Use the gender to fetch a random name from Behind the Name
     api_key = os.environ.get('BTN_KEY')
