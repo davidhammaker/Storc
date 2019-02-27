@@ -29,7 +29,7 @@ Requires that the following environment variables be set appropriately:
     * Profile pictures are saved to a [Dropbox](https://www.dropbox.com) account, including "default.jpg", which is given to all new users who sign up with email. For this functionality to work properly, you will need a Dropbox account and a corresponding API key. View [the documentation](https://dropbox.github.io/dropbox-api-v2-explorer/) for more information.
     * After establishing a Dropbox account, you will need to create a default profile picture called "default.jpg" and upload it to Dropbox. An image that is 200x200 pixels will be consistent with the rest of the application.
 
-    
+
 * "STORC_FB_ID" (Facebook application id) and "STORC_FB_SECRET" (Facebook application secret)
     * To allow users to log in using Facebook, you'll have to set up a Facebook application, [here](https://developers.facebook.com/apps/).
 
@@ -44,7 +44,7 @@ If you are running the application for the first time, run `$ python run.py --se
 ## Future Development
 
 The following features will hopefully be implemented in the near future:
-* Facebook and Google sign-in options.
+* Google login option.
 * Open Graph metadata (to improve sharing on social media).
 * Mobile-friendly style modifications.
 * Other character saving options (printing or PDF).
