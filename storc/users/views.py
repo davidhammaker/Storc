@@ -221,6 +221,10 @@ def reset_password_request():
     """
 
     if current_user.is_authenticated:
+        # Prevent non-email users from requesting a new password
+        if current_user.login != 'email':
+            return redirect(url_for('main.home'))
+        
         send_pw_reset_email(current_user)
         flash(
             f'Check your email! We sent a link to '
