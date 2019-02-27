@@ -54,6 +54,10 @@
     font-size: small;
 }
 
+.large-font{
+    font-size: large;
+}
+
 .character-list{
     font-size: large;
     line-height: 1.6;
@@ -74,8 +78,16 @@
     height: 30px;
 }
 
+.large{
+    height: 200px;
+}
+
 .next-to-pic{
     position: relative;
     top: 7px;
     padding-left: 8px;
+}
+
+.spaced{
+    line-height: 2;
 }

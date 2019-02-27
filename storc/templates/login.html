@@ -6,9 +6,11 @@
         <h2>Log In</h2>
         <ul class="center-text">
             {% if next_page %}
-                <li><a href="{{ url_for('users.email_login', next=next_page) }}"><button type="button" name="button">Log in with Email</button></a></li>
+                <li class="spaced"><a href="{{ url_for('users.email_login', next=next_page) }}"><button type="button" name="button">Log in with Email</button></a></li>
+                <li class="spaced"><a href="{{ url_for('facebook.login', next=next_page) }}"><button type="button" name="button">Log in with Facebook</button></a></li>
             {% else %}
-                <li><a href="{{ url_for('users.email_login') }}"><button type="button" name="button">Log in with Email</button></a></li>
+                <li class="spaced"><a href="{{ url_for('users.email_login') }}"><button type="button" name="button">Log in with Email</button></a></li>
+                <li class="spaced"><a href="{{ url_for('facebook.login') }}"><button type="button" name="button">Log in with Facebook</button></a></li>
             {% endif %}
         </ul>
     </div>

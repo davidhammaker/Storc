@@ -2,6 +2,7 @@ from datetime import datetime
 from flask import current_app
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask_login import UserMixin
+from flask_dance.consumer.backend.sqla import OAuthConsumerMixin
 from storc import db, login_manager
 
 
@@ -89,3 +90,12 @@ class User(db.Model, UserMixin):
         except:
             return None
         return User.query.get(user_id)
+
+
+class OAuth(OAuthConsumerMixin, db.Model):
+    """
+    The OAuth model for storing provider information and Oauth tokens.
+    """
+    provider_user_id = db.Column(db.String(256), unique=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id))
+    user = db.relationship(User)
