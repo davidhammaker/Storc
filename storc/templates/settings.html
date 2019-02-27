@@ -5,20 +5,25 @@
     <div class="box tall">
         <h2>Account Settings</h2>
         <div class="narrower left">
-            <img src="{{ image_path }}" alt="profile picture" class="profile-picture right">
+            <img src="{{ image_path }}" alt="profile picture" class="profile-picture right large">
         </div>
         <div class="wide right multi">
             <form action="" method="POST" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
-                {% if form.name.errors %}
-                    <h4>{{ form.name.label(class="error") }}</h4>
-                    {{ form.name(class="form-field error-field", value=current_user.name) }}
-                    {% for error in form.name.errors %}
-                        <span class="error small-font">{{ error }}</span>
-                    {% endfor %}
+                {% if current_user.login == 'email' %}
+                    {% if form.name.errors %}
+                        <h4>{{ form.name.label(class="error") }}</h4>
+                        {{ form.name(class="form-field error-field", value=current_user.name) }}
+                        {% for error in form.name.errors %}
+                            <span class="error small-font">{{ error }}</span>
+                        {% endfor %}
+                    {% else %}
+                        <h4>{{ form.name.label }}</h4>
+                        {{ form.name(class="form-field", value=current_user.name) }}
+                    {% endif %}
                 {% else %}
-                    <h4>{{ form.name.label }}</h4>
-                    {{ form.name(class="form-field", value=current_user.name) }}
+                    <h4>Name</h4>
+                    <span class="large-font">{{ current_user.name }}</span>
                 {% endif %}
                 <br>
                 <br>
@@ -34,22 +39,24 @@
                 {% endif %}
                 <br>
                 <br>
-                {% if form.email.errors %}
-                    <h4>{{ form.email.label(class="error") }}</h4>
-                    {{ form.email(class="form-field error-field", value=current_user.email) }}
-                    {% for error in form.email.errors %}
-                        <span class="error small-font">{{ error }}</span>
-                    {% endfor %}
-                {% else %}
-                    <h4>{{ form.email.label }}</h4>
-                    {{ form.email(class="form-field", value=current_user.email) }}
+                {% if current_user.login == 'email' %}
+                    {% if form.email.errors %}
+                        <h4>{{ form.email.label(class="error") }}</h4>
+                        {{ form.email(class="form-field error-field", value=current_user.email) }}
+                        {% for error in form.email.errors %}
+                            <span class="error small-font">{{ error }}</span>
+                        {% endfor %}
+                    {% else %}
+                        <h4>{{ form.email.label }}</h4>
+                        {{ form.email(class="form-field", value=current_user.email) }}
+                    {% endif %}
+                    <br>
+                    <br>
+                    <h4>Password</h4>
+                    <a href="{{ url_for('users.reset_password_request') }}">Request new password.</a>
+                    <br>
+                    <br>
                 {% endif %}
-                <br>
-                <br>
-                <h4>Password</h4>
-                <a href="{{ url_for('users.reset_password_request') }}">Request new password.</a>
-                <br>
-                <br>
                 {% if form.profile_picture.errors %}
                     <h4>{{ form.profile_picture.label(class="error") }}</h4>
                     {{ form.profile_picture(class="form-field error-field", value=current_user.profile_picture) }}

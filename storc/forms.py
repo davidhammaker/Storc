@@ -84,7 +84,7 @@ class ResetPasswordForm(FlaskForm):
     submit = SubmitField('Submit')
 
 
-class SettingsForm(FlaskForm):
+class EmailSettingsForm(FlaskForm):
     """A form for updating user account information."""
     name = StringField('First Name', validators=[
         DataRequired(),
@@ -126,3 +126,29 @@ class SettingsForm(FlaskForm):
             if user != current_user:
                 raise ValidationError(
                     'That email address is already in use.')
+
+
+class AlternateSettingsForm(FlaskForm):
+    """A form for updating non-email user account information."""
+    username = StringField('Username', validators=[
+        DataRequired(),
+        Length(min=2, max=32)])
+    profile_picture = FileField('Profile Picture', validators=[
+        FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Save Changes')
+
+    def validate_username(self, username):
+        """
+        Check a user's username entry for duplicates.
+
+        :param username: The user's requested username.
+        """
+        user = User.query.filter_by(username=username.data).first()
+        if user:
+            if user != current_user:
+                if user.validated:
+                    raise ValidationError(
+                        'That username is already in use.')
+                else:
+                    db.session.delete(user)
+                    db.session.commit()

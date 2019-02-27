@@ -9,7 +9,7 @@ from storc import bcrypt, db
 from storc.models import User
 from storc.forms import (
     EmailRegistrationForm, EmailVerifyForm, EmailLoginForm,
-    ResetPasswordForm, SettingsForm)
+    ResetPasswordForm, EmailSettingsForm, AlternateSettingsForm)
 from storc.users.utils import (
     send_verify_email, send_new_email, send_pw_reset_email,
     get_profile_picture, delete_old_picture, upload_profile_picture)
@@ -221,10 +221,11 @@ def reset_password_request():
     """
 
     if current_user.is_authenticated:
+
         # Prevent non-email users from requesting a new password
         if current_user.login != 'email':
             return redirect(url_for('main.home'))
-        
+
         send_pw_reset_email(current_user)
         flash(
             f'Check your email! We sent a link to '
@@ -306,25 +307,38 @@ def settings():
     :return: 'settings.html' template with a form instance and a URL
     path for the current user's profile picture.
     """
-    form = SettingsForm()
+
+    # Provide users with the correct form
+    if current_user.login == 'email':
+        form = EmailSettingsForm()
+    else:
+        form = AlternateSettingsForm()
+
     if form.validate_on_submit():
         user = current_user
 
+        # Prepare a message
+        message = None
+
         # If the user's name, username, or profile picture is updated,
         # save the changes to the database
+        if current_user.login == 'email':
+            if form.name.data != user.name:
+                user.name = form.name.data
+                db.session.add(user)
+                db.session.commit()
+                message = 'Changes have been saved!'
         if (
-                form.name.data != user.name) or (
                 form.username.data != user.username) or (
                 form.profile_picture.data):
             message = 'Changes have been saved!'
 
             # Start by saving name and/or username
-            if form.name.data != user.name:
-                user.name = form.name.data
+
             if form.username.data != user.username:
                 user.username = form.username.data
-            db.session.add(user)
-            db.session.commit()
+                db.session.add(user)
+                db.session.commit()
 
             # Check whether the profile picture has been updated, and
             # update it if necessary
@@ -388,19 +402,21 @@ def settings():
                 # Delete the image stored in the working directory
                 os.remove(f'{user.profile_picture}')
 
+        if message:
             flash(message, 'good')
 
         # If the email address has been updated, store the new email
         # address as 'temp_email' until verification, and send an email
         # to the new address for verification
-        if form.email.data != user.email:
-            user.temp_email = form.email.data
-            db.session.add(user)
-            db.session.commit()
-            send_new_email(user)
-            flash(
-                f'An email has been sent to "{user.temp_email}". '
-                f'Check your email to verify the change!', 'good')
+        if current_user.login == 'email':
+            if form.email.data != user.email:
+                user.temp_email = form.email.data
+                db.session.add(user)
+                db.session.commit()
+                send_new_email(user)
+                flash(
+                    f'An email has been sent to "{user.temp_email}". '
+                    f'Check your email to verify the change!', 'good')
 
     image_path = get_profile_picture(current_user)
     return render_template(
