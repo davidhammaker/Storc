@@ -33,10 +33,13 @@ def create_app(config_class=Config):
     from storc.users.views import users
     from storc.characters.views import characters
     from storc.dance.facebook.utils import fb_blueprint
+    from storc.dance.google.utils import g_blueprint
     app.register_blueprint(main)
     app.register_blueprint(users)
     app.register_blueprint(characters)
     app.register_blueprint(
         fb_blueprint, url_prefix='/other_login')
+    app.register_blueprint(
+        g_blueprint, url_prefix='/other_login')
 
     return app
