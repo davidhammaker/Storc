@@ -33,6 +33,9 @@ Requires that the following environment variables be set appropriately:
 * "STORC_FB_ID" (Facebook application id) and "STORC_FB_SECRET" (Facebook application secret)
     * To allow users to log in using Facebook, you'll have to set up a Facebook application, [here](https://developers.facebook.com/apps/).
 
+* "STORC_G_ID" (Google web app client id) and "STORC_G_SECRET" (Google web app client secret)
+    * To allow users to log in using Google, you'll have to set up a Google application, [here](https://developers.google.com/identity/sign-in/web/sign-in).
+
 ## Usage
 
 _When using this tool, please be aware that the tool is not yet complete._
@@ -44,7 +47,6 @@ If you are running the application for the first time, run `$ python run.py --se
 ## Future Development
 
 The following features will hopefully be implemented in the near future:
-* Google login option.
 * Open Graph metadata (to improve sharing on social media).
 * Mobile-friendly style modifications.
 * Other character saving options (printing or PDF).
