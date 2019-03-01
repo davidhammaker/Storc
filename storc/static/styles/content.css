@@ -14,8 +14,16 @@
     display: inline-block;
 }
 
+.block{
+    display: block;
+}
+
 .wide{
     width: 575px;
+}
+
+.wider{
+    width: 600px;
 }
 
 .narrow{
@@ -84,6 +92,7 @@
 
 .large{
     height: 200px;
+    width: 200px;
 }
 
 .next-to-pic{

@@ -38,7 +38,7 @@
         margin-bottom: 10px;
     }
 
-    .wide, .narrow, .narrower, .narrowest{
+    .wide, .wider, .narrow, .narrower, .narrowest{
         width: auto;
     }
 

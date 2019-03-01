@@ -1,12 +1,13 @@
 import os
 import secrets
 from flask import (
-    flash, redirect, render_template, url_for, request, Blueprint)
+    flash, redirect, render_template, url_for, request, Blueprint,
+    abort)
 from flask_login import (
     current_user, login_user, logout_user, login_required)
 from PIL import Image
 from storc import bcrypt, db
-from storc.models import User
+from storc.models import User, Character, Favorite
 from storc.forms import (
     EmailRegistrationForm, EmailVerifyForm, EmailLoginForm,
     ResetPasswordForm, EmailSettingsForm, AlternateSettingsForm)
@@ -451,3 +452,46 @@ def new_email(token):
         db.session.commit()
         flash('Your new email address has been verified!', 'good')
     return redirect(url_for('users.email_login'))
+
+
+@users.route('/<string:username>')
+def profile(username):
+    """
+    Render a template displaying information about a user.
+
+    :param username: the user's username.
+    :return: an abort with a 404 or 'profile.html' template with
+    relevant user details.
+    """
+    user = User.query.filter_by(username=username).first()
+
+    # If no user exists, abort 404
+    if not user:
+        return abort(404)
+
+    # Get the user's profile picture
+    image_path = get_profile_picture(current_user)
+
+    # Display private characters if the user is also the current user
+    if user == current_user:
+        recent_characters = \
+            Character.query.filter_by(user=user)\
+            .order_by(Character.date.desc()).limit(5)
+
+    # If the current user is not the user, don't display private
+    # characters
+    else:
+        recent_characters = \
+            Character.query.filter_by(user=user, private=False)\
+            .order_by(Character.date.desc()).limit(5)
+
+    # Get the user's favorite characters
+    favorites = Favorite.query.filter_by(user=user)\
+        .order_by(Favorite.date.desc()).limit(5)
+
+    return render_template(
+        'profile.html',
+        user=user,
+        image_path=image_path,
+        recent_characters=recent_characters,
+        favorites=favorites)

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="box tall wider center">
+        <div class="box narrower left">
+            <h2>{{ user.username }}</h2>
+            <div class="narrower left">
+                <img src="{{ image_path }}" alt="profile picture" class="profile-picture center large block">
+            </div>
+        </div>
+        <div class="box narrower left-auto-margin">
+            <h3>Recent Characters</h3>
+            <br>
+            {% if recent_characters.first() %}
+                <ul>
+                    {% for character in recent_characters %}
+                        <li class="character-list"><a href="{{ url_for('characters.character', id=character.id) }}">{{ character.name }}</a></li>
+                    {% endfor %}
+                    <li><em><a href="{{ url_for('characters.all_characters', user=user.username) }}">(View All)</a></em></li>
+                </ul>
+            {% else %}
+                <ul>
+                    <li class="character-list">No recent characters.</li>
+                    <li class="character-list">(You can generate a character <a href="{{ url_for('characters.new_character') }}">here</a>!)</li>
+                </ul>
+            {% endif %}
+        </div>
+        <div class="box narrower left-auto-margin">
+            <h3>Favorite Characters</h3>
+            <br>
+            {% if favorites.first() %}
+                <ul>
+                    {% for favorite in favorites %}
+                        <li class="character-list"><a href="{{ url_for('characters.character', id=favorite.character.id) }}">{{ favorite.character.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <ul>
+                    <li class="character-list">No favorite characters.</li>
+                    <li class="character-list">(To add a favorite character, navigate to any public character page and click "Add to Favorites"!)</li>
+                </ul>
+            {% endif %}
+            <br>
+            <br>
+        </div>
+    </div>
+</div>
+{% endblock content %}
