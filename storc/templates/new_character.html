@@ -3,11 +3,11 @@
 {% block content %}
 <div class="container">
     <div class="box tall">
-        <button type="button" onclick="scramble()" class="right">Scramble</button>
+        <button type="button" onclick="scramble()" class="right keep-right">Scramble</button>
         {% if not character %}
-            <a href="{{ url_for('characters.new_character') }}"><button type="button" class="small-font right margin-right">Start Over</button></a>
-            <a href="{{ url_for('characters.new_character', gender='female') }}"><button type="button" class="small-font right margin-right">New Female</button></a>
-            <a href="{{ url_for('characters.new_character', gender='male') }}"><button type="button" class="small-font right margin-right">New Male</button></a>
+            <a href="{{ url_for('characters.new_character') }}"><button type="button" class="right small-font no-mobile margin-right">Start Over</button></a>
+            <a href="{{ url_for('characters.new_character', gender='female') }}"><button type="button" class="right small-font no-mobile margin-right">New Female</button></a>
+            <a href="{{ url_for('characters.new_character', gender='male') }}"><button type="button" class="right small-font no-mobile margin-right">New Male</button></a>
         {% endif %}
         <h2 id="name">{{ name }}</h2>
         <div class="narrow left">
@@ -58,7 +58,7 @@
                 </tr>
             </table>
         </div>
-        <div class="wide right">
+        <div class="wide left-auto-margin">
             <h3>About Me</h3>
             <table>
                 <tr>

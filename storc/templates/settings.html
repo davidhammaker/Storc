@@ -7,7 +7,7 @@
         <div class="narrower left">
             <img src="{{ image_path }}" alt="profile picture" class="profile-picture right large">
         </div>
-        <div class="wide right multi">
+        <div class="wide left-auto-margin">
             <form action="" method="POST" enctype="multipart/form-data">
                 {{ form.hidden_tag() }}
                 {% if current_user.login == 'email' %}

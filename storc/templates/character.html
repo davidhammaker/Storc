@@ -47,7 +47,7 @@
                 </tr>
             </table>
         </div>
-        <div class="wide right">
+        <div class="wide left-auto-margin">
             <h3>About Me</h3>
             <table>
                 <tr>
@@ -110,7 +110,7 @@
 {% if character.user == current_user %}
     <script type="text/javascript">
         let character_id = {'id': {{ character.id }}}
-        
+
         document.getElementById('private').addEventListener('click', function() {
             let characterPromise = $.post(
                 "{{ url_for('characters.change_privacy') }}", character_id
