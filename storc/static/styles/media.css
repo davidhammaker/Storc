@@ -1,12 +1,12 @@
 @media only screen and (max-width: 1000px){
     .wide{
-        width: 500px;
+        width: 475px;
     }
 }
 
 @media only screen and (max-width: 900px){
     .wide{
-        width: 400px;
+        width: 375px;
     }
 }
 
@@ -39,7 +39,6 @@
     }
 
     .wide, .narrow, .narrower, .narrowest{
-        margin: 20px;
         width: auto;
     }
 
@@ -113,5 +112,23 @@
         display: block;
         height: 150px;
         width: 150px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .container{
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .box{
+        padding: 10px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    td:nth-child(2){
+        padding-right: 0;
     }
 }
