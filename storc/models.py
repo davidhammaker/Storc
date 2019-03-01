@@ -107,6 +107,7 @@ class OAuth(OAuthConsumerMixin, db.Model):
 class Favorite(db.Model):
     """The Favorite model for the SQLAlchemy database."""
     id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(
         db.Integer,
         db.ForeignKey('user.id'),
