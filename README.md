@@ -48,7 +48,6 @@ If you are running the application for the first time, run `$ python run.py --se
 
 The following features will hopefully be implemented in the near future:
 * Open Graph metadata (to improve sharing on social media).
-* Mobile-friendly style modifications.
 * Other character saving options (printing or PDF).
 * Blank character templates.
 
