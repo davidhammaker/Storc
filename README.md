@@ -47,6 +47,7 @@ If you are running the application for the first time, run `$ python run.py --se
 ## Future Development
 
 The following features will hopefully be implemented in the near future:
+* Character descriptions and user comments.
 * Open Graph metadata (to improve sharing on social media).
 * Other character saving options (printing or PDF).
 * Blank character templates.
