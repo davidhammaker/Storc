@@ -124,30 +124,32 @@
     </div>
 </div>
 <script src="{{ url_for('static', filename='main.js') }}"></script>
-<script type="text/javascript">
-    document.getElementById('save').addEventListener('click', function() {
-        let newCharacter = new Character;
-        let characterPromise = $.post(
-            {% if character %}
-                "{{ url_for('characters.edit', id=character.id) }}", newCharacter
-            {% else %}
-                "{{ url_for('characters.save_character') }}", newCharacter
-            {% endif %}
-        );
-        function characterRedirect(value) {
-            console.log(`Message: ${value}`);
-            {% if character %}
-                window.location = "{{ url_for('characters.character', id=character.id) }}"
-            {% else %}
-                window.location = "{{ url_for('characters.save_character') }}";
-            {% endif %}
-        };
-        characterPromise.then(
-            value => characterRedirect(value),
-            error => console.log(`Message: ${error}`)
-        );
-    });
-</script>
+{% if current_user.is_authenticated %}
+    <script type="text/javascript">
+        document.getElementById('save').addEventListener('click', function() {
+            let newCharacter = new Character;
+            let characterPromise = $.post(
+                {% if character %}
+                    "{{ url_for('characters.edit', id=character.id) }}", newCharacter
+                {% else %}
+                    "{{ url_for('characters.save_character') }}", newCharacter
+                {% endif %}
+            );
+            function characterRedirect(value) {
+                console.log(`Message: ${value}`);
+                {% if character %}
+                    window.location = "{{ url_for('characters.character', id=character.id) }}"
+                {% else %}
+                    window.location = "{{ url_for('characters.save_character') }}";
+                {% endif %}
+            };
+            characterPromise.then(
+                value => characterRedirect(value),
+                error => console.log(`Message: ${error}`)
+            );
+        });
+    </script>
+{% endif %}
 {% if not character %}
     <script type="text/javascript">
         scramble();
