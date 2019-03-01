@@ -6,7 +6,7 @@ from flask import (
     abort)
 from flask_login import current_user, login_required
 from storc import db
-from storc.models import User, Character
+from storc.models import User, Character, Favorite
 from storc.users.utils import get_profile_picture
 
 
@@ -270,3 +270,29 @@ def delete(id):
     db.session.commit()
     flash(f'{character.name} has been deleted.', 'neutral')
     return 'Character deleted successfully.'
+
+
+@characters.route('/add_favorite/<int:id>')
+@login_required
+def add_favorite(id):
+    """
+    Save a character as a favorite character for the current user.
+
+    :param id: Character id.
+    :return: an abort with a 403, or a redirect to
+    'characters.character' with the Character id.
+    """
+    character = Character.query.get_or_404(id)
+
+    # Prevent users from adding private characters to favorites
+    if character.private:
+        return abort(403)
+
+    # Create and commit the new Favorite instance
+    favorite = Favorite(user=current_user, character=character)
+    db.session.add(favorite)
+    db.session.commit()
+
+    flash(f'{character.name} has been added to your Favorites!', 'good')
+    return redirect(url_for('characters.character', id=id))
+

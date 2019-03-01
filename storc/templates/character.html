@@ -93,16 +93,21 @@
         </div>
     </div>
     <br>
-    {% if character.user == current_user %}
+    {% if current_user.is_authenticated %}
         <div class="box narrow center">
-            <ul class="center-text">
-                {% if character.private %}
-                    <li class="multi"><button id="private" type="button">Make Public</button></li>
-                {% else %}
-                    <li class="multi"><button id="private" type="button">Make Private</button></li>
+            <ul class="center-text spaced">
+                {% if character.user == current_user %}
+                    {% if character.private %}
+                        <li class="multi"><button id="private" type="button">Make Public</button></li>
+                    {% else %}
+                        <li class="multi"><button id="private" type="button">Make Private</button></li>
+                    {% endif %}
+                    <li class="multi"><a href="{{ url_for('characters.edit', id=character.id) }}"><button type="button">Edit</button></a></li>
+                    <li class="multi"><button id="delete" type="button">Delete</button></li>
                 {% endif %}
-                <li class="multi"><a href="{{ url_for('characters.edit', id=character.id) }}"><button type="button">Edit</button></a></li>
-                <li class="multi"><button id="delete" type="button">Delete</button></li>
+                {% if not character.private %}
+                    <li class="multi"><a href="{{ url_for('characters.add_favorite', id=character.id) }}"><button type="button" name="button">Add to Favorites</button></a></li>
+                {% endif %}
             </ul>
         </div>
     {% endif %}

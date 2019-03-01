@@ -39,6 +39,8 @@ class Character(db.Model):
         db.Integer,
         db.ForeignKey('user.id'),
         nullable=False)
+    favorites = db.relationship(
+        'Favorite', backref='character', lazy=True)
 
     def __repr__(self):
         """Character representation."""
@@ -59,6 +61,7 @@ class User(db.Model, UserMixin):
     validated = db.Column(db.Boolean)
     login = db.Column(db.String, default='email')
     characters = db.relationship('Character', backref='user', lazy=True)
+    favorites = db.relationship('Favorite', backref='user', lazy=True)
 
     def __repr__(self):
         """User representation."""
@@ -99,3 +102,21 @@ class OAuth(OAuthConsumerMixin, db.Model):
     provider_user_id = db.Column(db.String(256), unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey(User.id))
     user = db.relationship(User)
+
+
+class Favorite(db.Model):
+    """The Favorite model for the SQLAlchemy database."""
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('user.id'),
+        nullable=False)
+    character_id = db.Column(
+        db.Integer,
+        db.ForeignKey('character.id'),
+        nullable=False)
+
+    def __repr__(self):
+        """Favorite representation."""
+        return f"Favorite(id={self.id}, user_id={self.user_id}, " \
+            f"character_id={self.character_id})"
