@@ -113,13 +113,22 @@ def character(id):
     if character.private and current_user != character.user:
         return abort(403)
 
+    # Determine whether this character is a favorite of the current user
+    favorite = False
+    favorite_result = \
+        Favorite.query\
+        .filter_by(user=current_user, character=character).first()
+    if favorite_result:
+        favorite = True
+
     image_path = get_profile_picture(character.user)
 
     return render_template(
         'character.html',
         character=character,
         title=character.name,
-        image_path=image_path)
+        image_path=image_path,
+        favorite=favorite)
 
 
 @characters.route('/all_characters')
@@ -294,5 +303,38 @@ def add_favorite(id):
     db.session.commit()
 
     flash(f'{character.name} has been added to your Favorites!', 'good')
+    return redirect(url_for('characters.character', id=id))
+
+
+@characters.route('/remove_favorite/<int:id>')
+@login_required
+def remove_favorite(id):
+    """
+    Delete a Favorite instance.
+
+    :param id: Character id associated with the Favorite
+    :return: an abort with a 404 or a redirect to characters.character
+    with the Character id.
+    """
+
+    # Select the Favorite associated with the Character and current user
+    favorite = \
+        Favorite.query.filter_by(user=current_user, character_id=id)\
+        .first()
+
+    # If there is no associated Favorite, return a 404 error
+    if not favorite:
+        return abort(404)
+
+    # Delete the Favorite
+    db.session.delete(favorite)
+    db.session.commit()
+
+    # Get the associated Character and redirect to that character's
+    # page
+    character = Character.query.get_or_404(id)
+    flash(
+        f'{character.name} has been removed from your '
+        f'Favorites.', 'neutral')
     return redirect(url_for('characters.character', id=id))
 
