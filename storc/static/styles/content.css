@@ -112,3 +112,11 @@
 .mobile-only{
     display: none;
 }
+
+.facebook{
+    background-color: #4267b2;
+}
+
+.google{
+    background-color: #d93025;
+}
