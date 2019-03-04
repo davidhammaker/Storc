@@ -2,7 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% if not print %}
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% endif %}
         <title>Storc | {% if title %}{{title}}{% else %}Character Generator{% endif %}</title>
         <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
@@ -16,47 +18,49 @@
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
     </head>
     <body>
-        <nav>
-            <div class="nav-l">
-                <a href="{{ url_for('main.home') }}">
-                    <img src="{{ url_for('static', filename='storctitle.png') }}" alt="Storc" height="45px">
-                </a>
-            </div>
-            <a href="{{ url_for('main.home') }}" class="mobile-only"><img src="{{ url_for('static', filename='mini-storc.jpg') }}"></a>
-            <div class="nav-r">
-                {% if current_user.is_authenticated %}
-                    <ul>
-                        <li>
-                            <div class="menu">
-                                <span>Welcome, {{ current_user.name }}! ▼</span>
-                                <div class="menu-content">
-                                    <ul>
-                                        <li><a href="{{ url_for('characters.new_character') }}">New Character</a></li>
-                                        <li><a href="{{ url_for('users.profile', username=current_user.username) }}">My Profile</a></li>
-                                        <li><a href="{{ url_for('users.settings') }}">Settings</a></li>
-                                        <li><a href="{{ url_for('users.logout') }}">Log Out</a></li>
-                                    </ul>
+        {% if not print %}
+            <nav>
+                <div class="nav-l">
+                    <a href="{{ url_for('main.home') }}">
+                        <img src="{{ url_for('static', filename='storctitle.png') }}" alt="Storc" height="45px">
+                    </a>
+                </div>
+                <a href="{{ url_for('main.home') }}" class="mobile-only"><img src="{{ url_for('static', filename='mini-storc.jpg') }}"></a>
+                <div class="nav-r">
+                    {% if current_user.is_authenticated %}
+                        <ul>
+                            <li>
+                                <div class="menu">
+                                    <span>Welcome, {{ current_user.name }}! ▼</span>
+                                    <div class="menu-content">
+                                        <ul>
+                                            <li><a href="{{ url_for('characters.new_character') }}">New Character</a></li>
+                                            <li><a href="{{ url_for('users.profile', username=current_user.username) }}">My Profile</a></li>
+                                            <li><a href="{{ url_for('users.settings') }}">Settings</a></li>
+                                            <li><a href="{{ url_for('users.logout') }}">Log Out</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
-                {% else %}
-                    <ul>
-                        <li><a href="{{ url_for('users.sign_up') }}">Sign Up</a></li>
-                        <li><a href="{{ url_for('main.login') }}">Log In</a></li>
-                    </ul>
+                            </li>
+                        </ul>
+                    {% else %}
+                        <ul>
+                            <li><a href="{{ url_for('users.sign_up') }}">Sign Up</a></li>
+                            <li><a href="{{ url_for('main.login') }}">Log In</a></li>
+                        </ul>
+                    {% endif %}
+                </div>
+            </nav>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash wide center {{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
                 {% endif %}
-            </div>
-        </nav>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="flash wide center {{ category }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+            {% endwith %}
+        {% endif %}
         {% block content %}
         {% endblock content %}
     </body>

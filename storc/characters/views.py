@@ -133,6 +133,29 @@ def character(id):
         favorite=favorite)
 
 
+@characters.route('/character/<int:id>/print')
+def print_character(id):
+    """
+    Render a template that displays a generated Character from the
+    database in a printer-friendly format.
+
+    :param id: the Character id.
+    :return: 'print_character.html' template with a Character and a
+    title, or an abort with a 403.
+    """
+    character = Character.query.get_or_404(id)
+
+    # Prevent other users from viewing if private
+    if character.private and current_user != character.user:
+        return abort(403)
+
+    return render_template(
+        'print_character.html',
+        character=character,
+        title=character.name,
+        print=True)
+
+
 @characters.route('/all_characters')
 def all_characters():
     """

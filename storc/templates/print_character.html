@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="widest container">
+    <div class="box tall">
+        <span class="right next-to-pic">{{ character.user.username }}</span>
+        <h2 id="name">{{ character.name }}{% if character.private %} <span class="small-font">(Private)</span>{% endif %}</h2>
+        <div class="narrower left">
+            <h3>Physical Qualities</h3>
+            <table>
+                <tr>
+                    <td>Gender: </td>
+                    <td>{{ character.gender }}</td>
+                </tr>
+                <tr>
+                    <td>Height: </td>
+                    <td>{{ character.height }}</td>
+                </tr>
+                <tr>
+                    <td>Weight: </td>
+                    <td>{{ character.weight }}</td>
+                </tr>
+                <tr>
+                    <td>Hair color: </td>
+                    <td>{{ character.hair_color }}</td>
+                </tr>
+                <tr>
+                    <td>Eye color: </td>
+                    <td>{{ character.eye_color }}</td>
+                </tr>
+                <tr>
+                    <td>Unique Attribute: </td>
+                    <td>{{ character.unique_attribute }}</td>
+                </tr>
+            </table>
+            <br>
+            <h3>My Style</h3>
+            <table>
+                <tr>
+                    <td>Favorite clothes:</td>
+                    <td>{{ character.favorite_clothes }}</td>
+                </tr>
+                <tr>
+                    <td>Hair:</td>
+                    <td>{{ character.hair }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="medium left-auto-margin">
+            <h3>About Me</h3>
+            <table>
+                <tr>
+                    <td rowspan="2">Common Mannerisms:</td>
+                    <td>{{ character.mannerism_one }}</td>
+                </tr>
+                <tr class="second-cell">
+                    <td class="second-cell" id="mannerism_two">{{ character.mannerism_two }}</td>
+                </tr>
+                <tr>
+                    <td>Speaking Style:</td>
+                    <td>{{ character.speaking_style }}</td>
+                </tr>
+                <tr>
+                    <td>Skill:</td>
+                    <td>{{ character.skill }}</td>
+                </tr>
+                <tr>
+                    <td>Flaw:</td>
+                    <td>{{ character.flaw }}</td>
+                </tr>
+                <tr>
+                    <td>Fear:</td>
+                    <td>{{ character.fear }}</td>
+                </tr>
+                <tr>
+                    <td>Favorite Thing:</td>
+                    <td>{{ character.favorite }}</td>
+                </tr>
+                <tr>
+                    <td>Family:</td>
+                    <td>{{ character.family }}</td>
+                </tr>
+                <tr>
+                    <td>Friends:</td>
+                    <td>{{ character.friends }}</td>
+                </tr>
+                <tr>
+                    <td>Significant Other:</td>
+                    <td>{{ character.significant_other }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="box narrow center" id="button_box">
+        <ul class="center-text spaced">
+            <li><button id="print" type="button">Print</button></li>
+            <li><a href="{{ url_for('characters.character', id=character.id) }}">Back</a></li>
+        </ul>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='print.js') }}"></script>
+<script type="text/javascript">
+    document.body.style.backgroundColor = '#ffffff';
+</script>
+{% endblock content %}

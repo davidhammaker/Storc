@@ -18,12 +18,20 @@
     display: block;
 }
 
-.wide{
-    width: 575px;
+.widest{
+    width: 800px;
 }
 
 .wider{
     width: 600px;
+}
+
+.wide{
+    width: 575px;
+}
+
+.medium{
+    width: 425px;
 }
 
 .narrow{

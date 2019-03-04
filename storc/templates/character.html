@@ -112,6 +112,7 @@
                         <li class="multi"><button id="remove_favorite" type="button" name="button">Remove from Favorites</button></li>
                     {% endif %}
                 {% endif %}
+                <li class="multi"><a href="{{ url_for('characters.print_character', id=character.id) }}"><button type="button" name="button">Print</button></a></li>
             </ul>
         </div>
     {% endif %}
