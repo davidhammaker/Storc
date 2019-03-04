@@ -8,7 +8,7 @@
                 {% if current_user==user %}
                     My Characters
                 {% else %}
-                    Characters by {{ user.username }}
+                    Characters by <a href="{{ url_for('users.profile', username=user.username) }}">{{ user.username }}</a>
                 {% endif %}
             {% elif gender %}
                 {{ gender }} Characters
@@ -18,7 +18,7 @@
         </h2>
         <ul>
             {% for character in characters.items %}
-                <li class="character-list"><a href="{{ url_for('characters.character', id=character.id) }}">{{ character.name }}</a> by {{ character.user.username }}</li>
+                <li class="character-list"><a href="{{ url_for('characters.character', id=character.id) }}">{{ character.name }}</a> by <a href="{{ url_for('users.profile', username=character.user.username) }}">{{ character.user.username }}</a></li>
             {% endfor %}
         </ul>
         <br>

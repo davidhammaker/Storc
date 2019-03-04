@@ -32,6 +32,7 @@
                                 <div class="menu-content">
                                     <ul>
                                         <li><a href="{{ url_for('characters.new_character') }}">New Character</a></li>
+                                        <li><a href="{{ url_for('users.profile', username=current_user.username) }}">My Profile</a></li>
                                         <li><a href="{{ url_for('users.settings') }}">Settings</a></li>
                                         <li><a href="{{ url_for('users.logout') }}">Log Out</a></li>
                                     </ul>

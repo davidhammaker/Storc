@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     <div class="box tall">
-        <span class="right next-to-pic"> {{ character.user.username }}</span>
+        <span class="right next-to-pic"> <a href="{{ url_for('users.profile', username=character.user.username)}}">{{ character.user.username }}</a></span>
         <img src="{{ image_path }}" alt="profile picture" class="profile-picture tiny right">
         <h2 id="name">{{ character.name }}{% if character.private %} <span class="small-font">(Private)</span>{% endif %}</h2>
         <div class="narrow left">
