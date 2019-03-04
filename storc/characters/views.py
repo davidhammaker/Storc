@@ -115,9 +115,11 @@ def character(id):
 
     # Determine whether this character is a favorite of the current user
     favorite = False
-    favorite_result = \
-        Favorite.query\
-        .filter_by(user=current_user, character=character).first()
+    favorite_result = None
+    if current_user.is_authenticated:
+        favorite_result = \
+            Favorite.query\
+            .filter_by(user=current_user, character=character).first()
     if favorite_result:
         favorite = True
 
