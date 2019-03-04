@@ -42,6 +42,9 @@ _When using this tool, please be aware that the tool is not yet complete._
 
 To use the application, start by cloning this repository. Use `$ pip install -r requirements.txt` to install all necessary requirements.
 
+If you are running the application locally, you will have to use `$ export OAUTHLIB_INSECURE_TRANSPORT=1` in order to use Facebook/Google login features.
+* Do not use this command if you are not running the app locally.
+
 If you are running the application for the first time, run `$ python run.py --setup`. Otherwise, you can run the application with `$ python run.py`. You can then view the application at [localhost:5000](http://localhost:5000/).
 
 ## Future Development
@@ -49,7 +52,6 @@ If you are running the application for the first time, run `$ python run.py --se
 The following features will hopefully be implemented in the near future:
 * Character descriptions and user comments.
 * Open Graph metadata (to improve sharing on social media).
-* Other character saving options (printing or PDF).
 * Blank character templates.
 
 ## Copyright
