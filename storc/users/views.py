@@ -470,7 +470,7 @@ def profile(username):
         return abort(404)
 
     # Get the user's profile picture
-    image_path = get_profile_picture(current_user)
+    image_path = get_profile_picture(user)
 
     # Display private characters if the user is also the current user
     if user == current_user:
