@@ -308,7 +308,7 @@ function defineFlaws() {
         'I\'m always telling lies. Sometimes I lie for no reason.',
         'I trust no one. Anyone might let me down.',
         'I have a habit of intentionally irritating people.',
-        'I use humor at very innappropriate times.',
+        'I use humor at very inappropriate times.',
         'No matter what anyone tells me, I feel insignificant.',
         'I am envious, always wanting whatever I can\'t have.',
         'I look down on others. Why live in denial of my own superiority?',
