@@ -105,16 +105,14 @@
                     <li class="multi"><a href="{{ url_for('characters.edit', id=character.id) }}"><button type="button">Edit</button></a></li>
                     <li class="multi"><button id="delete" type="button">Delete</button></li>
                 {% endif %}
-                {% if not character.private %}
-                    {% if not favorite %}
-                        {% if favorites_permitted %}
-                            <li class="multi"><a href="{{ url_for('characters.add_favorite', id=character.id) }}"><button type="button" name="button">Add to Favorites</button></a></li>
-                        {% else %}
-                            <li class="multi"><button id="max_favorites" type="button" name="button">(Maximum Favorites)</button></li>
-                        {% endif %}
+                {% if not favorite %}
+                    {% if favorites_permitted %}
+                        <li class="multi"><a href="{{ url_for('characters.add_favorite', id=character.id) }}"><button type="button" name="button">Add to Favorites</button></a></li>
                     {% else %}
-                        <li class="multi"><button id="remove_favorite" type="button" name="button">Remove from Favorites</button></li>
+                        <li class="multi"><button id="max_favorites" type="button" name="button">(Maximum Favorites)</button></li>
                     {% endif %}
+                {% else %}
+                    <li class="multi"><button id="remove_favorite" type="button" name="button">Remove from Favorites</button></li>
                 {% endif %}
                 <li class="multi"><a href="{{ url_for('characters.print_character', id=character.id) }}"><button type="button" name="button">Print</button></a></li>
             </ul>
