@@ -31,13 +31,14 @@ def sign_up():
     if form.validate_on_submit():
 
         # Hash the user's password before it is stored in the database
-        pw_hash = bcrypt.generate_password_hash(form.password.data)
+        pw_hash = bcrypt.generate_password_hash(
+            form.password.data.encode('utf8'))
 
         user = User(
             username=form.username.data,
             name=form.name.data,
             email=form.email.data,
-            password=pw_hash,
+            password=pw_hash.decode('utf8'),
             validated=False)
         db.session.add(user)
         db.session.commit()
@@ -155,7 +156,8 @@ def email_login():
         # Check that the user exists, that the password matches, and
         # that the user's email address has been validated
         if user and bcrypt.check_password_hash(
-                user.password, form.password.data) and user.validated:
+                user.password, form.password.data.encode('utf8'))\
+                and user.validated:
             login_user(user, remember=form.remember_me.data)
 
             # Remove 'temp_email', if any exists
@@ -280,9 +282,10 @@ def reset_password(token):
             flash('You have logged out.', 'neutral')
 
         # Hash the user's password before it is stored in the database
-        pw_hash = bcrypt.generate_password_hash(form.password.data)
+        pw_hash = bcrypt.generate_password_hash(
+            form.password.data.encode('utf8'))
 
-        user.password = pw_hash
+        user.password = pw_hash.decode('utf8')
         db.session.add(user)
         db.session.commit()
         flash(
