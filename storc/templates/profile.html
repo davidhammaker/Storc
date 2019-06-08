@@ -29,10 +29,10 @@
         <div class="box narrower left-auto-margin">
             <h3>Favorite Characters</h3>
             <br>
-            {% if favorites.first() %}
+            {% if favorites %}
                 <ul>
-                    {% for favorite in favorites %}
-                        <li class="character-list"><a href="{{ url_for('characters.character', id=favorite.character.id) }}">{{ favorite.character.name }}</a></li>
+                    {% for character in favorites %}
+                        <li class="character-list"><a href="{{ url_for('characters.character', id=character.id) }}">{{ character.name }}</a></li>
                     {% endfor %}
                 </ul>
             {% else %}

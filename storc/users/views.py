@@ -486,8 +486,23 @@ def profile(username):
             .order_by(Character.date.desc()).limit(5)
 
     # Get the user's favorite characters
-    favorites = Favorite.query.filter_by(user=user)\
+    favorites_raw = Favorite.query.filter_by(user=user)\
         .order_by(Favorite.date.desc()).limit(5)
+
+    # If the current user is not the user, don't display private
+    # characters among the favorites
+    favorites = []
+    if user != current_user:
+        for favorite in favorites_raw:
+            character = Character.query.get(favorite.character_id)
+            if not character.private:
+                favorites.append(character)
+
+    # If the current user is the user, include private characters
+    else:
+        for favorite in favorites_raw:
+            character = Character.query.get(favorite.character_id)
+            favorites.append(character)
 
     return render_template(
         'profile.html',
