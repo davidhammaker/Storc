@@ -6,9 +6,15 @@
         <h2>
             {% if user %}
                 {% if current_user==user %}
-                    My Characters
-                {% else %}
+                    {% if characters %}
+                        My Characters
+                    {% else %}
+                        My Favorites
+                    {% endif %}
+                {% elif characters %}
                     Characters by <a href="{{ url_for('users.profile', username=user.username) }}">{{ user.username }}</a>
+                {% else %}
+                    Favorites of <a href="{{ url_for('users.profile', username=user.username) }}">{{ user.username }}</a>
                 {% endif %}
             {% elif gender %}
                 {{ gender }} Characters
@@ -16,30 +22,40 @@
                 All Characters
             {% endif %}
         </h2>
-        <ul>
-            {% for character in characters.items %}
-                <li class="character-list"><a href="{{ url_for('characters.character', id=character.id) }}">{{ character.name }}</a> by <a href="{{ url_for('users.profile', username=character.user.username) }}">{{ character.user.username }}</a></li>
-            {% endfor %}
-        </ul>
+        {% if characters %}
+            <ul>
+                {% for character in characters.items %}
+                    <li class="character-list"><a href="{{ url_for('characters.character', id=character.id) }}">{{ character.name }}</a> by <a href="{{ url_for('users.profile', username=character.user.username) }}">{{ character.user.username }}</a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <ul>
+                {% for character in favorites_list %}
+                    <li class="character-list"><a href="{{ url_for('characters.character', id=character.id) }}">{{ character.name }}</a> by <a href="{{ url_for('users.profile', username=character.user.username) }}">{{ character.user.username }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
         <br>
         <ul class="center-text">
-            {% for page_num in characters.iter_pages() %}
-                <li class="multi">
-                    {% if page_num %}
-                        {% if page_num == page %}
-                                <strong>{{ page_num }}</strong>
-                        {% else %}
-                            {% if user %}
-                                <a class="" href="{{ url_for('characters.all_characters', page_num=page_num, gender=gender, user=user.username) }}">{{ page_num }}</a>
+            {% if characters %}
+                {% for page_num in characters.iter_pages() %}
+                    <li class="multi">
+                        {% if page_num %}
+                            {% if page_num == page %}
+                                    <strong>{{ page_num }}</strong>
                             {% else %}
-                                <a class="" href="{{ url_for('characters.all_characters', page_num=page_num, gender=gender) }}">{{ page_num }}</a>
+                                {% if user %}
+                                    <a class="" href="{{ url_for('characters.all_characters', page_num=page_num, gender=gender, user=user.username) }}">{{ page_num }}</a>
+                                {% else %}
+                                    <a class="" href="{{ url_for('characters.all_characters', page_num=page_num, gender=gender) }}">{{ page_num }}</a>
+                                {% endif %}
                             {% endif %}
+                        {% else %}
+                            -
                         {% endif %}
-                    {% else %}
-                        -
-                    {% endif %}
-                </li>
-            {% endfor %}
+                    </li>
+                {% endfor %}
+            {% endif %}
         </ul>
     </div>
 </div>

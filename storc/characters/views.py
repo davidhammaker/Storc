@@ -169,22 +169,53 @@ def all_characters():
     gender = request.args.get('gender')
     username = request.args.get('user')
     user = User.query.filter_by(username=username).first()
+    favorites = request.args.get('favorites')
 
-    # If 'user' query parameter exists, only show characters by that
-    # user
+    # Set characters to False until needed
+    characters = False
+
+    # Create a list for favorites
+    favorites_list = []
+
+    # If 'user' query parameter exists, only show characters pertaining
+    # to that user
     if user:
 
-        # If 'user' is current user, include private characters
-        if current_user == user:
-            characters = Character.query.order_by(Character.name)\
-                .filter_by(user=user)\
-                .paginate(page=page, per_page=20)
+        # If 'favorites' is True, show the user's favorites
+        if favorites:
+            favorites_raw = Favorite.query.filter_by(user=user) \
+                .order_by(Favorite.date.desc())
 
-        # If 'user' is not current user, exclude private characters
+            # If the current user is not the user, don't display private
+            # characters among the favorites
+            if user != current_user:
+                for favorite in favorites_raw:
+                    character = Character.query.get(
+                        favorite.character_id)
+                    if not character.private:
+                        favorites_list.append(character)
+
+            # If the current user is the user, include private
+            # characters
+            else:
+                for favorite in favorites_raw:
+                    character = Character.query.get(
+                        favorite.character_id)
+                    favorites_list.append(character)
+
         else:
-            characters = Character.query.order_by(Character.name) \
-                .filter_by(user=user, private=False) \
-                .paginate(page=page, per_page=20)
+
+            # If 'user' is current user, include private characters
+            if current_user == user:
+                characters = Character.query.order_by(Character.name)\
+                    .filter_by(user=user)\
+                    .paginate(page=page, per_page=20)
+
+            # If 'user' is not current user, exclude private characters
+            else:
+                characters = Character.query.order_by(Character.name) \
+                    .filter_by(user=user, private=False) \
+                    .paginate(page=page, per_page=20)
 
     # If 'gender' query parameter exists, only show characters of that
     # gender
@@ -200,6 +231,7 @@ def all_characters():
     return render_template(
         'all_characters.html',
         characters=characters,
+        favorites_list=favorites_list,
         gender=gender,
         user=user,
         page=page)

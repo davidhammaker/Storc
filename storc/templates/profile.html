@@ -17,7 +17,7 @@
                     {% for character in recent_characters %}
                         <li class="character-list"><a href="{{ url_for('characters.character', id=character.id) }}">{{ character.name }}</a></li>
                     {% endfor %}
-                    <li><em><a href="{{ url_for('characters.all_characters', user=user.username) }}">(View All)</a></em></li>
+                    <li class="character-list"><em><a href="{{ url_for('characters.all_characters', user=user.username) }}">(View All)</a></em></li>
                 </ul>
             {% else %}
                 <ul>
@@ -34,6 +34,7 @@
                     {% for character in favorites %}
                         <li class="character-list"><a href="{{ url_for('characters.character', id=character.id) }}">{{ character.name }}</a></li>
                     {% endfor %}
+                    <li class="character-list"><em><a href="{{ url_for('characters.all_characters', user=user.username, favorites=True) }}">(View All)</a></em></li>
                 </ul>
             {% else %}
                 <ul>
