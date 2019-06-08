@@ -30,3 +30,14 @@ def login():
     next_page = request.args.get('next')
 
     return render_template('login.html', next_page=next_page)
+
+
+@main.route('/privacy_policy')
+def privacy_policy():
+    """
+    Render the Privacy Policy.
+
+    :return: 'privacy_policy.txt'.
+    """
+
+    return render_template('privacy_policy.html')
