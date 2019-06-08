@@ -8,3 +8,5 @@ blinker
 flask-bcrypt
 flask-mail
 pillow
+gunicorn
+psycopg2
