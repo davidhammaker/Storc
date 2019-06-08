@@ -107,7 +107,11 @@
                 {% endif %}
                 {% if not character.private %}
                     {% if not favorite %}
-                        <li class="multi"><a href="{{ url_for('characters.add_favorite', id=character.id) }}"><button type="button" name="button">Add to Favorites</button></a></li>
+                        {% if favorites_permitted %}
+                            <li class="multi"><a href="{{ url_for('characters.add_favorite', id=character.id) }}"><button type="button" name="button">Add to Favorites</button></a></li>
+                        {% else %}
+                            <li class="multi"><button id="max_favorites" type="button" name="button">(Maximum Favorites)</button></li>
+                        {% endif %}
                     {% else %}
                         <li class="multi"><button id="remove_favorite" type="button" name="button">Remove from Favorites</button></li>
                     {% endif %}
@@ -150,6 +154,10 @@
                     error => console.log(`Message: ${error}`)
                 );
             }
+        });
+
+        document.getElementById('max_favorites').addEventListener('click', function() {
+            window.alert('You have reached the maximum allowed number of favorites (20).');
         });
 
         document.getElementById('remove_favorite').addEventListener('click', function() {

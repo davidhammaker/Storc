@@ -125,12 +125,21 @@ def character(id):
 
     image_path = get_profile_picture(character.user)
 
+    # Determine whether user has too many favorites
+    favorites_permitted = False
+    if current_user.is_authenticated:
+        total_favorites = Favorite.query.filter_by(user_id=current_user.id)\
+            .count()
+        if total_favorites < 20:
+            favorites_permitted = True
+
     return render_template(
         'character.html',
         character=character,
         title=character.name,
         image_path=image_path,
-        favorite=favorite)
+        favorite=favorite,
+        favorites_permitted=favorites_permitted)
 
 
 @characters.route('/character/<int:id>/print')
