@@ -1,3 +1,7 @@
+### _Note:_
+
+This application was developed as a learning experiment before I had any professional experience as a Python developer. Several years later, I still love this project, despite its flaws and painful lack of tests. I had deployed this project on Heroku, but they are removing their free tier, so it will be going away. Feel free to browse the code, or even attempt to run the application if you are so inclined!
+
 # Storc | Character Generator
 
 A random character generator that creates a named character to inspire your creativity.
@@ -56,4 +60,4 @@ The following features will hopefully be implemented in the near future:
 
 ## Copyright
 
-© 2018-2019 David J. Hammaker
+© 2018-2022 David J. Hammaker
